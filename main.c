@@ -20,9 +20,13 @@
 #define PIZERO_SCK BIT2 //2.2 used for selecting the clock for communication
 #define LORA_G0 BIT4 // 2.4 used for incoming interrupt requests from the LORA board
 #define LORA_RST BIT5 //2.5 used for reseting the LORA board in case of any glitches or hangs
+#define WATCHDOG_SIGNAL_PIN BIT6 // P2.6 changed as pin number 5.0 cannot have interrupts enabled
+#define RESET_SIGNAL_PIN    BIT7 // P2.7
 
 void configureADC(void);
 void configurePins(void);
+void configureTimer(void);
+void sendResetSignal(void);
 void enable_burn_wire(void);
 unsigned int readADC(void);
 void switch_control(unsigned int);
@@ -37,6 +41,8 @@ void main(void)
     configureADC();
 
     enable_burn_wire(); //enables the burn wire to deploy antennas for communication
+
+    _BIS_SR(GIE);
 
     // Main loop
     while(1)
@@ -75,7 +81,38 @@ void configurePins(void){
     P5OUT &= ~SKYSAT_EN;
     P3OUT &= ~BURN_EN;  // setting the burn wire to low till antenna has to be deployed
 
+    // setting the pins for the pizero watchdog and reset
+    // configuring 2.6 as the input of the watchdog signal from pizero
+    P2DIR &= ~WATCHDOG_SIGNAL_PIN;
+    P2REN |= WATCHDOG_SIGNAL_PIN;
+    P2OUT |= WATCHDOG_SIGNAL_PIN;
+
+    // Configure P2.7 as output for reset signal
+    P2DIR |= RESET_SIGNAL_PIN;
+    P2OUT &= ~RESET_SIGNAL_PIN;
+
+    // Configure interrupt for watchdog signal on rising edge
+    P2IE |= WATCHDOG_SIGNAL_PIN;
+    P2IES &= ~WATCHDOG_SIGNAL_PIN;  // Rising edge
+    P2IFG &= ~WATCHDOG_SIGNAL_PIN;  // Clear interrupt flag
+
 }
+
+void configureTimer(void)
+{
+    // Configure Timer_A0
+    TA0CCTL0 = CCIE;                       // Enable Timer_A interrupt
+    TA0CCR0 = 32768;                       // Set timer period (1 second at 32.768 kHz)
+    TA0CTL = TASSEL_1 | MC_1 | TACLR;      // ACLK, up mode, clear TAR
+}
+
+void sendResetSignal(void)
+{
+    P2OUT |= RESET_SIGNAL_PIN;   // Set reset signal high
+    __delay_cycles(100000);      // Delay to ensure reset signal is recognized
+    P2OUT &= ~RESET_SIGNAL_PIN;  // Set reset signal low
+}
+
 void enable_burn_wire(void){
     P3OUT |= BURN_EN;
     __delay_cycles(100000);
@@ -111,5 +148,18 @@ void switch_control(unsigned int adc_value){
             P4OUT |= LORA_EN;
             P5OUT |= SKYSAT_EN;
         }
+}
+#pragma vector = TIMER_A0_VECTOR
+__interrupt void TIMER_A0(void){
+    sendResetSignal();
+}
+
+#pragma vector = PORT2_VECTOR
+__interrupt void PORT_2(void){
+
+    if(P2IFG & WATCHDOG_SIGNAL_PIN){
+        TA0CTL |= TACLR;
+        P2IFG &= ~WATCHDOG_SIGNAL_PIN;
+    }
 }
 

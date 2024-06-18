@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Tue Jun 18 13:51:37 2024
+>> Linked Tue Jun 18 16:44:47 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   RAM                   00001c00   00000800  000000a0  00000760  RWIX
-  FRAM                  00004400   0000bb80  00000020  0000bb60  RWIX
+  FRAM                  00004400   0000bb80  00000034  0000bb4c  RWIX
   JTAGSIGNATURE         0000ff80   00000004  00000004  00000000  RWIX  ffff 
   BSLSIGNATURE          0000ff84   00000004  00000004  00000000  RWIX  ffff 
   IPESIGNATURE          0000ff88   00000008  00000008  00000000  RWIX  ffff 
@@ -79,7 +79,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00013ff8  000001ae  00013e4a  RWIX
+  FRAM2                 00010000   00013ff8  000001e4  00013e14  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -116,9 +116,10 @@ section   page    origin      length       input sections
 *          0    00004400    00000000     UNINITIALIZED
 
 .text:_isr 
-*          0    00004400    00000020     
+*          0    00004400    00000034     
                   00004400    00000018     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs_mpu)
-                  00004418    00000008                            : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
+                  00004418    00000014     main.obj (.text:_isr:PORT_2)
+                  0000442c    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .stack     0    00002360    000000a0     UNINITIALIZED
                   00002360    00000004     rts430x_lc_rd_eabi.lib : boot.c.obj (.stack)
@@ -157,7 +158,7 @@ TIMER3_A0
                   0000ffd2    00000002     rts430x_lc_rd_eabi.lib : int33.asm.obj (.int33)
 
 PORT2      0    0000ffd4    00000002     
-                  0000ffd4    00000002     rts430x_lc_rd_eabi.lib : int34.asm.obj (.int34)
+                  0000ffd4    00000002     main.obj (.int34)
 
 TIMER2_A1 
 *          0    0000ffd6    00000002     
@@ -230,27 +231,27 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    000001ae     
+.text      0    00010000    000001e4     
                   00010000    00000060     main.obj (.text:switch_control)
-                  00010060    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
-                  000100aa    00000030     main.obj (.text:configureADC)
-                  000100da    0000002e     main.obj (.text:main)
-                  00010108    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00010134    00000026     main.obj (.text:configurePins)
-                  0001015a    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
-                  0001017e    00000016     main.obj (.text:enable_burn_wire)
-                  00010194    00000010     main.obj (.text:readADC)
-                  000101a4    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  000101aa    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  00010060    00000056     main.obj (.text:configurePins)
+                  000100b6    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
+                  00010100    00000034     main.obj (.text:main)
+                  00010134    00000030     main.obj (.text:configureADC)
+                  00010164    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00010190    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
+                  000101b4    00000016     main.obj (.text:enable_burn_wire)
+                  000101ca    00000010     main.obj (.text:readADC)
+                  000101da    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  000101e0    00000004                            : pre_init.c.obj (.text:_system_pre_init)
 
 MODULE SUMMARY
 
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       main.obj           266    0         0      
+       main.obj           340    2         0      
     +--+------------------+------+---------+---------+
-       Total:             266    0         0      
+       Total:             340    2         0      
                                                   
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o         44     0         0      
@@ -271,7 +272,6 @@ MODULE SUMMARY
        int31.asm.obj      0      2         0      
        int32.asm.obj      0      2         0      
        int33.asm.obj      0      2         0      
-       int34.asm.obj      0      2         0      
        int35.asm.obj      0      2         0      
        int36.asm.obj      0      2         0      
        int37.asm.obj      0      2         0      
@@ -293,11 +293,11 @@ MODULE SUMMARY
        int53.asm.obj      0      2         0      
        int54.asm.obj      0      2         0      
     +--+------------------+------+---------+---------+
-       Total:             152    58        0      
+       Total:             152    56        0      
                                                   
        Stack:             0      0         160    
     +--+------------------+------+---------+---------+
-       Grand Total:       462    58        160    
+       Grand Total:       536    58        160    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -561,7 +561,7 @@ address   name
 000009ce  AESAXIN_L                 
 000004be  BCD2BIN                   
 000004bc  BIN2BCD                   
-000101a4  C$$EXIT                   
+000101da  C$$EXIT                   
 0000043e  CAPTIO0CTL                
 0000043f  CAPTIO0CTL_H              
 0000043e  CAPTIO0CTL_L              
@@ -1357,6 +1357,7 @@ address   name
 0000012a  PMMIFG                    
 0000012b  PMMIFG_H                  
 0000012a  PMMIFG_L                  
+00004418  PORT_2                    
 00000158  RCCTL0                    
 00000159  RCCTL0_H                  
 00000158  RCCTL0_L                  
@@ -1686,7 +1687,7 @@ address   name
 00004400  __TI_CINIT_Base           
 00004400  __TI_CINIT_Limit          
 00004400  __TI_CINIT_Warm           
-00004418  __TI_ISR_TRAP             
+0000442c  __TI_ISR_TRAP             
 0000ffc6  __TI_int27                
 0000ffc8  __TI_int28                
 0000ffca  __TI_int29                
@@ -1720,27 +1721,27 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 00000001  __mpu_enable              
-00010108  __mpu_init                
-00010060  __mspabi_cmpf             
-0001015a  __mspabi_fltuf            
+00010164  __mpu_init                
+000100b6  __mspabi_cmpf             
+00010190  __mspabi_fltuf            
 00004400  _c_int00_noinit_noargs_mpu
 0000fffe  _reset_vector             
 00002360  _stack                    
-000101aa  _system_pre_init          
-000101a4  abort                     
-000100aa  configureADC              
-00010134  configurePins             
-0001017e  enable_burn_wire          
+000101e0  _system_pre_init          
+000101da  abort                     
+00010134  configureADC              
+00010060  configurePins             
+000101b4  enable_burn_wire          
 00004400  fram_ipe_end              
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-000100da  main                      
+00010100  main                      
 0000a501  mpu_ctl0_value            
 00001513  mpu_sam_value             
 00000440  mpu_segment_border1       
 00000440  mpu_segment_border2       
-00010194  readADC                   
+000101ca  readADC                   
 00010000  switch_control            
 
 
@@ -3139,7 +3140,8 @@ address   name
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-00004418  __TI_ISR_TRAP             
+00004418  PORT_2                    
+0000442c  __TI_ISR_TRAP             
 0000a501  mpu_ctl0_value            
 0000ffc6  __TI_int27                
 0000ffc8  __TI_int28                
@@ -3171,20 +3173,20 @@ address   name
 0000fffc  __TI_int54                
 0000fffe  _reset_vector             
 00010000  switch_control            
-00010060  __mspabi_cmpf             
-000100aa  configureADC              
-000100da  main                      
-00010108  __mpu_init                
-00010134  configurePins             
-0001015a  __mspabi_fltuf            
-0001017e  enable_burn_wire          
-00010194  readADC                   
-000101a4  C$$EXIT                   
-000101a4  abort                     
-000101aa  _system_pre_init          
+00010060  configurePins             
+000100b6  __mspabi_cmpf             
+00010100  main                      
+00010134  configureADC              
+00010164  __mpu_init                
+00010190  __mspabi_fltuf            
+000101b4  enable_burn_wire          
+000101ca  readADC                   
+000101da  C$$EXIT                   
+000101da  abort                     
+000101e0  _system_pre_init          
 ffffffff  __TI_pprof_out_hndl       
 ffffffff  __TI_prof_data_size       
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 
-[1438 symbols]
+[1439 symbols]
