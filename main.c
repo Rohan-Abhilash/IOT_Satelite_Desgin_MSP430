@@ -149,7 +149,7 @@ void switch_control(unsigned int adc_value){
             P5OUT |= SKYSAT_EN;
         }
 }
-#pragma vector = TIMER_A0_VECTOR
+#pragma vector = TIMER0_A0_VECTOR
 __interrupt void TIMER_A0(void){
     sendResetSignal();
 }
