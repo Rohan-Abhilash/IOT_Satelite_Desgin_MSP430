@@ -10,14 +10,16 @@
 #define BAT_VOLT BIT6 //P1.6 for receiving the voltage of the battery
 #define TIMER_THRESHOLD 50000
 
+
+#define WATCHDOG_SIGNAL_PIN BIT6 // P2.6 changed as pin number 5.0 cannot have interrupts enabled
+#define RESET_SIGNAL_PIN    BIT7 // P2.7
+
 void configureADC(void);
 void configurePins(void);
 void configureTimer(void);
 unsigned int readADC(void);
 void switch_control(unsigned int);
-void resetPIZero(void);
-
-volatile unsigned int timerCounter = 0;
+void sendResetSignal(void);
 
 void main(void)
 {
@@ -29,7 +31,7 @@ void main(void)
     configureADC();
     configureTimer();
 
-    __BIS_SR(GIE);
+    _BIS_SR(GIE);
 
     // Main loop
     while(1)
@@ -37,12 +39,6 @@ void main(void)
         unsigned int adc_value = readADC();
 
         switch_control(adc_value);
-
-        if(timerCounter >= TIMER_THRESHOLD){
-            timerCounter = 0;
-            resetPIZero();
-        }
-
 
         __delay_cycles(100000); // Delay for demonstration purposes
     }
@@ -64,37 +60,36 @@ void configureADC(void)
     ADC12CTL0 |= ADC12ENC;               // Enable ADC12_B
 }
 
-void configurePins(void){
-    P1DIR |= PIZERO_EN;
-    P4DIR |= LORA_EN;
-    P5DIR |= SKYSAT_EN;
+void configurePins(void)
+{
+    // Configure P2.6 as input for watchdog signal
+    P2DIR &= ~WATCHDOG_SIGNAL_PIN;
+    P2REN |= WATCHDOG_SIGNAL_PIN;
+    P2OUT |= WATCHDOG_SIGNAL_PIN;
 
-    P1OUT &= ~PIZERO_EN;
-    P4OUT &= ~LORA_EN;
-    P5OUT &= ~SKYSAT_EN;
+    // Configure P2.7 as output for reset signal
+    P2DIR |= RESET_SIGNAL_PIN;
+    P2OUT &= ~RESET_SIGNAL_PIN;
 
-    // Configure P5.0 as input for watchdog signal
-    P5DIR &= ~BIT0;
-    P5REN |= BIT0;  // Enable pull-up/pull-down resistor
-    P5OUT |= BIT0;  // Select pull-up mode
-
-    // Configure P5.1 as output for reset signal
-    P5DIR |= BIT1;
-    P5OUT &= ~BIT1;  // Ensure the reset signal is initially low
+    // Configure interrupt for watchdog signal on rising edge
+    P2IE |= WATCHDOG_SIGNAL_PIN;
+    P2IES &= ~WATCHDOG_SIGNAL_PIN;  // Rising edge
+    P2IFG &= ~WATCHDOG_SIGNAL_PIN;  // Clear interrupt flag
 }
 
 void configureTimer(void)
 {
-    // Configure Timer_A
-    TA0CCTL0 = CCIE;                          // Enable interrupt for CCR0
-    TA0CCR0 = 32768;                          // Set CCR0 value for ~1 second delay at ACLK 32.768 kHz
-    TA0CTL = TASSEL_1 | MC_1 | TACLR;         // ACLK, up mode, clear TAR
+    // Configure Timer_A0
+    TA0CCTL0 = CCIE;                       // Enable Timer_A interrupt
+    TA0CCR0 = 32768;                       // Set timer period (1 second at 32.768 kHz)
+    TA0CTL = TASSEL_1 | MC_1 | TACLR;      // ACLK, up mode, clear TAR
+}
 
-    // Enable interrupt for P5.0 (watchdog signal)
-    //Error here undefined p5ie , p5ies and p5ifg; to be solved
-    P5IE |= BIT0;
-    P5IES &= ~BIT0;  // Trigger on rising edge
-    P5IFG &= ~BIT0;  // Clear interrupt flag
+void sendResetSignal(void)
+{
+    P2OUT |= RESET_SIGNAL_PIN;   // Set reset signal high
+    __delay_cycles(100000);      // Delay to ensure reset signal is recognized
+    P2OUT &= ~RESET_SIGNAL_PIN;  // Set reset signal low
 }
 
 unsigned int readADC(void)
@@ -128,26 +123,26 @@ void switch_control(unsigned int adc_value){
         }
 }
 
-void resetPIZero(void)
+//Port 2 ISR
+#pragma vector=PORT2_VECTOR
+__interrupt void Port_2(void)
 {
-    // Send reset signal to the other board through P5.1
-    P5OUT |= BIT1;    // Set P5.1 high
-    __delay_cycles(100000);  // Delay to ensure reset signal is recognized (adjust as necessary)
-    P5OUT &= ~BIT1;   // Set P5.1 low
-}
-
-#pragma vector = TIMER0_A0_VECTOR
-__interrupt void Timer_A(void)
-{
-    timerCounter++;
-}
-
-#pragma vector=PORT5_VECTOR
-__interrupt void Port_5(void)
-{
-    if(P5IFG & BIT0)  // Check if interrupt was triggered by P5.0
+    if (P2IFG & WATCHDOG_SIGNAL_PIN)
     {
-        timerCounter = 0;  // Reset timer counter when watchdog signal is received
-        P5IFG &= ~BIT0;    // Clear interrupt flag
+        // Clear interrupt flag
+        P2IFG &= ~WATCHDOG_SIGNAL_PIN;
+
+        // Reset Timer_A0
+        TA0CTL |= TACLR;
     }
 }
+
+// Timer_A0 interrupt service routine
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void Timer_A(void)
+{
+    // Timeout occurred, send reset signal
+    sendResetSignal();
+}
+
+
