@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Tue Jun 18 13:46:20 2024
+>> Linked Tue Jun 18 13:51:37 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
