@@ -11,6 +11,7 @@
 
 void configureADC(void);
 void configurePins(void);
+void enable_burn_wire(void);
 unsigned int readADC(void);
 void switch_control(unsigned int);
 
@@ -22,6 +23,8 @@ void main(void)
     // Configure the 12 bit ADC
     configurePins();
     configureADC();
+
+    enable_burn_wire(); //enables the burn wire to deploy antennas for communication
 
     // Main loop
     while(1)
@@ -54,10 +57,18 @@ void configurePins(void){
     P1DIR |= PIZERO_EN;
     P4DIR |= LORA_EN;
     P5DIR |= SKYSAT_EN;
+    P3DIR |= BURN_EN; // setting the burnwire enable pin as output
 
     P1OUT &= ~PIZERO_EN;
     P4OUT &= ~LORA_EN;
     P5OUT &= ~SKYSAT_EN;
+    P3OUT &= ~BURN_EN; // setting the burn wire to low till antenna has to be deployed
+
+}
+void enable_burn_wire(void){
+    P3OUT |= BURN_EN;
+    __delay_cycles(100000);
+    P3OUT &= ~BURN_EN;
 }
 
 unsigned int readADC(void)

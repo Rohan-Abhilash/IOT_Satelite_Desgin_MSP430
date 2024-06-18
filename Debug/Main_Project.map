@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Tue Jun 18 11:25:54 2024
+>> Linked Tue Jun 18 12:21:43 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
@@ -79,7 +79,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00013ff8  0000018c  00013e6c  RWIX
+  FRAM2                 00010000   00013ff8  000001ae  00013e4a  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -230,26 +230,27 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    0000018c     
+.text      0    00010000    000001ae     
                   00010000    00000060     main.obj (.text:switch_control)
                   00010060    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
                   000100aa    00000030     main.obj (.text:configureADC)
-                  000100da    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  00010106    0000002a     main.obj (.text:main)
-                  00010130    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
-                  00010154    0000001e     main.obj (.text:configurePins)
-                  00010172    00000010     main.obj (.text:readADC)
-                  00010182    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  00010188    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  000100da    0000002e     main.obj (.text:main)
+                  00010108    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  00010134    00000026     main.obj (.text:configurePins)
+                  0001015a    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
+                  0001017e    00000016     main.obj (.text:enable_burn_wire)
+                  00010194    00000010     main.obj (.text:readADC)
+                  000101a4    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  000101aa    00000004                            : pre_init.c.obj (.text:_system_pre_init)
 
 MODULE SUMMARY
 
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       main.obj           232    0         0      
+       main.obj           266    0         0      
     +--+------------------+------+---------+---------+
-       Total:             232    0         0      
+       Total:             266    0         0      
                                                   
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o         44     0         0      
@@ -296,7 +297,7 @@ MODULE SUMMARY
                                                   
        Stack:             0      0         160    
     +--+------------------+------+---------+---------+
-       Grand Total:       428    58        160    
+       Grand Total:       462    58        160    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -560,7 +561,7 @@ address   name
 000009ce  AESAXIN_L                 
 000004be  BCD2BIN                   
 000004bc  BIN2BCD                   
-00010182  C$$EXIT                   
+000101a4  C$$EXIT                   
 0000043e  CAPTIO0CTL                
 0000043f  CAPTIO0CTL_H              
 0000043e  CAPTIO0CTL_L              
@@ -1719,26 +1720,27 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 00000001  __mpu_enable              
-000100da  __mpu_init                
+00010108  __mpu_init                
 00010060  __mspabi_cmpf             
-00010130  __mspabi_fltuf            
+0001015a  __mspabi_fltuf            
 00004400  _c_int00_noinit_noargs_mpu
 0000fffe  _reset_vector             
 00002360  _stack                    
-00010188  _system_pre_init          
-00010182  abort                     
+000101aa  _system_pre_init          
+000101a4  abort                     
 000100aa  configureADC              
-00010154  configurePins             
+00010134  configurePins             
+0001017e  enable_burn_wire          
 00004400  fram_ipe_end              
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-00010106  main                      
+000100da  main                      
 0000a501  mpu_ctl0_value            
 00001513  mpu_sam_value             
 00000440  mpu_segment_border1       
 00000440  mpu_segment_border2       
-00010172  readADC                   
+00010194  readADC                   
 00010000  switch_control            
 
 
@@ -3171,17 +3173,18 @@ address   name
 00010000  switch_control            
 00010060  __mspabi_cmpf             
 000100aa  configureADC              
-000100da  __mpu_init                
-00010106  main                      
-00010130  __mspabi_fltuf            
-00010154  configurePins             
-00010172  readADC                   
-00010182  C$$EXIT                   
-00010182  abort                     
-00010188  _system_pre_init          
+000100da  main                      
+00010108  __mpu_init                
+00010134  configurePins             
+0001015a  __mspabi_fltuf            
+0001017e  enable_burn_wire          
+00010194  readADC                   
+000101a4  C$$EXIT                   
+000101a4  abort                     
+000101aa  _system_pre_init          
 ffffffff  __TI_pprof_out_hndl       
 ffffffff  __TI_prof_data_size       
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 
-[1437 symbols]
+[1438 symbols]
