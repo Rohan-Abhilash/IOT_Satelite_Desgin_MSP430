@@ -8,11 +8,16 @@
 #define PIZERO_EN BIT4 //GPIO1 p1.4 5V to PI zero switch
 #define BURN_EN BIT0 //P3.0 for enabling the burn wire
 #define BAT_VOLT BIT6 //P1.6 for receiving the voltage of the battery
+#define TIMER_THRESHOLD 50000
 
 void configureADC(void);
 void configurePins(void);
+void configureTimer(void);
 unsigned int readADC(void);
 void switch_control(unsigned int);
+void resetPIZero(void);
+
+volatile unsigned int timerCounter = 0;
 
 void main(void)
 {
@@ -22,6 +27,9 @@ void main(void)
     // Configure the 12 bit ADC
     configurePins();
     configureADC();
+    configureTimer();
+
+    __BIS_SR(GIE);
 
     // Main loop
     while(1)
@@ -29,6 +37,12 @@ void main(void)
         unsigned int adc_value = readADC();
 
         switch_control(adc_value);
+
+        if(timerCounter >= TIMER_THRESHOLD){
+            timerCounter = 0;
+            resetPIZero();
+        }
+
 
         __delay_cycles(100000); // Delay for demonstration purposes
     }
@@ -58,6 +72,29 @@ void configurePins(void){
     P1OUT &= ~PIZERO_EN;
     P4OUT &= ~LORA_EN;
     P5OUT &= ~SKYSAT_EN;
+
+    // Configure P5.0 as input for watchdog signal
+    P5DIR &= ~BIT0;
+    P5REN |= BIT0;  // Enable pull-up/pull-down resistor
+    P5OUT |= BIT0;  // Select pull-up mode
+
+    // Configure P5.1 as output for reset signal
+    P5DIR |= BIT1;
+    P5OUT &= ~BIT1;  // Ensure the reset signal is initially low
+}
+
+void configureTimer(void)
+{
+    // Configure Timer_A
+    TA0CCTL0 = CCIE;                          // Enable interrupt for CCR0
+    TA0CCR0 = 32768;                          // Set CCR0 value for ~1 second delay at ACLK 32.768 kHz
+    TA0CTL = TASSEL_1 | MC_1 | TACLR;         // ACLK, up mode, clear TAR
+
+    // Enable interrupt for P5.0 (watchdog signal)
+    //Error here undefined p5ie , p5ies and p5ifg; to be solved
+    P5IE |= BIT0;
+    P5IES &= ~BIT0;  // Trigger on rising edge
+    P5IFG &= ~BIT0;  // Clear interrupt flag
 }
 
 unsigned int readADC(void)
@@ -91,3 +128,26 @@ void switch_control(unsigned int adc_value){
         }
 }
 
+void resetPIZero(void)
+{
+    // Send reset signal to the other board through P5.1
+    P5OUT |= BIT1;    // Set P5.1 high
+    __delay_cycles(100000);  // Delay to ensure reset signal is recognized (adjust as necessary)
+    P5OUT &= ~BIT1;   // Set P5.1 low
+}
+
+#pragma vector = TIMER0_A0_VECTOR
+__interrupt void Timer_A(void)
+{
+    timerCounter++;
+}
+
+#pragma vector=PORT5_VECTOR
+__interrupt void Port_5(void)
+{
+    if(P5IFG & BIT0)  // Check if interrupt was triggered by P5.0
+    {
+        timerCounter = 0;  // Reset timer counter when watchdog signal is received
+        P5IFG &= ~BIT0;    // Clear interrupt flag
+    }
+}
