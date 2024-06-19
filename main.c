@@ -35,6 +35,10 @@ void sendResetSignal(void);
 void enable_burn_wire(void);
 unsigned int readADC(void);
 void switch_control(unsigned int);
+void SPI_init(void);
+void Lora_init(void);
+void Lora_reset(void);
+void Lora_enable(void);
 void SPI_send(uint8_t);
 uint8_t SPI_receive(void);
 
