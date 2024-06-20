@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Wed Jun 19 09:33:23 2024
+>> Linked Thu Jun 20 09:20:13 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
@@ -79,7 +79,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00013ff8  000001d8  00013e20  RWIX
+  FRAM2                 00010000   00013ff8  000001e8  00013e10  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -232,28 +232,28 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    000001d8     
-                  00010000    00000060     main.obj (.text:switch_control)
-                  00010060    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
-                  000100aa    00000034     main.obj (.text:main)
-                  000100de    00000032     main.obj (.text:configurePins)
-                  00010110    00000030     main.obj (.text:configureADC)
-                  00010140    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  0001016c    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
-                  00010190    0000001a     main.obj (.text:sendResetSignal)
-                  000101aa    00000014     main.obj (.text:configureTimer)
-                  000101be    00000010     main.obj (.text:readADC)
-                  000101ce    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  000101d4    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+.text      0    00010000    000001e8     
+                  00010000    00000068     main.obj (.text:switch_control)
+                  00010068    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
+                  000100b2    0000003c     main.obj (.text:main)
+                  000100ee    00000032     main.obj (.text:configurePins)
+                  00010120    00000030     main.obj (.text:configureADC)
+                  00010150    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  0001017c    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
+                  000101a0    0000001a     main.obj (.text:sendResetSignal)
+                  000101ba    00000014     main.obj (.text:configureTimer)
+                  000101ce    00000010     main.obj (.text:readADC)
+                  000101de    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  000101e4    00000004                            : pre_init.c.obj (.text:_system_pre_init)
 
 MODULE SUMMARY
 
        Module             code   ro data   rw data
        ------             ----   -------   -------
     .\
-       main.obj           338    4         0      
+       main.obj           354    4         0      
     +--+------------------+------+---------+---------+
-       Total:             338    4         0      
+       Total:             354    4         0      
                                                   
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o         44     0         0      
@@ -298,7 +298,7 @@ MODULE SUMMARY
                                                   
        Stack:             0      0         160    
     +--+------------------+------+---------+---------+
-       Grand Total:       534    58        160    
+       Grand Total:       550    58        160    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -562,7 +562,7 @@ address   name
 000009ce  AESAXIN_L                 
 000004be  BCD2BIN                   
 000004bc  BIN2BCD                   
-000101ce  C$$EXIT                   
+000101de  C$$EXIT                   
 0000043e  CAPTIO0CTL                
 0000043f  CAPTIO0CTL_H              
 0000043e  CAPTIO0CTL_L              
@@ -1723,28 +1723,28 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 00000001  __mpu_enable              
-00010140  __mpu_init                
-00010060  __mspabi_cmpf             
-0001016c  __mspabi_fltuf            
+00010150  __mpu_init                
+00010068  __mspabi_cmpf             
+0001017c  __mspabi_fltuf            
 00004400  _c_int00_noinit_noargs_mpu
 0000fffe  _reset_vector             
 00002360  _stack                    
-000101d4  _system_pre_init          
-000101ce  abort                     
-00010110  configureADC              
-000100de  configurePins             
-000101aa  configureTimer            
+000101e4  _system_pre_init          
+000101de  abort                     
+00010120  configureADC              
+000100ee  configurePins             
+000101ba  configureTimer            
 00004400  fram_ipe_end              
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-000100aa  main                      
+000100b2  main                      
 0000a501  mpu_ctl0_value            
 00001513  mpu_sam_value             
 00000440  mpu_segment_border1       
 00000440  mpu_segment_border2       
-000101be  readADC                   
-00010190  sendResetSignal           
+000101ce  readADC                   
+000101a0  sendResetSignal           
 00010000  switch_control            
 
 
@@ -3177,18 +3177,18 @@ address   name
 0000fffc  __TI_int54                
 0000fffe  _reset_vector             
 00010000  switch_control            
-00010060  __mspabi_cmpf             
-000100aa  main                      
-000100de  configurePins             
-00010110  configureADC              
-00010140  __mpu_init                
-0001016c  __mspabi_fltuf            
-00010190  sendResetSignal           
-000101aa  configureTimer            
-000101be  readADC                   
-000101ce  C$$EXIT                   
-000101ce  abort                     
-000101d4  _system_pre_init          
+00010068  __mspabi_cmpf             
+000100b2  main                      
+000100ee  configurePins             
+00010120  configureADC              
+00010150  __mpu_init                
+0001017c  __mspabi_fltuf            
+000101a0  sendResetSignal           
+000101ba  configureTimer            
+000101ce  readADC                   
+000101de  C$$EXIT                   
+000101de  abort                     
+000101e4  _system_pre_init          
 ffffffff  __TI_pprof_out_hndl       
 ffffffff  __TI_prof_data_size       
 ffffffff  __TI_prof_data_start      
