@@ -1,7 +1,11 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
+<<<<<<< HEAD
 >> Linked Thu Jun 20 15:09:18 2024
+=======
+>> Linked Thu Jun 20 09:20:13 2024
+>>>>>>> pizeroTest
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
@@ -79,7 +83,11 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
+<<<<<<< HEAD
   FRAM2                 00010000   00013ff8  0000112c  00012ecc  RWIX
+=======
+  FRAM2                 00010000   00013ff8  000001e8  00013e10  RWIX
+>>>>>>> pizeroTest
 
 
 SECTION ALLOCATION MAP
@@ -118,8 +126,13 @@ section   page    origin      length       input sections
 .text:_isr 
 *          0    00004400    0000003e     
                   00004400    00000018     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs_mpu)
+<<<<<<< HEAD
                   00004418    00000014     main.obj (.text:_isr:PORT_2)
                   0000442c    0000000a     main.obj (.text:_isr:TIMER_A0)
+=======
+                  00004418    00000014     main.obj (.text:_isr:Port_2)
+                  0000442c    0000000a     main.obj (.text:_isr:Timer_A)
+>>>>>>> pizeroTest
                   00004436    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .stack     0    00002360    000000a0     UNINITIALIZED
@@ -232,6 +245,7 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
+<<<<<<< HEAD
 .text      0    00010000    0000112c     
                   00010000    00000468     rts430x_lc_rd_eabi.lib : frcdivd.c.obj (.text:__TI_frcdivd)
                   00010468    00000292                            : mpyd.c.obj (.text:__mspabi_mpyd)
@@ -261,22 +275,45 @@ SYSNMI     0    0000fffc    00000002
                   0001111c    00000006     rts430x_lc_rd_eabi.lib : fltud.c.obj (.text:__mspabi_fltud)
                   00011122    00000006                            : exit.c.obj (.text:abort)
                   00011128    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+=======
+.text      0    00010000    000001e8     
+                  00010000    00000068     main.obj (.text:switch_control)
+                  00010068    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
+                  000100b2    0000003c     main.obj (.text:main)
+                  000100ee    00000032     main.obj (.text:configurePins)
+                  00010120    00000030     main.obj (.text:configureADC)
+                  00010150    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  0001017c    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
+                  000101a0    0000001a     main.obj (.text:sendResetSignal)
+                  000101ba    00000014     main.obj (.text:configureTimer)
+                  000101ce    00000010     main.obj (.text:readADC)
+                  000101de    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  000101e4    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+>>>>>>> pizeroTest
 
 MODULE SUMMARY
 
        Module                  code   ro data   rw data
        ------                  ----   -------   -------
     .\
+<<<<<<< HEAD
        main.obj                564    4         0      
     +--+-----------------------+------+---------+---------+
        Total:                  564    4         0      
                                                        
+=======
+       main.obj           354    4         0      
+    +--+------------------+------+---------+---------+
+       Total:             354    4         0      
+                                                  
+>>>>>>> pizeroTest
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o              44     0         0      
     +--+-----------------------+------+---------+---------+
        Total:                  44     0         0      
                                                        
     C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
+<<<<<<< HEAD
        frcdivd.c.obj           1128   0         0      
        mpyd.c.obj              658    0         0      
        divd.c.obj              540    0         0      
@@ -331,6 +368,46 @@ MODULE SUMMARY
        Stack:                  0      0         160    
     +--+-----------------------+------+---------+---------+
        Grand Total:            4458   58        160    
+=======
+       fs_cmp.asm.obj     74     0         0      
+       fs_utof.asm.obj    36     0         0      
+       boot.c.obj         24     2         0      
+       isr_trap.asm.obj   8      0         0      
+       exit.c.obj         6      0         0      
+       pre_init.c.obj     4      0         0      
+       int27.asm.obj      0      2         0      
+       int28.asm.obj      0      2         0      
+       int29.asm.obj      0      2         0      
+       int30.asm.obj      0      2         0      
+       int31.asm.obj      0      2         0      
+       int32.asm.obj      0      2         0      
+       int33.asm.obj      0      2         0      
+       int35.asm.obj      0      2         0      
+       int36.asm.obj      0      2         0      
+       int37.asm.obj      0      2         0      
+       int38.asm.obj      0      2         0      
+       int39.asm.obj      0      2         0      
+       int40.asm.obj      0      2         0      
+       int41.asm.obj      0      2         0      
+       int42.asm.obj      0      2         0      
+       int43.asm.obj      0      2         0      
+       int45.asm.obj      0      2         0      
+       int46.asm.obj      0      2         0      
+       int47.asm.obj      0      2         0      
+       int48.asm.obj      0      2         0      
+       int49.asm.obj      0      2         0      
+       int50.asm.obj      0      2         0      
+       int51.asm.obj      0      2         0      
+       int52.asm.obj      0      2         0      
+       int53.asm.obj      0      2         0      
+       int54.asm.obj      0      2         0      
+    +--+------------------+------+---------+---------+
+       Total:             152    54        0      
+                                                  
+       Stack:             0      0         160    
+    +--+------------------+------+---------+---------+
+       Grand Total:       550    58        160    
+>>>>>>> pizeroTest
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -594,7 +671,11 @@ address   name
 000009ce  AESAXIN_L                 
 000004be  BCD2BIN                   
 000004bc  BIN2BCD                   
+<<<<<<< HEAD
 00011122  C$$EXIT                   
+=======
+000101de  C$$EXIT                   
+>>>>>>> pizeroTest
 0000043e  CAPTIO0CTL                
 0000043f  CAPTIO0CTL_H              
 0000043e  CAPTIO0CTL_L              
@@ -1392,7 +1473,11 @@ address   name
 0000012a  PMMIFG                    
 0000012b  PMMIFG_H                  
 0000012a  PMMIFG_L                  
+<<<<<<< HEAD
 00004418  PORT_2                    
+=======
+00004418  Port_2                    
+>>>>>>> pizeroTest
 00000158  RCCTL0                    
 00000159  RCCTL0_H                  
 00000158  RCCTL0_L                  
@@ -1556,7 +1641,11 @@ address   name
 000003e0  TB0EX0                    
 000003ee  TB0IV                     
 000003d0  TB0R                      
+<<<<<<< HEAD
 0000442c  TIMER_A0                  
+=======
+0000442c  Timer_A                   
+>>>>>>> pizeroTest
 000005d0  UCA0ABCTL                 
 000005c6  UCA0BRW                   
 000005c7  UCA0BRW_H                 
@@ -1724,8 +1813,11 @@ address   name
 00004400  __TI_CINIT_Limit          
 00004400  __TI_CINIT_Warm           
 00004436  __TI_ISR_TRAP             
+<<<<<<< HEAD
 00010000  __TI_frcdivd              
 00010916  __TI_frcmpyd              
+=======
+>>>>>>> pizeroTest
 0000ffc6  __TI_int27                
 0000ffc8  __TI_int28                
 0000ffca  __TI_int29                
@@ -1759,6 +1851,7 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 00000001  __mpu_enable              
+<<<<<<< HEAD
 00011030  __mpu_init                
 00010a7a  __mspabi_cmpd             
 00010b52  __mspabi_cvtdf            
@@ -1825,17 +1918,40 @@ ffffffff  __c_args__
 00011122  abort                     
 00010eac  configurePins             
 00011106  enable_burn_wire          
+=======
+00010150  __mpu_init                
+00010068  __mspabi_cmpf             
+0001017c  __mspabi_fltuf            
+00004400  _c_int00_noinit_noargs_mpu
+0000fffe  _reset_vector             
+00002360  _stack                    
+000101e4  _system_pre_init          
+000101de  abort                     
+00010120  configureADC              
+000100ee  configurePins             
+000101ba  configureTimer            
+>>>>>>> pizeroTest
 00004400  fram_ipe_end              
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
+<<<<<<< HEAD
 00010d08  main                      
+=======
+000100b2  main                      
+>>>>>>> pizeroTest
 0000a501  mpu_ctl0_value            
 00001513  mpu_sam_value             
 00000440  mpu_segment_border1       
 00000440  mpu_segment_border2       
+<<<<<<< HEAD
 000110d4  sendResetSignal           
 00010c04  switch_control            
+=======
+000101ce  readADC                   
+000101a0  sendResetSignal           
+00010000  switch_control            
+>>>>>>> pizeroTest
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3233,8 +3349,13 @@ address   name
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
+<<<<<<< HEAD
 00004418  PORT_2                    
 0000442c  TIMER_A0                  
+=======
+00004418  Port_2                    
+0000442c  Timer_A                   
+>>>>>>> pizeroTest
 00004436  __TI_ISR_TRAP             
 0000a501  mpu_ctl0_value            
 0000ffc6  __TI_int27                
@@ -3266,6 +3387,7 @@ address   name
 0000fffa  __TI_int53                
 0000fffc  __TI_int54                
 0000fffe  _reset_vector             
+<<<<<<< HEAD
 00010000  __TI_frcdivd              
 00010468  __mspabi_mpyd             
 000106fa  __mspabi_divd             
@@ -3337,9 +3459,28 @@ address   name
 00011122  C$$EXIT                   
 00011122  abort                     
 00011128  _system_pre_init          
+=======
+00010000  switch_control            
+00010068  __mspabi_cmpf             
+000100b2  main                      
+000100ee  configurePins             
+00010120  configureADC              
+00010150  __mpu_init                
+0001017c  __mspabi_fltuf            
+000101a0  sendResetSignal           
+000101ba  configureTimer            
+000101ce  readADC                   
+000101de  C$$EXIT                   
+000101de  abort                     
+000101e4  _system_pre_init          
+>>>>>>> pizeroTest
 ffffffff  __TI_pprof_out_hndl       
 ffffffff  __TI_prof_data_size       
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 
+<<<<<<< HEAD
 [1499 symbols]
+=======
+[1441 symbols]
+>>>>>>> pizeroTest

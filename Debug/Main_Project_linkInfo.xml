@@ -2,7 +2,11 @@
 <link_info>
    <banner>MSP430 Linker PC v21.6.1.LTS</banner>
    <copyright>Copyright (c) 2003-2018 Texas Instruments Incorporated</copyright>
+<<<<<<< HEAD
    <link_time>0x6673f8c6</link_time>
+=======
+   <link_time>0x6673a6f5</link_time>
+>>>>>>> pizeroTest
    <link_errors>0x0</link_errors>
    <output_file>Main_Project.out</output_file>
    <entry_point>
@@ -205,48 +209,77 @@
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>cmpd.c.obj</name>
+=======
+         <name>fs_cmp.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-48">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>cvtdf.c.obj</name>
+=======
+         <name>fs_utof.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-49">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>cvtfd.c.obj</name>
+=======
+         <name>mult16_f5hw.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-4a">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>divd.c.obj</name>
+=======
+         <name>mult32_f5hw.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-4b">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>frcdivd.c.obj</name>
+=======
+         <name>mult64_f5hw.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-4c">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>fltud.c.obj</name>
+=======
+         <name>mult1632_f5hw.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-4d">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>fltuld.c.obj</name>
+=======
+         <name>mult3264_f5hw.asm.obj</name>
+>>>>>>> pizeroTest
       </input_file>
       <input_file id="fl-4e">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
+<<<<<<< HEAD
          <name>mpyd.c.obj</name>
       </input_file>
       <input_file id="fl-4f">
@@ -263,65 +296,71 @@
       </input_file>
       <input_file id="fl-51">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
+=======
+         <name>boot.c.obj</name>
+      </input_file>
+      <input_file id="fl-4f">
+         <path>C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\</path>
+>>>>>>> pizeroTest
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult16_f5hw.asm.obj</name>
       </input_file>
-      <input_file id="fl-52">
+      <input_file id="fl-50">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult32.asm.obj</name>
       </input_file>
-      <input_file id="fl-53">
+      <input_file id="fl-51">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult32_f5hw.asm.obj</name>
       </input_file>
-      <input_file id="fl-54">
+      <input_file id="fl-52">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult64.asm.obj</name>
       </input_file>
-      <input_file id="fl-55">
+      <input_file id="fl-53">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult64_f5hw.asm.obj</name>
       </input_file>
-      <input_file id="fl-56">
+      <input_file id="fl-54">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult1632_f5hw.asm.obj</name>
       </input_file>
-      <input_file id="fl-57">
+      <input_file id="fl-55">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult3264_f5hw.asm.obj</name>
       </input_file>
-      <input_file id="fl-58">
+      <input_file id="fl-56">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult1632.asm.obj</name>
       </input_file>
-      <input_file id="fl-59">
+      <input_file id="fl-57">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>mult3264.asm.obj</name>
       </input_file>
-      <input_file id="fl-5a">
+      <input_file id="fl-58">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
          <name>lsl32.asm.obj</name>
       </input_file>
-      <input_file id="fl-5b">
+      <input_file id="fl-59">
          <path>C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\</path>
          <kind>archive</kind>
          <file>rts430x_lc_rd_eabi.lib</file>
@@ -413,13 +452,21 @@
       </input_file>
    </input_file_list>
    <object_component_list>
+<<<<<<< HEAD
       <object_component id="oc-8a4">
+=======
+      <object_component id="oc-814">
+>>>>>>> pizeroTest
          <name>__TI_cinit_table</name>
          <load_address>0x4400</load_address>
          <run_address>0x4400</run_address>
          <size>0x0</size>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-833">
+=======
+      <object_component id="oc-7a3">
+>>>>>>> pizeroTest
          <name>.binit</name>
          <load_address>0x4400</load_address>
          <run_address>0x4400</run_address>
@@ -430,17 +477,28 @@
          <load_address>0x4400</load_address>
          <run_address>0x4400</run_address>
          <size>0x18</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-5f"/>
       </object_component>
       <object_component id="oc-62e">
          <name>.text:_isr:PORT_2</name>
+=======
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-62e">
+         <name>.text:_isr:Port_2</name>
+>>>>>>> pizeroTest
          <load_address>0x4418</load_address>
          <run_address>0x4418</run_address>
          <size>0x14</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-634">
+<<<<<<< HEAD
          <name>.text:_isr:TIMER_A0</name>
+=======
+         <name>.text:_isr:Timer_A</name>
+>>>>>>> pizeroTest
          <load_address>0x442c</load_address>
          <run_address>0x442c</run_address>
          <size>0xa</size>
@@ -453,6 +511,7 @@
          <size>0x8</size>
          <input_file_ref idref="fl-2c"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-75b">
          <name>.text:__TI_frcdivd</name>
          <load_address>0x10000</load_address>
@@ -536,6 +595,91 @@
          <run_address>0x10e50</run_address>
          <size>0x5c</size>
          <input_file_ref idref="fl-55"/>
+=======
+      <object_component id="oc-6df">
+         <name>.text:switch_control</name>
+         <load_address>0x10000</load_address>
+         <run_address>0x10000</run_address>
+         <size>0x68</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-72e">
+         <name>.text</name>
+         <load_address>0x10068</load_address>
+         <run_address>0x10068</run_address>
+         <size>0x4a</size>
+         <input_file_ref idref="fl-47"/>
+      </object_component>
+      <object_component id="oc-69e">
+         <name>.text:main</name>
+         <load_address>0x100b2</load_address>
+         <run_address>0x100b2</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6c7">
+         <name>.text:configurePins</name>
+         <load_address>0x100ee</load_address>
+         <run_address>0x100ee</run_address>
+         <size>0x32</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6cd">
+         <name>.text:configureADC</name>
+         <load_address>0x10120</load_address>
+         <run_address>0x10120</run_address>
+         <size>0x30</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6b0">
+         <name>.text:__mpu_init</name>
+         <load_address>0x10150</load_address>
+         <run_address>0x10150</run_address>
+         <size>0x2c</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-729">
+         <name>.text</name>
+         <load_address>0x1017c</load_address>
+         <run_address>0x1017c</run_address>
+         <size>0x24</size>
+         <input_file_ref idref="fl-48"/>
+      </object_component>
+      <object_component id="oc-689">
+         <name>.text:sendResetSignal</name>
+         <load_address>0x101a0</load_address>
+         <run_address>0x101a0</run_address>
+         <size>0x1a</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d3">
+         <name>.text:configureTimer</name>
+         <load_address>0x101ba</load_address>
+         <run_address>0x101ba</run_address>
+         <size>0x14</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d9">
+         <name>.text:readADC</name>
+         <load_address>0x101ce</load_address>
+         <run_address>0x101ce</run_address>
+         <size>0x10</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6e6">
+         <name>.text:abort</name>
+         <load_address>0x101de</load_address>
+         <run_address>0x101de</run_address>
+         <size>0x6</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-698">
+         <name>.text:_system_pre_init</name>
+         <load_address>0x101e4</load_address>
+         <run_address>0x101e4</run_address>
+         <size>0x4</size>
+         <input_file_ref idref="fl-53"/>
+>>>>>>> pizeroTest
       </object_component>
       <object_component id="oc-6c7">
          <name>.text:configurePins</name>
@@ -654,9 +798,15 @@
          <uninitialized>true</uninitialized>
          <run_address>0x2360</run_address>
          <size>0x4</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-5f"/>
       </object_component>
       <object_component id="oc-8a5">
+=======
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-815">
+>>>>>>> pizeroTest
          <name>.stack</name>
          <uninitialized>true</uninitialized>
          <run_address>0x2360</run_address>
@@ -863,15 +1013,22 @@
          <load_address>0xfffe</load_address>
          <run_address>0xfffe</run_address>
          <size>0x2</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-5f"/>
       </object_component>
       <object_component id="oc-6fe">
+=======
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-6e2">
+>>>>>>> pizeroTest
          <name>.debug_info</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
          <size>0x489</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6f8">
          <name>.debug_info</name>
          <load_address>0x489</load_address>
@@ -898,10 +1055,39 @@
          <load_address>0x83d</load_address>
          <run_address>0x83d</run_address>
          <size>0x112</size>
+=======
+      <object_component id="oc-68c">
+         <name>.debug_info</name>
+         <load_address>0x196</load_address>
+         <run_address>0x196</run_address>
+         <size>0x110</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6da">
+         <name>.debug_info</name>
+         <load_address>0x2a6</load_address>
+         <run_address>0x2a6</run_address>
+         <size>0x104</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6c9">
+         <name>.debug_info</name>
+         <load_address>0x3aa</load_address>
+         <run_address>0x3aa</run_address>
+         <size>0x10c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d0">
+         <name>.debug_info</name>
+         <load_address>0x4b6</load_address>
+         <run_address>0x4b6</run_address>
+         <size>0x10a</size>
+>>>>>>> pizeroTest
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-6d4">
          <name>.debug_info</name>
+<<<<<<< HEAD
          <load_address>0x94f</load_address>
          <run_address>0x94f</run_address>
          <size>0x102</size>
@@ -926,10 +1112,30 @@
          <load_address>0xd9d</load_address>
          <run_address>0xd9d</run_address>
          <size>0x119</size>
+=======
+         <load_address>0x5c0</load_address>
+         <run_address>0x5c0</run_address>
+         <size>0x10e</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6a0">
+         <name>.debug_info</name>
+         <load_address>0x6ce</load_address>
+         <run_address>0x6ce</run_address>
+         <size>0x153</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-636">
+         <name>.debug_info</name>
+         <load_address>0x821</load_address>
+         <run_address>0x821</run_address>
+         <size>0x117</size>
+>>>>>>> pizeroTest
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-62f">
          <name>.debug_info</name>
+<<<<<<< HEAD
          <load_address>0xeb6</load_address>
          <run_address>0xeb6</run_address>
          <size>0xff</size>
@@ -940,10 +1146,16 @@
          <load_address>0xfb5</load_address>
          <run_address>0xfb5</run_address>
          <size>0x26b</size>
+=======
+         <load_address>0x938</load_address>
+         <run_address>0x938</run_address>
+         <size>0xff</size>
+>>>>>>> pizeroTest
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-617">
          <name>.debug_info</name>
+<<<<<<< HEAD
          <load_address>0x1220</load_address>
          <run_address>0x1220</run_address>
          <size>0x84</size>
@@ -1018,6 +1230,33 @@
          <run_address>0x1f0f</run_address>
          <size>0x1a7</size>
          <input_file_ref idref="fl-4a"/>
+=======
+         <load_address>0xa37</load_address>
+         <run_address>0xa37</run_address>
+         <size>0x84</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-62c">
+         <name>.debug_info</name>
+         <load_address>0xabb</load_address>
+         <run_address>0xabb</run_address>
+         <size>0x10f</size>
+         <input_file_ref idref="fl-2c"/>
+      </object_component>
+      <object_component id="oc-72f">
+         <name>.debug_info</name>
+         <load_address>0xbca</load_address>
+         <run_address>0xbca</run_address>
+         <size>0x12d</size>
+         <input_file_ref idref="fl-47"/>
+      </object_component>
+      <object_component id="oc-72c">
+         <name>.debug_info</name>
+         <load_address>0xcf7</load_address>
+         <run_address>0xcf7</run_address>
+         <size>0x124</size>
+         <input_file_ref idref="fl-48"/>
+>>>>>>> pizeroTest
       </object_component>
       <object_component id="oc-6ec">
          <name>.debug_info</name>
@@ -1147,6 +1386,7 @@
       </object_component>
       <object_component id="oc-60e">
          <name>.debug_info</name>
+<<<<<<< HEAD
          <load_address>0x409c</load_address>
          <run_address>0x409c</run_address>
          <size>0x100</size>
@@ -1246,11 +1486,106 @@
          <name>.debug_line</name>
          <load_address>0x290</load_address>
          <run_address>0x290</run_address>
+=======
+         <load_address>0xe1b</load_address>
+         <run_address>0xe1b</run_address>
+         <size>0x100</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-65f">
+         <name>.debug_info</name>
+         <load_address>0xf1b</load_address>
+         <run_address>0xf1b</run_address>
+         <size>0x190</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-6b1">
+         <name>.debug_info</name>
+         <load_address>0x10ab</load_address>
+         <run_address>0x10ab</run_address>
+         <size>0xf2</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-69a">
+         <name>.debug_info</name>
+         <load_address>0x119d</load_address>
+         <run_address>0x119d</run_address>
+         <size>0x153</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-6ea">
+         <name>.debug_info</name>
+         <load_address>0x12f0</load_address>
+         <run_address>0x12f0</run_address>
+         <size>0x122</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-817">
+         <name>.debug_info</name>
+         <load_address>0x1412</load_address>
+         <run_address>0x1412</run_address>
+         <size>0xa7</size>
+      </object_component>
+      <object_component id="oc-6e1">
+         <name>.debug_line</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x5b</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-68a">
+         <name>.debug_line</name>
+         <load_address>0x5b</load_address>
+         <run_address>0x5b</run_address>
+         <size>0x45</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6de">
+         <name>.debug_line</name>
+         <load_address>0xa0</load_address>
+         <run_address>0xa0</run_address>
+         <size>0x45</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6c8">
+         <name>.debug_line</name>
+         <load_address>0xe5</load_address>
+         <run_address>0xe5</run_address>
+         <size>0x4a</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6ce">
+         <name>.debug_line</name>
+         <load_address>0x12f</load_address>
+         <run_address>0x12f</run_address>
+         <size>0x48</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d7">
+         <name>.debug_line</name>
+         <load_address>0x177</load_address>
+         <run_address>0x177</run_address>
+         <size>0x45</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-69f">
+         <name>.debug_line</name>
+         <load_address>0x1bc</load_address>
+         <run_address>0x1bc</run_address>
+         <size>0x4e</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-635">
+         <name>.debug_line</name>
+         <load_address>0x20a</load_address>
+         <run_address>0x20a</run_address>
+>>>>>>> pizeroTest
          <size>0x43</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-632">
          <name>.debug_line</name>
+<<<<<<< HEAD
          <load_address>0x2d3</load_address>
          <run_address>0x2d3</run_address>
          <size>0x47</size>
@@ -1261,10 +1596,16 @@
          <load_address>0x31a</load_address>
          <run_address>0x31a</run_address>
          <size>0x72</size>
+=======
+         <load_address>0x24d</load_address>
+         <run_address>0x24d</run_address>
+         <size>0x47</size>
+>>>>>>> pizeroTest
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-61a">
          <name>.debug_line</name>
+<<<<<<< HEAD
          <load_address>0x38c</load_address>
          <run_address>0x38c</run_address>
          <size>0x20</size>
@@ -1502,6 +1843,70 @@
          <input_file_ref idref="fl-66"/>
       </object_component>
       <object_component id="oc-6fc">
+=======
+         <load_address>0x294</load_address>
+         <run_address>0x294</run_address>
+         <size>0x20</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-62a">
+         <name>.debug_line</name>
+         <load_address>0x2b4</load_address>
+         <run_address>0x2b4</run_address>
+         <size>0x3d</size>
+         <input_file_ref idref="fl-2c"/>
+      </object_component>
+      <object_component id="oc-732">
+         <name>.debug_line</name>
+         <load_address>0x2f1</load_address>
+         <run_address>0x2f1</run_address>
+         <size>0x5e</size>
+         <input_file_ref idref="fl-47"/>
+      </object_component>
+      <object_component id="oc-72b">
+         <name>.debug_line</name>
+         <load_address>0x34f</load_address>
+         <run_address>0x34f</run_address>
+         <size>0x4d</size>
+         <input_file_ref idref="fl-48"/>
+      </object_component>
+      <object_component id="oc-677">
+         <name>.debug_line</name>
+         <load_address>0x39c</load_address>
+         <run_address>0x39c</run_address>
+         <size>0x2a</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-662">
+         <name>.debug_line</name>
+         <load_address>0x3c6</load_address>
+         <run_address>0x3c6</run_address>
+         <size>0x48</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-6b4">
+         <name>.debug_line</name>
+         <load_address>0x40e</load_address>
+         <run_address>0x40e</run_address>
+         <size>0x45</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-69d">
+         <name>.debug_line</name>
+         <load_address>0x453</load_address>
+         <run_address>0x453</run_address>
+         <size>0x3e</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-6e8">
+         <name>.debug_line</name>
+         <load_address>0x491</load_address>
+         <run_address>0x491</run_address>
+         <size>0x3d</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-6e0">
+>>>>>>> pizeroTest
          <name>.debug_frame</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
@@ -1613,7 +2018,11 @@
          <size>0x44</size>
          <input_file_ref idref="fl-4d"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6e6">
+=======
+      <object_component id="oc-68b">
+>>>>>>> pizeroTest
          <name>.debug_frame</name>
          <load_address>0x46c</load_address>
          <run_address>0x46c</run_address>
@@ -1634,13 +2043,18 @@
          <size>0x3c</size>
          <input_file_ref idref="fl-5b"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-7cf">
+=======
+      <object_component id="oc-6dd">
+>>>>>>> pizeroTest
          <name>.debug_frame</name>
          <load_address>0x558</load_address>
          <run_address>0x558</run_address>
          <size>0x3c</size>
          <input_file_ref idref="fl-5e"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-65f">
          <name>.debug_frame</name>
          <load_address>0x594</load_address>
@@ -1654,9 +2068,60 @@
          <run_address>0x640</run_address>
          <size>0x39</size>
          <input_file_ref idref="fl-60"/>
-      </object_component>
-      <object_component id="oc-69d">
+=======
+      <object_component id="oc-6cc">
          <name>.debug_frame</name>
+         <load_address>0xbc</load_address>
+         <run_address>0xbc</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6cf">
+         <name>.debug_frame</name>
+         <load_address>0xf8</load_address>
+         <run_address>0xf8</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d8">
+         <name>.debug_frame</name>
+         <load_address>0x134</load_address>
+         <run_address>0x134</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6a3">
+         <name>.debug_frame</name>
+         <load_address>0x170</load_address>
+         <run_address>0x170</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-639">
+         <name>.debug_frame</name>
+         <load_address>0x1ac</load_address>
+         <run_address>0x1ac</run_address>
+         <size>0x4c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-633">
+         <name>.debug_frame</name>
+         <load_address>0x1f8</load_address>
+         <run_address>0x1f8</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-663">
+         <name>.debug_frame</name>
+         <load_address>0x234</load_address>
+         <run_address>0x234</run_address>
+         <size>0x34</size>
+         <input_file_ref idref="fl-4e"/>
+>>>>>>> pizeroTest
+      </object_component>
+      <object_component id="oc-6b5">
+         <name>.debug_frame</name>
+<<<<<<< HEAD
          <load_address>0x5c8</load_address>
          <run_address>0x5c8</run_address>
          <size>0x3c</size>
@@ -1670,6 +2135,28 @@
          <input_file_ref idref="fl-66"/>
       </object_component>
       <object_component id="oc-777">
+=======
+         <load_address>0x2e0</load_address>
+         <run_address>0x2e0</run_address>
+         <size>0x39</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-699">
+         <name>.debug_frame</name>
+         <load_address>0x268</load_address>
+         <run_address>0x268</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-6e7">
+         <name>.debug_frame</name>
+         <load_address>0x2a4</load_address>
+         <run_address>0x2a4</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-733">
+>>>>>>> pizeroTest
          <name>.debug_abbrev</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
@@ -1685,18 +2172,35 @@
       </object_component>
       <object_component id="oc-6c3">
          <name>.debug_abbrev</name>
+<<<<<<< HEAD
          <load_address>0x104</load_address>
          <run_address>0x104</run_address>
          <size>0x50</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-743">
+=======
+         <load_address>0x7a</load_address>
+         <run_address>0x7a</run_address>
+         <size>0x50</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-728">
+         <name>.debug_abbrev</name>
+         <load_address>0xca</load_address>
+         <run_address>0xca</run_address>
+         <size>0x52</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-725">
+>>>>>>> pizeroTest
          <name>.debug_abbrev</name>
          <load_address>0x154</load_address>
          <run_address>0x154</run_address>
          <size>0x50</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-744">
          <name>.debug_abbrev</name>
          <load_address>0x1a4</load_address>
@@ -1744,10 +2248,46 @@
          <load_address>0x3c4</load_address>
          <run_address>0x3c4</run_address>
          <size>0x69</size>
+=======
+      <object_component id="oc-726">
+         <name>.debug_abbrev</name>
+         <load_address>0x16c</load_address>
+         <run_address>0x16c</run_address>
+         <size>0x50</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-727">
+         <name>.debug_abbrev</name>
+         <load_address>0x1bc</load_address>
+         <run_address>0x1bc</run_address>
+         <size>0x50</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6e5">
+         <name>.debug_abbrev</name>
+         <load_address>0x20c</load_address>
+         <run_address>0x20c</run_address>
+         <size>0x52</size>
+>>>>>>> pizeroTest
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-68f">
+         <name>.debug_abbrev</name>
+         <load_address>0x25e</load_address>
+         <run_address>0x25e</run_address>
+         <size>0x61</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-688">
+         <name>.debug_abbrev</name>
+         <load_address>0x2bf</load_address>
+         <run_address>0x2bf</run_address>
+         <size>0x53</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-619">
          <name>.debug_abbrev</name>
+<<<<<<< HEAD
          <load_address>0x42d</load_address>
          <run_address>0x42d</run_address>
          <size>0x1f</size>
@@ -1988,6 +2528,73 @@
          <name>.debug_abbrev</name>
          <load_address>0xf75</load_address>
          <run_address>0xf75</run_address>
+=======
+         <load_address>0x312</load_address>
+         <run_address>0x312</run_address>
+         <size>0x1f</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-687">
+         <name>.debug_abbrev</name>
+         <load_address>0x331</load_address>
+         <run_address>0x331</run_address>
+         <size>0x28</size>
+         <input_file_ref idref="fl-2c"/>
+      </object_component>
+      <object_component id="oc-768">
+         <name>.debug_abbrev</name>
+         <load_address>0x359</load_address>
+         <run_address>0x359</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-47"/>
+      </object_component>
+      <object_component id="oc-767">
+         <name>.debug_abbrev</name>
+         <load_address>0x395</load_address>
+         <run_address>0x395</run_address>
+         <size>0x3c</size>
+         <input_file_ref idref="fl-48"/>
+      </object_component>
+      <object_component id="oc-676">
+         <name>.debug_abbrev</name>
+         <load_address>0x3d1</load_address>
+         <run_address>0x3d1</run_address>
+         <size>0x29</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-6b6">
+         <name>.debug_abbrev</name>
+         <load_address>0x3fa</load_address>
+         <run_address>0x3fa</run_address>
+         <size>0x58</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-724">
+         <name>.debug_abbrev</name>
+         <load_address>0x452</load_address>
+         <run_address>0x452</run_address>
+         <size>0x50</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-6c6">
+         <name>.debug_abbrev</name>
+         <load_address>0x4a2</load_address>
+         <run_address>0x4a2</run_address>
+         <size>0x55</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-734">
+         <name>.debug_abbrev</name>
+         <load_address>0x4f7</load_address>
+         <run_address>0x4f7</run_address>
+         <size>0x45</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-818">
+         <name>.debug_abbrev</name>
+         <load_address>0x53c</load_address>
+         <run_address>0x53c</run_address>
+>>>>>>> pizeroTest
          <size>0xf</size>
       </object_component>
       <object_component id="oc-77d">
@@ -2004,6 +2611,7 @@
          <size>0xfd</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-782">
          <name>.debug_str</name>
          <load_address>0x3b8</load_address>
@@ -2033,41 +2641,64 @@
          <input_file_ref idref="fl-48"/>
       </object_component>
       <object_component id="oc-6fa">
+=======
+      <object_component id="oc-6e4">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-68c">
+=======
+      <object_component id="oc-68d">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x20</load_address>
          <run_address>0x20</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6ca">
+=======
+      <object_component id="oc-6db">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x40</load_address>
          <run_address>0x40</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6cf">
+=======
+      <object_component id="oc-6cb">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x60</load_address>
          <run_address>0x60</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6d6">
+=======
+      <object_component id="oc-6d2">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x80</load_address>
          <run_address>0x80</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6dc">
+=======
+      <object_component id="oc-6d5">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0xa0</load_address>
          <run_address>0xa0</run_address>
@@ -2081,53 +2712,84 @@
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-637">
+=======
+      <object_component id="oc-638">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0xe0</load_address>
          <run_address>0xe0</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-631">
+=======
+      <object_component id="oc-630">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x100</load_address>
          <run_address>0x100</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-62c">
+=======
+      <object_component id="oc-62b">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x120</load_address>
          <run_address>0x120</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-2c"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-772">
+=======
+      <object_component id="oc-730">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x140</load_address>
          <run_address>0x140</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-47"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-6f3">
+=======
+      <object_component id="oc-72a">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x160</load_address>
          <run_address>0x160</run_address>
          <size>0x20</size>
          <input_file_ref idref="fl-48"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-76c">
+=======
+      <object_component id="oc-661">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x180</load_address>
          <run_address>0x180</run_address>
          <size>0x20</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-49"/>
       </object_component>
       <object_component id="oc-6ed">
+=======
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-6b3">
+>>>>>>> pizeroTest
          <name>.debug_aranges</name>
          <load_address>0x1a0</load_address>
          <run_address>0x1a0</run_address>
          <size>0x20</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-4a"/>
       </object_component>
       <object_component id="oc-75f">
@@ -2257,17 +2919,41 @@
          <input_file_ref idref="fl-66"/>
       </object_component>
       <object_component id="oc-6f9">
+=======
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-69c">
+         <name>.debug_aranges</name>
+         <load_address>0x1c0</load_address>
+         <run_address>0x1c0</run_address>
+         <size>0x20</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-6e9">
+         <name>.debug_aranges</name>
+         <load_address>0x1e0</load_address>
+         <run_address>0x1e0</run_address>
+         <size>0x20</size>
+         <input_file_ref idref="fl-56"/>
+      </object_component>
+      <object_component id="oc-6e3">
+>>>>>>> pizeroTest
          <name>.debug_pubnames</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
          <size>0x25</size>
          <input_file_ref idref="fl-2"/>
       </object_component>
+<<<<<<< HEAD
       <object_component id="oc-68b">
+=======
+      <object_component id="oc-68e">
+>>>>>>> pizeroTest
          <name>.debug_pubnames</name>
          <load_address>0x25</load_address>
          <run_address>0x25</run_address>
          <size>0x26</size>
+<<<<<<< HEAD
          <input_file_ref idref="fl-2"/>
       </object_component>
       <object_component id="oc-6cb">
@@ -2297,9 +2983,97 @@
          <run_address>0xb5</run_address>
          <size>0x1f</size>
          <input_file_ref idref="fl-2"/>
+=======
+         <input_file_ref idref="fl-2"/>
       </object_component>
-      <object_component id="oc-6a0">
+      <object_component id="oc-6dc">
          <name>.debug_pubnames</name>
+         <load_address>0x4b</load_address>
+         <run_address>0x4b</run_address>
+         <size>0x1e</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6ca">
+         <name>.debug_pubnames</name>
+         <load_address>0x69</load_address>
+         <run_address>0x69</run_address>
+         <size>0x24</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d1">
+         <name>.debug_pubnames</name>
+         <load_address>0x8d</load_address>
+         <run_address>0x8d</run_address>
+         <size>0x23</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6d6">
+         <name>.debug_pubnames</name>
+         <load_address>0xb0</load_address>
+         <run_address>0xb0</run_address>
+         <size>0x25</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-6a2">
+         <name>.debug_pubnames</name>
+         <load_address>0xd5</load_address>
+         <run_address>0xd5</run_address>
+         <size>0x1b</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-637">
+         <name>.debug_pubnames</name>
+         <load_address>0xf0</load_address>
+         <run_address>0xf0</run_address>
+         <size>0x1e</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-631">
+         <name>.debug_pubnames</name>
+         <load_address>0x10e</load_address>
+         <run_address>0x10e</run_address>
+         <size>0x1d</size>
+         <input_file_ref idref="fl-2"/>
+      </object_component>
+      <object_component id="oc-62d">
+         <name>.debug_pubnames</name>
+         <load_address>0x12b</load_address>
+         <run_address>0x12b</run_address>
+         <size>0x2b</size>
+         <input_file_ref idref="fl-2c"/>
+      </object_component>
+      <object_component id="oc-731">
+         <name>.debug_pubnames</name>
+         <load_address>0x156</load_address>
+         <run_address>0x156</run_address>
+         <size>0x24</size>
+         <input_file_ref idref="fl-47"/>
+      </object_component>
+      <object_component id="oc-72d">
+         <name>.debug_pubnames</name>
+         <load_address>0x17a</load_address>
+         <run_address>0x17a</run_address>
+         <size>0x25</size>
+         <input_file_ref idref="fl-48"/>
+      </object_component>
+      <object_component id="oc-60f">
+         <name>.debug_pubnames</name>
+         <load_address>0x19f</load_address>
+         <run_address>0x19f</run_address>
+         <size>0x1d</size>
+         <input_file_ref idref="fl-4e"/>
+      </object_component>
+      <object_component id="oc-660">
+         <name>.debug_pubnames</name>
+         <load_address>0x1bc</load_address>
+         <run_address>0x1bc</run_address>
+         <size>0x31</size>
+         <input_file_ref idref="fl-4e"/>
+>>>>>>> pizeroTest
+      </object_component>
+      <object_component id="oc-6b2">
+         <name>.debug_pubnames</name>
+<<<<<<< HEAD
          <load_address>0xd4</load_address>
          <run_address>0xd4</run_address>
          <size>0x1b</size>
@@ -2416,6 +3190,26 @@
          <run_address>0x319</run_address>
          <size>0x2b</size>
          <input_file_ref idref="fl-57"/>
+=======
+         <load_address>0x1ed</load_address>
+         <run_address>0x1ed</run_address>
+         <size>0x21</size>
+         <input_file_ref idref="fl-4f"/>
+      </object_component>
+      <object_component id="oc-69b">
+         <name>.debug_pubnames</name>
+         <load_address>0x20e</load_address>
+         <run_address>0x20e</run_address>
+         <size>0x27</size>
+         <input_file_ref idref="fl-53"/>
+      </object_component>
+      <object_component id="oc-6eb">
+         <name>.debug_pubnames</name>
+         <load_address>0x235</load_address>
+         <run_address>0x235</run_address>
+         <size>0x1c</size>
+         <input_file_ref idref="fl-56"/>
+>>>>>>> pizeroTest
       </object_component>
       <object_component id="oc-767">
          <name>.debug_pubnames</name>
@@ -2624,7 +3418,11 @@
          <run_address>0x4400</run_address>
          <size>0x0</size>
          <contents>
+<<<<<<< HEAD
             <object_component_ref idref="oc-8a4"/>
+=======
+            <object_component_ref idref="oc-814"/>
+>>>>>>> pizeroTest
          </contents>
       </logical_group>
       <logical_group id="lg-e" display="no" color="cyan">
@@ -2640,7 +3438,11 @@
          <run_address>0x4400</run_address>
          <size>0x0</size>
          <contents>
+<<<<<<< HEAD
             <object_component_ref idref="oc-833"/>
+=======
+            <object_component_ref idref="oc-7a3"/>
+>>>>>>> pizeroTest
          </contents>
       </logical_group>
       <logical_group id="lg-10" display="no" color="cyan">
@@ -2683,6 +3485,7 @@
             <object_component_ref idref="oc-629"/>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-8a6" display="no" color="cyan">
          <name>.text</name>
          <load_address>0x10000</load_address>
@@ -2716,13 +3519,36 @@
             <object_component_ref idref="oc-6cd"/>
             <object_component_ref idref="oc-6df"/>
             <object_component_ref idref="oc-704"/>
+=======
+      <logical_group id="lg-816" display="no" color="cyan">
+         <name>.text</name>
+         <load_address>0x10000</load_address>
+         <run_address>0x10000</run_address>
+         <size>0x1e8</size>
+         <contents>
+            <object_component_ref idref="oc-6df"/>
+            <object_component_ref idref="oc-72e"/>
+            <object_component_ref idref="oc-69e"/>
+            <object_component_ref idref="oc-6c7"/>
+            <object_component_ref idref="oc-6cd"/>
+            <object_component_ref idref="oc-6b0"/>
+            <object_component_ref idref="oc-729"/>
+            <object_component_ref idref="oc-689"/>
+            <object_component_ref idref="oc-6d3"/>
+            <object_component_ref idref="oc-6d9"/>
+            <object_component_ref idref="oc-6e6"/>
+>>>>>>> pizeroTest
             <object_component_ref idref="oc-698"/>
          </contents>
       </logical_group>
       <split_section id="lg-15" display="no" color="cyan">
          <name>.text</name>
          <contents>
+<<<<<<< HEAD
             <logical_group_ref idref="lg-8a6"/>
+=======
+            <logical_group_ref idref="lg-816"/>
+>>>>>>> pizeroTest
          </contents>
       </split_section>
       <logical_group id="lg-16" display="no" color="cyan">
@@ -2796,7 +3622,11 @@
          <size>0xa0</size>
          <contents>
             <object_component_ref idref="oc-60d"/>
+<<<<<<< HEAD
             <object_component_ref idref="oc-8a5"/>
+=======
+            <object_component_ref idref="oc-815"/>
+>>>>>>> pizeroTest
          </contents>
       </logical_group>
       <logical_group id="lg-20" display="no" color="cyan">
@@ -3284,6 +4114,7 @@
             <object_component_ref idref="oc-610"/>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-88b" display="never" color="cyan">
          <name>.debug_info</name>
          <load_address>0x0</load_address>
@@ -3478,6 +4309,110 @@
          </contents>
       </logical_group>
       <logical_group id="lg-893" display="never" color="cyan">
+=======
+      <logical_group id="lg-7fb" display="never" color="cyan">
+         <name>.debug_info</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x14b9</size>
+         <contents>
+            <object_component_ref idref="oc-6e2"/>
+            <object_component_ref idref="oc-68c"/>
+            <object_component_ref idref="oc-6da"/>
+            <object_component_ref idref="oc-6c9"/>
+            <object_component_ref idref="oc-6d0"/>
+            <object_component_ref idref="oc-6d4"/>
+            <object_component_ref idref="oc-6a0"/>
+            <object_component_ref idref="oc-636"/>
+            <object_component_ref idref="oc-62f"/>
+            <object_component_ref idref="oc-617"/>
+            <object_component_ref idref="oc-62c"/>
+            <object_component_ref idref="oc-72f"/>
+            <object_component_ref idref="oc-72c"/>
+            <object_component_ref idref="oc-60e"/>
+            <object_component_ref idref="oc-65f"/>
+            <object_component_ref idref="oc-6b1"/>
+            <object_component_ref idref="oc-69a"/>
+            <object_component_ref idref="oc-6ea"/>
+            <object_component_ref idref="oc-817"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-7fd" display="never" color="cyan">
+         <name>.debug_line</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x4ce</size>
+         <contents>
+            <object_component_ref idref="oc-6e1"/>
+            <object_component_ref idref="oc-68a"/>
+            <object_component_ref idref="oc-6de"/>
+            <object_component_ref idref="oc-6c8"/>
+            <object_component_ref idref="oc-6ce"/>
+            <object_component_ref idref="oc-6d7"/>
+            <object_component_ref idref="oc-69f"/>
+            <object_component_ref idref="oc-635"/>
+            <object_component_ref idref="oc-632"/>
+            <object_component_ref idref="oc-61a"/>
+            <object_component_ref idref="oc-62a"/>
+            <object_component_ref idref="oc-732"/>
+            <object_component_ref idref="oc-72b"/>
+            <object_component_ref idref="oc-677"/>
+            <object_component_ref idref="oc-662"/>
+            <object_component_ref idref="oc-6b4"/>
+            <object_component_ref idref="oc-69d"/>
+            <object_component_ref idref="oc-6e8"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-7ff" display="never" color="cyan">
+         <name>.debug_frame</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x319</size>
+         <contents>
+            <object_component_ref idref="oc-6e0"/>
+            <object_component_ref idref="oc-68b"/>
+            <object_component_ref idref="oc-6dd"/>
+            <object_component_ref idref="oc-6cc"/>
+            <object_component_ref idref="oc-6cf"/>
+            <object_component_ref idref="oc-6d8"/>
+            <object_component_ref idref="oc-6a3"/>
+            <object_component_ref idref="oc-639"/>
+            <object_component_ref idref="oc-633"/>
+            <object_component_ref idref="oc-663"/>
+            <object_component_ref idref="oc-6b5"/>
+            <object_component_ref idref="oc-699"/>
+            <object_component_ref idref="oc-6e7"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-801" display="never" color="cyan">
+         <name>.debug_abbrev</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x54b</size>
+         <contents>
+            <object_component_ref idref="oc-733"/>
+            <object_component_ref idref="oc-6c3"/>
+            <object_component_ref idref="oc-728"/>
+            <object_component_ref idref="oc-725"/>
+            <object_component_ref idref="oc-726"/>
+            <object_component_ref idref="oc-727"/>
+            <object_component_ref idref="oc-6e5"/>
+            <object_component_ref idref="oc-68f"/>
+            <object_component_ref idref="oc-688"/>
+            <object_component_ref idref="oc-619"/>
+            <object_component_ref idref="oc-687"/>
+            <object_component_ref idref="oc-768"/>
+            <object_component_ref idref="oc-767"/>
+            <object_component_ref idref="oc-676"/>
+            <object_component_ref idref="oc-6b6"/>
+            <object_component_ref idref="oc-724"/>
+            <object_component_ref idref="oc-6c6"/>
+            <object_component_ref idref="oc-734"/>
+            <object_component_ref idref="oc-818"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-803" display="never" color="cyan">
+>>>>>>> pizeroTest
          <name>.debug_str</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
@@ -3491,6 +4426,7 @@
             <object_component_ref idref="oc-7f1"/>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-895" display="never" color="cyan">
          <name>.debug_aranges</name>
          <load_address>0x0</load_address>
@@ -3573,6 +4509,58 @@
          </contents>
       </logical_group>
       <logical_group id="lg-899" display="never" color="cyan">
+=======
+      <logical_group id="lg-805" display="never" color="cyan">
+         <name>.debug_aranges</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x200</size>
+         <contents>
+            <object_component_ref idref="oc-6e4"/>
+            <object_component_ref idref="oc-68d"/>
+            <object_component_ref idref="oc-6db"/>
+            <object_component_ref idref="oc-6cb"/>
+            <object_component_ref idref="oc-6d2"/>
+            <object_component_ref idref="oc-6d5"/>
+            <object_component_ref idref="oc-6a1"/>
+            <object_component_ref idref="oc-638"/>
+            <object_component_ref idref="oc-630"/>
+            <object_component_ref idref="oc-62b"/>
+            <object_component_ref idref="oc-730"/>
+            <object_component_ref idref="oc-72a"/>
+            <object_component_ref idref="oc-661"/>
+            <object_component_ref idref="oc-6b3"/>
+            <object_component_ref idref="oc-69c"/>
+            <object_component_ref idref="oc-6e9"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-807" display="never" color="cyan">
+         <name>.debug_pubnames</name>
+         <load_address>0x0</load_address>
+         <run_address>0x0</run_address>
+         <size>0x251</size>
+         <contents>
+            <object_component_ref idref="oc-6e3"/>
+            <object_component_ref idref="oc-68e"/>
+            <object_component_ref idref="oc-6dc"/>
+            <object_component_ref idref="oc-6ca"/>
+            <object_component_ref idref="oc-6d1"/>
+            <object_component_ref idref="oc-6d6"/>
+            <object_component_ref idref="oc-6a2"/>
+            <object_component_ref idref="oc-637"/>
+            <object_component_ref idref="oc-631"/>
+            <object_component_ref idref="oc-62d"/>
+            <object_component_ref idref="oc-731"/>
+            <object_component_ref idref="oc-72d"/>
+            <object_component_ref idref="oc-60f"/>
+            <object_component_ref idref="oc-660"/>
+            <object_component_ref idref="oc-6b2"/>
+            <object_component_ref idref="oc-69b"/>
+            <object_component_ref idref="oc-6eb"/>
+         </contents>
+      </logical_group>
+      <logical_group id="lg-809" display="never" color="cyan">
+>>>>>>> pizeroTest
          <name>.debug_pubtypes</name>
          <load_address>0x0</load_address>
          <run_address>0x0</run_address>
@@ -3586,7 +4574,11 @@
             <object_component_ref idref="oc-7ee"/>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-8a9" display="no" color="cyan">
+=======
+      <logical_group id="lg-819" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>$fill000</name>
          <load_address>0xff80</load_address>
          <run_address>0xff80</run_address>
@@ -3594,7 +4586,11 @@
          <contents>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-8ab" display="no" color="cyan">
+=======
+      <logical_group id="lg-81b" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>$fill001</name>
          <load_address>0xff84</load_address>
          <run_address>0xff84</run_address>
@@ -3602,7 +4598,11 @@
          <contents>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <logical_group id="lg-8ad" display="no" color="cyan">
+=======
+      <logical_group id="lg-81d" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>$fill002</name>
          <load_address>0xff88</load_address>
          <run_address>0xff88</run_address>
@@ -3610,7 +4610,11 @@
          <contents>
          </contents>
       </logical_group>
+<<<<<<< HEAD
       <load_segment id="lg-8af" display="no" color="cyan">
+=======
+      <load_segment id="lg-81f" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>SEGMENT_0</name>
          <run_address>0x2360</run_address>
          <size>0xa0</size>
@@ -3619,7 +4623,11 @@
             <logical_group_ref idref="lg-1f"/>
          </contents>
       </load_segment>
+<<<<<<< HEAD
       <load_segment id="lg-8b0" display="no" color="cyan">
+=======
+      <load_segment id="lg-820" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>SEGMENT_1</name>
          <load_address>0x4400</load_address>
          <run_address>0x4400</run_address>
@@ -3629,13 +4637,18 @@
             <logical_group_ref idref="lg-14"/>
          </contents>
       </load_segment>
+<<<<<<< HEAD
       <load_segment id="lg-8b1" display="no" color="cyan">
+=======
+      <load_segment id="lg-821" display="no" color="cyan">
+>>>>>>> pizeroTest
          <name>SEGMENT_2</name>
          <load_address>0xff80</load_address>
          <run_address>0xff80</run_address>
          <size>0x10</size>
          <flags>0x4</flags>
          <contents>
+<<<<<<< HEAD
             <logical_group_ref idref="lg-8a9"/>
             <logical_group_ref idref="lg-8ab"/>
             <logical_group_ref idref="lg-8ad"/>
@@ -3646,6 +4659,18 @@
          <load_address>0xffc6</load_address>
          <run_address>0xffc6</run_address>
          <size>0x1166</size>
+=======
+            <logical_group_ref idref="lg-819"/>
+            <logical_group_ref idref="lg-81b"/>
+            <logical_group_ref idref="lg-81d"/>
+         </contents>
+      </load_segment>
+      <load_segment id="lg-822" display="no" color="cyan">
+         <name>SEGMENT_3</name>
+         <load_address>0xffc6</load_address>
+         <run_address>0xffc6</run_address>
+         <size>0x222</size>
+>>>>>>> pizeroTest
          <flags>0x5</flags>
          <contents>
             <logical_group_ref idref="lg-40"/>
@@ -3677,7 +4702,11 @@
             <logical_group_ref idref="lg-74"/>
             <logical_group_ref idref="lg-76"/>
             <logical_group_ref idref="lg-78"/>
+<<<<<<< HEAD
             <logical_group_ref idref="lg-8a6"/>
+=======
+            <logical_group_ref idref="lg-816"/>
+>>>>>>> pizeroTest
          </contents>
       </load_segment>
    </logical_group_list>
@@ -3829,7 +4858,11 @@
             <allocated_space>
                <start_address>0xff80</start_address>
                <size>0x4</size>
+<<<<<<< HEAD
                <logical_group_ref idref="lg-8a9"/>
+=======
+               <logical_group_ref idref="lg-819"/>
+>>>>>>> pizeroTest
             </allocated_space>
          </usage_details>
       </memory_area>
@@ -3848,7 +4881,11 @@
             <allocated_space>
                <start_address>0xff84</start_address>
                <size>0x4</size>
+<<<<<<< HEAD
                <logical_group_ref idref="lg-8ab"/>
+=======
+               <logical_group_ref idref="lg-81b"/>
+>>>>>>> pizeroTest
             </allocated_space>
          </usage_details>
       </memory_area>
@@ -3867,7 +4904,11 @@
             <allocated_space>
                <start_address>0xff88</start_address>
                <size>0x8</size>
+<<<<<<< HEAD
                <logical_group_ref idref="lg-8ad"/>
+=======
+               <logical_group_ref idref="lg-81d"/>
+>>>>>>> pizeroTest
             </allocated_space>
          </usage_details>
       </memory_area>
@@ -4637,18 +5678,32 @@
          <page_id>0x0</page_id>
          <origin>0x10000</origin>
          <length>0x13ff8</length>
+<<<<<<< HEAD
          <used_space>0x112c</used_space>
          <unused_space>0x12ecc</unused_space>
+=======
+         <used_space>0x1e8</used_space>
+         <unused_space>0x13e10</unused_space>
+>>>>>>> pizeroTest
          <attributes>RWIX</attributes>
          <usage_details>
             <allocated_space>
                <start_address>0x10000</start_address>
+<<<<<<< HEAD
                <size>0x112c</size>
                <logical_group_ref idref="lg-8a6"/>
             </allocated_space>
             <available_space>
                <start_address>0x1112c</start_address>
                <size>0x12ecc</size>
+=======
+               <size>0x1e8</size>
+               <logical_group_ref idref="lg-816"/>
+            </allocated_space>
+            <available_space>
+               <start_address>0x101e8</start_address>
+               <size>0x13e10</size>
+>>>>>>> pizeroTest
             </available_space>
          </usage_details>
       </memory_area>
@@ -10230,16 +11285,21 @@
          <name>__TI_prof_data_size</name>
          <value>0xffffffff</value>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-63c">
          <name>I2C_init</name>
          <value>0x11088</value>
          <object_component_ref idref="oc-6d3"/>
       </symbol>
       <symbol id="sm-63d">
+=======
+      <symbol id="sm-624">
+>>>>>>> pizeroTest
          <name>__TI_int34</name>
          <value>0xffd4</value>
          <object_component_ref idref="oc-8d"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-63e">
          <name>enable_burn_wire</name>
          <value>0x11106</value>
@@ -10251,10 +11311,19 @@
          <object_component_ref idref="oc-634"/>
       </symbol>
       <symbol id="sm-640">
+=======
+      <symbol id="sm-625">
+         <name>readADC</name>
+         <value>0x101ce</value>
+         <object_component_ref idref="oc-6d9"/>
+      </symbol>
+      <symbol id="sm-626">
+>>>>>>> pizeroTest
          <name>__TI_int44</name>
          <value>0xffe8</value>
          <object_component_ref idref="oc-97"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-641">
          <name>main</name>
          <value>0x10d08</value>
@@ -10286,140 +11355,288 @@
          <object_component_ref idref="oc-6d9"/>
       </symbol>
       <symbol id="sm-64c">
+=======
+      <symbol id="sm-627">
+         <name>Port_2</name>
+         <value>0x4418</value>
+         <object_component_ref idref="oc-62e"/>
+      </symbol>
+      <symbol id="sm-628">
+         <name>configureTimer</name>
+         <value>0x101ba</value>
+         <object_component_ref idref="oc-6d3"/>
+      </symbol>
+      <symbol id="sm-629">
+         <name>main</name>
+         <value>0x100b2</value>
+         <object_component_ref idref="oc-69e"/>
+      </symbol>
+      <symbol id="sm-62a">
+         <name>configureADC</name>
+         <value>0x10120</value>
+         <object_component_ref idref="oc-6cd"/>
+      </symbol>
+      <symbol id="sm-62b">
+         <name>switch_control</name>
+         <value>0x10000</value>
+         <object_component_ref idref="oc-6df"/>
+      </symbol>
+      <symbol id="sm-62c">
+         <name>configurePins</name>
+         <value>0x100ee</value>
+         <object_component_ref idref="oc-6c7"/>
+      </symbol>
+      <symbol id="sm-62d">
+         <name>Timer_A</name>
+         <value>0x442c</value>
+         <object_component_ref idref="oc-634"/>
+      </symbol>
+      <symbol id="sm-62e">
+         <name>sendResetSignal</name>
+         <value>0x101a0</value>
+         <object_component_ref idref="oc-689"/>
+      </symbol>
+      <symbol id="sm-634">
+>>>>>>> pizeroTest
          <name>__TI_int27</name>
          <value>0xffc6</value>
          <object_component_ref idref="oc-86"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-654">
+=======
+      <symbol id="sm-63c">
+>>>>>>> pizeroTest
          <name>__TI_ISR_TRAP</name>
          <value>0x4436</value>
          <object_component_ref idref="oc-629"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-657">
+=======
+      <symbol id="sm-63f">
+>>>>>>> pizeroTest
          <name>__TI_int28</name>
          <value>0xffc8</value>
          <object_component_ref idref="oc-87"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-65a">
+=======
+      <symbol id="sm-642">
+>>>>>>> pizeroTest
          <name>__TI_int29</name>
          <value>0xffca</value>
          <object_component_ref idref="oc-88"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-65d">
+=======
+      <symbol id="sm-645">
+>>>>>>> pizeroTest
          <name>__TI_int30</name>
          <value>0xffcc</value>
          <object_component_ref idref="oc-89"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-660">
+=======
+      <symbol id="sm-648">
+>>>>>>> pizeroTest
          <name>__TI_int31</name>
          <value>0xffce</value>
          <object_component_ref idref="oc-8a"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-663">
+=======
+      <symbol id="sm-64b">
+>>>>>>> pizeroTest
          <name>__TI_int32</name>
          <value>0xffd0</value>
          <object_component_ref idref="oc-8b"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-666">
+=======
+      <symbol id="sm-64e">
+>>>>>>> pizeroTest
          <name>__TI_int33</name>
          <value>0xffd2</value>
          <object_component_ref idref="oc-8c"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-669">
+=======
+      <symbol id="sm-651">
+>>>>>>> pizeroTest
          <name>__TI_int35</name>
          <value>0xffd6</value>
          <object_component_ref idref="oc-8e"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-66c">
+=======
+      <symbol id="sm-654">
+>>>>>>> pizeroTest
          <name>__TI_int36</name>
          <value>0xffd8</value>
          <object_component_ref idref="oc-8f"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-66f">
+=======
+      <symbol id="sm-657">
+>>>>>>> pizeroTest
          <name>__TI_int37</name>
          <value>0xffda</value>
          <object_component_ref idref="oc-90"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-672">
+=======
+      <symbol id="sm-65a">
+>>>>>>> pizeroTest
          <name>__TI_int38</name>
          <value>0xffdc</value>
          <object_component_ref idref="oc-91"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-675">
+=======
+      <symbol id="sm-65d">
+>>>>>>> pizeroTest
          <name>__TI_int39</name>
          <value>0xffde</value>
          <object_component_ref idref="oc-92"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-678">
+=======
+      <symbol id="sm-660">
+>>>>>>> pizeroTest
          <name>__TI_int40</name>
          <value>0xffe0</value>
          <object_component_ref idref="oc-93"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-67b">
+=======
+      <symbol id="sm-663">
+>>>>>>> pizeroTest
          <name>__TI_int41</name>
          <value>0xffe2</value>
          <object_component_ref idref="oc-94"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-67e">
+=======
+      <symbol id="sm-666">
+>>>>>>> pizeroTest
          <name>__TI_int42</name>
          <value>0xffe4</value>
          <object_component_ref idref="oc-95"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-681">
+=======
+      <symbol id="sm-669">
+>>>>>>> pizeroTest
          <name>__TI_int43</name>
          <value>0xffe6</value>
          <object_component_ref idref="oc-96"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-684">
+=======
+      <symbol id="sm-66c">
+>>>>>>> pizeroTest
          <name>__TI_int45</name>
          <value>0xffea</value>
          <object_component_ref idref="oc-98"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-687">
+=======
+      <symbol id="sm-66f">
+>>>>>>> pizeroTest
          <name>__TI_int46</name>
          <value>0xffec</value>
          <object_component_ref idref="oc-99"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-68a">
+=======
+      <symbol id="sm-672">
+>>>>>>> pizeroTest
          <name>__TI_int47</name>
          <value>0xffee</value>
          <object_component_ref idref="oc-9a"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-68d">
+=======
+      <symbol id="sm-675">
+>>>>>>> pizeroTest
          <name>__TI_int48</name>
          <value>0xfff0</value>
          <object_component_ref idref="oc-9b"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-690">
+=======
+      <symbol id="sm-678">
+>>>>>>> pizeroTest
          <name>__TI_int49</name>
          <value>0xfff2</value>
          <object_component_ref idref="oc-9c"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-693">
+=======
+      <symbol id="sm-67b">
+>>>>>>> pizeroTest
          <name>__TI_int50</name>
          <value>0xfff4</value>
          <object_component_ref idref="oc-9d"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-696">
+=======
+      <symbol id="sm-67e">
+>>>>>>> pizeroTest
          <name>__TI_int51</name>
          <value>0xfff6</value>
          <object_component_ref idref="oc-9e"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-699">
+=======
+      <symbol id="sm-681">
+>>>>>>> pizeroTest
          <name>__TI_int52</name>
          <value>0xfff8</value>
          <object_component_ref idref="oc-9f"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-69c">
+=======
+      <symbol id="sm-684">
+>>>>>>> pizeroTest
          <name>__TI_int53</name>
          <value>0xfffa</value>
          <object_component_ref idref="oc-a0"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-69f">
+=======
+      <symbol id="sm-687">
+>>>>>>> pizeroTest
          <name>__TI_int54</name>
          <value>0xfffc</value>
          <object_component_ref idref="oc-a1"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-6bf">
          <name>__mspabi_cmpd</name>
          <value>0x10a7a</value>
@@ -10721,20 +11938,42 @@
          <object_component_ref idref="oc-7cd"/>
       </symbol>
       <symbol id="sm-802">
+=======
+      <symbol id="sm-698">
+         <name>__mspabi_cmpf</name>
+         <value>0x10068</value>
+         <object_component_ref idref="oc-72e"/>
+      </symbol>
+      <symbol id="sm-6a3">
+         <name>__mspabi_fltuf</name>
+         <value>0x1017c</value>
+         <object_component_ref idref="oc-729"/>
+      </symbol>
+      <symbol id="sm-6b7">
+>>>>>>> pizeroTest
          <name>_c_int00_noinit_noargs_mpu</name>
          <value>0x4400</value>
          <object_component_ref idref="oc-65e"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-803">
+=======
+      <symbol id="sm-6b8">
+>>>>>>> pizeroTest
          <name>_stack</name>
          <value>0x2360</value>
          <object_component_ref idref="oc-60d"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-804">
+=======
+      <symbol id="sm-6b9">
+>>>>>>> pizeroTest
          <name>_reset_vector</name>
          <value>0xfffe</value>
          <object_component_ref idref="oc-610"/>
       </symbol>
+<<<<<<< HEAD
       <symbol id="sm-80d">
          <name>__mpu_init</name>
          <value>0x11030</value>
@@ -10754,6 +11993,27 @@
          <name>abort</name>
          <value>0x11122</value>
          <object_component_ref idref="oc-704"/>
+=======
+      <symbol id="sm-6c2">
+         <name>__mpu_init</name>
+         <value>0x10150</value>
+         <object_component_ref idref="oc-6b0"/>
+      </symbol>
+      <symbol id="sm-6ce">
+         <name>_system_pre_init</name>
+         <value>0x101e4</value>
+         <object_component_ref idref="oc-698"/>
+      </symbol>
+      <symbol id="sm-6da">
+         <name>C$$EXIT</name>
+         <value>0x101de</value>
+         <object_component_ref idref="oc-6e6"/>
+      </symbol>
+      <symbol id="sm-6db">
+         <name>abort</name>
+         <value>0x101de</value>
+         <object_component_ref idref="oc-6e6"/>
+>>>>>>> pizeroTest
       </symbol>
    </symbol_table>
    <title>Link successful</title>
