@@ -1,11 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
-<<<<<<< HEAD
->> Linked Thu Jun 20 15:09:18 2024
-=======
->> Linked Thu Jun 20 09:20:13 2024
->>>>>>> pizeroTest
+>> Linked Thu Jun 20 16:27:32 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noinit_noargs_mpu"  address: 00004400
@@ -83,11 +79,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-<<<<<<< HEAD
-  FRAM2                 00010000   00013ff8  0000112c  00012ecc  RWIX
-=======
-  FRAM2                 00010000   00013ff8  000001e8  00013e10  RWIX
->>>>>>> pizeroTest
+  FRAM2                 00010000   00013ff8  000011a8  00012e50  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -126,13 +118,8 @@ section   page    origin      length       input sections
 .text:_isr 
 *          0    00004400    0000003e     
                   00004400    00000018     rts430x_lc_rd_eabi.lib : boot.c.obj (.text:_isr:_c_int00_noinit_noargs_mpu)
-<<<<<<< HEAD
                   00004418    00000014     main.obj (.text:_isr:PORT_2)
                   0000442c    0000000a     main.obj (.text:_isr:TIMER_A0)
-=======
-                  00004418    00000014     main.obj (.text:_isr:Port_2)
-                  0000442c    0000000a     main.obj (.text:_isr:Timer_A)
->>>>>>> pizeroTest
                   00004436    00000008     rts430x_lc_rd_eabi.lib : isr_trap.asm.obj (.text:_isr:__TI_ISR_TRAP)
 
 .stack     0    00002360    000000a0     UNINITIALIZED
@@ -245,75 +232,55 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-<<<<<<< HEAD
-.text      0    00010000    0000112c     
+.text      0    00010000    000011a8     
                   00010000    00000468     rts430x_lc_rd_eabi.lib : frcdivd.c.obj (.text:__TI_frcdivd)
                   00010468    00000292                            : mpyd.c.obj (.text:__mspabi_mpyd)
                   000106fa    0000021c                            : divd.c.obj (.text:__mspabi_divd)
                   00010916    00000164                            : frcmpyd.c.obj (.text:__TI_frcmpyd)
                   00010a7a    000000d8                            : cmpd.c.obj (.text:__mspabi_cmpd)
                   00010b52    000000b2                            : cvtdf.c.obj (.text:__mspabi_cvtdf)
-                  00010c04    00000084     main.obj (.text:switch_control)
-                  00010c88    00000080     rts430x_lc_rd_eabi.lib : fltuld.c.obj (.text:__mspabi_fltuld)
-                  00010d08    00000080     main.obj (.text:main)
-                  00010d88    00000064     main.obj (.text:I2C_Read)
-                  00010dec    00000064     rts430x_lc_rd_eabi.lib : cvtfd.c.obj (.text:__mspabi_cvtfd)
-                  00010e50    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
-                  00010eac    00000056     main.obj (.text:configurePins)
-                  00010f02    0000003e     rts430x_lc_rd_eabi.lib : asr32.asm.obj (.text:l_asr_const)
-                  00010f40    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
-                  00010f7e    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
-                  00010fbc    0000003a                            : lsl64.c.obj (.text:__mspabi_sllll)
-                  00010ff6    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
-                  00011030    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  0001105c    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
-                  00011088    00000028     main.obj (.text:I2C_init)
-                  000110b0    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.asm.obj (.text)
-                  000110d4    0000001a     main.obj (.text:sendResetSignal)
-                  000110ee    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.asm.obj (.text)
-                  00011106    00000016     main.obj (.text:enable_burn_wire)
-                  0001111c    00000006     rts430x_lc_rd_eabi.lib : fltud.c.obj (.text:__mspabi_fltud)
-                  00011122    00000006                            : exit.c.obj (.text:abort)
-                  00011128    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-=======
-.text      0    00010000    000001e8     
-                  00010000    00000068     main.obj (.text:switch_control)
-                  00010068    0000004a     rts430x_lc_rd_eabi.lib : fs_cmp.asm.obj (.text)
-                  000100b2    0000003c     main.obj (.text:main)
-                  000100ee    00000032     main.obj (.text:configurePins)
-                  00010120    00000030     main.obj (.text:configureADC)
-                  00010150    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  0001017c    00000024     rts430x_lc_rd_eabi.lib : fs_utof.asm.obj (.text)
-                  000101a0    0000001a     main.obj (.text:sendResetSignal)
-                  000101ba    00000014     main.obj (.text:configureTimer)
-                  000101ce    00000010     main.obj (.text:readADC)
-                  000101de    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  000101e4    00000004                            : pre_init.c.obj (.text:_system_pre_init)
->>>>>>> pizeroTest
+                  00010c04    00000088     main.obj (.text:main)
+                  00010c8c    00000084     main.obj (.text:switch_control)
+                  00010d10    00000080     rts430x_lc_rd_eabi.lib : fltuld.c.obj (.text:__mspabi_fltuld)
+                  00010d90    00000064     main.obj (.text:I2C_Read)
+                  00010df4    00000064     rts430x_lc_rd_eabi.lib : cvtfd.c.obj (.text:__mspabi_cvtfd)
+                  00010e58    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
+                  00010eb4    00000056     main.obj (.text:configurePins)
+                  00010f0a    0000004a     main.obj (.text:SPI_init)
+                  00010f54    0000003e     rts430x_lc_rd_eabi.lib : asr32.asm.obj (.text:l_asr_const)
+                  00010f92    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
+                  00010fd0    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
+                  0001100e    0000003a                            : lsl64.c.obj (.text:__mspabi_sllll)
+                  00011048    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
+                  00011082    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  000110ae    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
+                  000110da    00000028     main.obj (.text:I2C_init)
+                  00011102    00000024     rts430x_lc_rd_eabi.lib : mult32_f5hw.asm.obj (.text)
+                  00011126    0000001a     main.obj (.text:Lora_reset)
+                  00011140    0000001a     main.obj (.text:sendResetSignal)
+                  0001115a    00000018     rts430x_lc_rd_eabi.lib : mult16_f5hw.asm.obj (.text)
+                  00011172    00000016     main.obj (.text:enable_burn_wire)
+                  00011188    0000000a     main.obj (.text:Lora_init)
+                  00011192    00000006     main.obj (.text:Lora_enable)
+                  00011198    00000006     rts430x_lc_rd_eabi.lib : fltud.c.obj (.text:__mspabi_fltud)
+                  0001119e    00000006                            : exit.c.obj (.text:abort)
+                  000111a4    00000004                            : pre_init.c.obj (.text:_system_pre_init)
 
 MODULE SUMMARY
 
        Module                  code   ro data   rw data
        ------                  ----   -------   -------
     .\
-<<<<<<< HEAD
-       main.obj                564    4         0      
+       main.obj                688    4         0      
     +--+-----------------------+------+---------+---------+
-       Total:                  564    4         0      
+       Total:                  688    4         0      
                                                        
-=======
-       main.obj           354    4         0      
-    +--+------------------+------+---------+---------+
-       Total:             354    4         0      
-                                                  
->>>>>>> pizeroTest
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o              44     0         0      
     +--+-----------------------+------+---------+---------+
        Total:                  44     0         0      
                                                        
     C:\ti\ccs1271\ccs\tools\compiler\ti-cgt-msp430_21.6.1.LTS\lib\rts430x_lc_rd_eabi.lib
-<<<<<<< HEAD
        frcdivd.c.obj           1128   0         0      
        mpyd.c.obj              658    0         0      
        divd.c.obj              540    0         0      
@@ -367,47 +334,7 @@ MODULE SUMMARY
                                                        
        Stack:                  0      0         160    
     +--+-----------------------+------+---------+---------+
-       Grand Total:            4458   58        160    
-=======
-       fs_cmp.asm.obj     74     0         0      
-       fs_utof.asm.obj    36     0         0      
-       boot.c.obj         24     2         0      
-       isr_trap.asm.obj   8      0         0      
-       exit.c.obj         6      0         0      
-       pre_init.c.obj     4      0         0      
-       int27.asm.obj      0      2         0      
-       int28.asm.obj      0      2         0      
-       int29.asm.obj      0      2         0      
-       int30.asm.obj      0      2         0      
-       int31.asm.obj      0      2         0      
-       int32.asm.obj      0      2         0      
-       int33.asm.obj      0      2         0      
-       int35.asm.obj      0      2         0      
-       int36.asm.obj      0      2         0      
-       int37.asm.obj      0      2         0      
-       int38.asm.obj      0      2         0      
-       int39.asm.obj      0      2         0      
-       int40.asm.obj      0      2         0      
-       int41.asm.obj      0      2         0      
-       int42.asm.obj      0      2         0      
-       int43.asm.obj      0      2         0      
-       int45.asm.obj      0      2         0      
-       int46.asm.obj      0      2         0      
-       int47.asm.obj      0      2         0      
-       int48.asm.obj      0      2         0      
-       int49.asm.obj      0      2         0      
-       int50.asm.obj      0      2         0      
-       int51.asm.obj      0      2         0      
-       int52.asm.obj      0      2         0      
-       int53.asm.obj      0      2         0      
-       int54.asm.obj      0      2         0      
-    +--+------------------+------+---------+---------+
-       Total:             152    54        0      
-                                                  
-       Stack:             0      0         160    
-    +--+------------------+------+---------+---------+
-       Grand Total:       550    58        160    
->>>>>>> pizeroTest
+       Grand Total:            4582   58        160    
 
 
 GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
@@ -671,11 +598,7 @@ address   name
 000009ce  AESAXIN_L                 
 000004be  BCD2BIN                   
 000004bc  BIN2BCD                   
-<<<<<<< HEAD
-00011122  C$$EXIT                   
-=======
-000101de  C$$EXIT                   
->>>>>>> pizeroTest
+0001119e  C$$EXIT                   
 0000043e  CAPTIO0CTL                
 0000043f  CAPTIO0CTL_H              
 0000043e  CAPTIO0CTL_L              
@@ -1149,8 +1072,8 @@ address   name
 00000146  GCCTL1                    
 00000147  GCCTL1_H                  
 00000146  GCCTL1_L                  
-00010d88  I2C_Read                  
-00011088  I2C_init                  
+00010d90  I2C_Read                  
+000110da  I2C_init                  
 00000a40  LCDBM1                    
 00000a49  LCDBM10                   
 00000a4a  LCDBM11                   
@@ -1244,6 +1167,9 @@ address   name
 00000a26  LCDM7                     
 00000a27  LCDM8                     
 00000a28  LCDM9                     
+00011192  Lora_enable               
+00011188  Lora_init                 
+00011126  Lora_reset                
 000004c4  MAC                       
 000004da  MAC32H                    
 000004db  MAC32H_H                  
@@ -1473,11 +1399,7 @@ address   name
 0000012a  PMMIFG                    
 0000012b  PMMIFG_H                  
 0000012a  PMMIFG_L                  
-<<<<<<< HEAD
 00004418  PORT_2                    
-=======
-00004418  Port_2                    
->>>>>>> pizeroTest
 00000158  RCCTL0                    
 00000159  RCCTL0_H                  
 00000158  RCCTL0_L                  
@@ -1551,6 +1473,7 @@ address   name
 00000104  SFRRPCR                   
 00000105  SFRRPCR_H                 
 00000104  SFRRPCR_L                 
+00010f0a  SPI_init                  
 000004ce  SUMEXT                    
 000004cf  SUMEXT_H                  
 000004ce  SUMEXT_L                  
@@ -1641,11 +1564,7 @@ address   name
 000003e0  TB0EX0                    
 000003ee  TB0IV                     
 000003d0  TB0R                      
-<<<<<<< HEAD
 0000442c  TIMER_A0                  
-=======
-0000442c  Timer_A                   
->>>>>>> pizeroTest
 000005d0  UCA0ABCTL                 
 000005c6  UCA0BRW                   
 000005c7  UCA0BRW_H                 
@@ -1813,11 +1732,8 @@ address   name
 00004400  __TI_CINIT_Limit          
 00004400  __TI_CINIT_Warm           
 00004436  __TI_ISR_TRAP             
-<<<<<<< HEAD
 00010000  __TI_frcdivd              
 00010916  __TI_frcmpyd              
-=======
->>>>>>> pizeroTest
 0000ffc6  __TI_int27                
 0000ffc8  __TI_int28                
 0000ffca  __TI_int29                
@@ -1851,107 +1767,83 @@ ffffffff  __TI_prof_data_size
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 00000001  __mpu_enable              
-<<<<<<< HEAD
-00011030  __mpu_init                
+00011082  __mpu_init                
 00010a7a  __mspabi_cmpd             
 00010b52  __mspabi_cvtdf            
-00010dec  __mspabi_cvtfd            
+00010df4  __mspabi_cvtfd            
 000106fa  __mspabi_divd             
-0001111c  __mspabi_fltud            
-00010c88  __mspabi_fltuld           
+00011198  __mspabi_fltud            
+00010d10  __mspabi_fltuld           
 00010468  __mspabi_mpyd             
-000110ee  __mspabi_mpyi_f5hw        
-000110b0  __mspabi_mpyl_f5hw        
-00010e50  __mspabi_mpyll_f5hw       
-0001105c  __mspabi_mpyull_f5hw      
-00010f78  __mspabi_slll_1           
-00010f54  __mspabi_slll_10          
-00010f50  __mspabi_slll_11          
-00010f4c  __mspabi_slll_12          
-00010f48  __mspabi_slll_13          
-00010f44  __mspabi_slll_14          
-00010f40  __mspabi_slll_15          
-00010f74  __mspabi_slll_2           
-00010f70  __mspabi_slll_3           
-00010f6c  __mspabi_slll_4           
-00010f68  __mspabi_slll_5           
-00010f64  __mspabi_slll_6           
-00010f60  __mspabi_slll_7           
-00010f5c  __mspabi_slll_8           
-00010f58  __mspabi_slll_9           
-00010fbc  __mspabi_sllll            
-00010f3a  __mspabi_sral_1           
-00010f16  __mspabi_sral_10          
-00010f12  __mspabi_sral_11          
-00010f0e  __mspabi_sral_12          
-00010f0a  __mspabi_sral_13          
-00010f06  __mspabi_sral_14          
-00010f02  __mspabi_sral_15          
-00010f36  __mspabi_sral_2           
-00010f32  __mspabi_sral_3           
-00010f2e  __mspabi_sral_4           
-00010f2a  __mspabi_sral_5           
-00010f26  __mspabi_sral_6           
-00010f22  __mspabi_sral_7           
-00010f1e  __mspabi_sral_8           
-00010f1a  __mspabi_sral_9           
-00010fb6  __mspabi_srll_1           
-00010f92  __mspabi_srll_10          
-00010f8e  __mspabi_srll_11          
-00010f8a  __mspabi_srll_12          
-00010f86  __mspabi_srll_13          
-00010f82  __mspabi_srll_14          
-00010f7e  __mspabi_srll_15          
-00010fb2  __mspabi_srll_2           
-00010fae  __mspabi_srll_3           
-00010faa  __mspabi_srll_4           
-00010fa6  __mspabi_srll_5           
-00010fa2  __mspabi_srll_6           
-00010f9e  __mspabi_srll_7           
-00010f9a  __mspabi_srll_8           
-00010f96  __mspabi_srll_9           
-00010ff6  __mspabi_srlll            
+0001115a  __mspabi_mpyi_f5hw        
+00011102  __mspabi_mpyl_f5hw        
+00010e58  __mspabi_mpyll_f5hw       
+000110ae  __mspabi_mpyull_f5hw      
+00010fca  __mspabi_slll_1           
+00010fa6  __mspabi_slll_10          
+00010fa2  __mspabi_slll_11          
+00010f9e  __mspabi_slll_12          
+00010f9a  __mspabi_slll_13          
+00010f96  __mspabi_slll_14          
+00010f92  __mspabi_slll_15          
+00010fc6  __mspabi_slll_2           
+00010fc2  __mspabi_slll_3           
+00010fbe  __mspabi_slll_4           
+00010fba  __mspabi_slll_5           
+00010fb6  __mspabi_slll_6           
+00010fb2  __mspabi_slll_7           
+00010fae  __mspabi_slll_8           
+00010faa  __mspabi_slll_9           
+0001100e  __mspabi_sllll            
+00010f8c  __mspabi_sral_1           
+00010f68  __mspabi_sral_10          
+00010f64  __mspabi_sral_11          
+00010f60  __mspabi_sral_12          
+00010f5c  __mspabi_sral_13          
+00010f58  __mspabi_sral_14          
+00010f54  __mspabi_sral_15          
+00010f88  __mspabi_sral_2           
+00010f84  __mspabi_sral_3           
+00010f80  __mspabi_sral_4           
+00010f7c  __mspabi_sral_5           
+00010f78  __mspabi_sral_6           
+00010f74  __mspabi_sral_7           
+00010f70  __mspabi_sral_8           
+00010f6c  __mspabi_sral_9           
+00011008  __mspabi_srll_1           
+00010fe4  __mspabi_srll_10          
+00010fe0  __mspabi_srll_11          
+00010fdc  __mspabi_srll_12          
+00010fd8  __mspabi_srll_13          
+00010fd4  __mspabi_srll_14          
+00010fd0  __mspabi_srll_15          
+00011004  __mspabi_srll_2           
+00011000  __mspabi_srll_3           
+00010ffc  __mspabi_srll_4           
+00010ff8  __mspabi_srll_5           
+00010ff4  __mspabi_srll_6           
+00010ff0  __mspabi_srll_7           
+00010fec  __mspabi_srll_8           
+00010fe8  __mspabi_srll_9           
+00011048  __mspabi_srlll            
 00004400  _c_int00_noinit_noargs_mpu
 0000fffe  _reset_vector             
 00002360  _stack                    
-00011128  _system_pre_init          
-00011122  abort                     
-00010eac  configurePins             
-00011106  enable_burn_wire          
-=======
-00010150  __mpu_init                
-00010068  __mspabi_cmpf             
-0001017c  __mspabi_fltuf            
-00004400  _c_int00_noinit_noargs_mpu
-0000fffe  _reset_vector             
-00002360  _stack                    
-000101e4  _system_pre_init          
-000101de  abort                     
-00010120  configureADC              
-000100ee  configurePins             
-000101ba  configureTimer            
->>>>>>> pizeroTest
+000111a4  _system_pre_init          
+0001119e  abort                     
+00010eb4  configurePins             
+00011172  enable_burn_wire          
 00004400  fram_ipe_end              
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-<<<<<<< HEAD
-00010d08  main                      
-=======
-000100b2  main                      
->>>>>>> pizeroTest
+00010c04  main                      
 0000a501  mpu_ctl0_value            
 00001513  mpu_sam_value             
 00000440  mpu_segment_border1       
 00000440  mpu_segment_border2       
-<<<<<<< HEAD
-000110d4  sendResetSignal           
-00010c04  switch_control            
-=======
-000101ce  readADC                   
-000101a0  sendResetSignal           
-00010000  switch_control            
->>>>>>> pizeroTest
+00011140  sendResetSignal           
+00010c8c  switch_control            
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -3349,13 +3241,8 @@ address   name
 00004400  fram_ipe_start            
 00004400  fram_rw_start             
 00004400  fram_rx_start             
-<<<<<<< HEAD
 00004418  PORT_2                    
 0000442c  TIMER_A0                  
-=======
-00004418  Port_2                    
-0000442c  Timer_A                   
->>>>>>> pizeroTest
 00004436  __TI_ISR_TRAP             
 0000a501  mpu_ctl0_value            
 0000ffc6  __TI_int27                
@@ -3387,100 +3274,84 @@ address   name
 0000fffa  __TI_int53                
 0000fffc  __TI_int54                
 0000fffe  _reset_vector             
-<<<<<<< HEAD
 00010000  __TI_frcdivd              
 00010468  __mspabi_mpyd             
 000106fa  __mspabi_divd             
 00010916  __TI_frcmpyd              
 00010a7a  __mspabi_cmpd             
 00010b52  __mspabi_cvtdf            
-00010c04  switch_control            
-00010c88  __mspabi_fltuld           
-00010d08  main                      
-00010d88  I2C_Read                  
-00010dec  __mspabi_cvtfd            
-00010e50  __mspabi_mpyll_f5hw       
-00010eac  configurePins             
-00010f02  __mspabi_sral_15          
-00010f06  __mspabi_sral_14          
-00010f0a  __mspabi_sral_13          
-00010f0e  __mspabi_sral_12          
-00010f12  __mspabi_sral_11          
-00010f16  __mspabi_sral_10          
-00010f1a  __mspabi_sral_9           
-00010f1e  __mspabi_sral_8           
-00010f22  __mspabi_sral_7           
-00010f26  __mspabi_sral_6           
-00010f2a  __mspabi_sral_5           
-00010f2e  __mspabi_sral_4           
-00010f32  __mspabi_sral_3           
-00010f36  __mspabi_sral_2           
-00010f3a  __mspabi_sral_1           
-00010f40  __mspabi_slll_15          
-00010f44  __mspabi_slll_14          
-00010f48  __mspabi_slll_13          
-00010f4c  __mspabi_slll_12          
-00010f50  __mspabi_slll_11          
-00010f54  __mspabi_slll_10          
-00010f58  __mspabi_slll_9           
-00010f5c  __mspabi_slll_8           
-00010f60  __mspabi_slll_7           
-00010f64  __mspabi_slll_6           
-00010f68  __mspabi_slll_5           
-00010f6c  __mspabi_slll_4           
-00010f70  __mspabi_slll_3           
-00010f74  __mspabi_slll_2           
-00010f78  __mspabi_slll_1           
-00010f7e  __mspabi_srll_15          
-00010f82  __mspabi_srll_14          
-00010f86  __mspabi_srll_13          
-00010f8a  __mspabi_srll_12          
-00010f8e  __mspabi_srll_11          
-00010f92  __mspabi_srll_10          
-00010f96  __mspabi_srll_9           
-00010f9a  __mspabi_srll_8           
-00010f9e  __mspabi_srll_7           
-00010fa2  __mspabi_srll_6           
-00010fa6  __mspabi_srll_5           
-00010faa  __mspabi_srll_4           
-00010fae  __mspabi_srll_3           
-00010fb2  __mspabi_srll_2           
-00010fb6  __mspabi_srll_1           
-00010fbc  __mspabi_sllll            
-00010ff6  __mspabi_srlll            
-00011030  __mpu_init                
-0001105c  __mspabi_mpyull_f5hw      
-00011088  I2C_init                  
-000110b0  __mspabi_mpyl_f5hw        
-000110d4  sendResetSignal           
-000110ee  __mspabi_mpyi_f5hw        
-00011106  enable_burn_wire          
-0001111c  __mspabi_fltud            
-00011122  C$$EXIT                   
-00011122  abort                     
-00011128  _system_pre_init          
-=======
-00010000  switch_control            
-00010068  __mspabi_cmpf             
-000100b2  main                      
-000100ee  configurePins             
-00010120  configureADC              
-00010150  __mpu_init                
-0001017c  __mspabi_fltuf            
-000101a0  sendResetSignal           
-000101ba  configureTimer            
-000101ce  readADC                   
-000101de  C$$EXIT                   
-000101de  abort                     
-000101e4  _system_pre_init          
->>>>>>> pizeroTest
+00010c04  main                      
+00010c8c  switch_control            
+00010d10  __mspabi_fltuld           
+00010d90  I2C_Read                  
+00010df4  __mspabi_cvtfd            
+00010e58  __mspabi_mpyll_f5hw       
+00010eb4  configurePins             
+00010f0a  SPI_init                  
+00010f54  __mspabi_sral_15          
+00010f58  __mspabi_sral_14          
+00010f5c  __mspabi_sral_13          
+00010f60  __mspabi_sral_12          
+00010f64  __mspabi_sral_11          
+00010f68  __mspabi_sral_10          
+00010f6c  __mspabi_sral_9           
+00010f70  __mspabi_sral_8           
+00010f74  __mspabi_sral_7           
+00010f78  __mspabi_sral_6           
+00010f7c  __mspabi_sral_5           
+00010f80  __mspabi_sral_4           
+00010f84  __mspabi_sral_3           
+00010f88  __mspabi_sral_2           
+00010f8c  __mspabi_sral_1           
+00010f92  __mspabi_slll_15          
+00010f96  __mspabi_slll_14          
+00010f9a  __mspabi_slll_13          
+00010f9e  __mspabi_slll_12          
+00010fa2  __mspabi_slll_11          
+00010fa6  __mspabi_slll_10          
+00010faa  __mspabi_slll_9           
+00010fae  __mspabi_slll_8           
+00010fb2  __mspabi_slll_7           
+00010fb6  __mspabi_slll_6           
+00010fba  __mspabi_slll_5           
+00010fbe  __mspabi_slll_4           
+00010fc2  __mspabi_slll_3           
+00010fc6  __mspabi_slll_2           
+00010fca  __mspabi_slll_1           
+00010fd0  __mspabi_srll_15          
+00010fd4  __mspabi_srll_14          
+00010fd8  __mspabi_srll_13          
+00010fdc  __mspabi_srll_12          
+00010fe0  __mspabi_srll_11          
+00010fe4  __mspabi_srll_10          
+00010fe8  __mspabi_srll_9           
+00010fec  __mspabi_srll_8           
+00010ff0  __mspabi_srll_7           
+00010ff4  __mspabi_srll_6           
+00010ff8  __mspabi_srll_5           
+00010ffc  __mspabi_srll_4           
+00011000  __mspabi_srll_3           
+00011004  __mspabi_srll_2           
+00011008  __mspabi_srll_1           
+0001100e  __mspabi_sllll            
+00011048  __mspabi_srlll            
+00011082  __mpu_init                
+000110ae  __mspabi_mpyull_f5hw      
+000110da  I2C_init                  
+00011102  __mspabi_mpyl_f5hw        
+00011126  Lora_reset                
+00011140  sendResetSignal           
+0001115a  __mspabi_mpyi_f5hw        
+00011172  enable_burn_wire          
+00011188  Lora_init                 
+00011192  Lora_enable               
+00011198  __mspabi_fltud            
+0001119e  C$$EXIT                   
+0001119e  abort                     
+000111a4  _system_pre_init          
 ffffffff  __TI_pprof_out_hndl       
 ffffffff  __TI_prof_data_size       
 ffffffff  __TI_prof_data_start      
 ffffffff  __c_args__                
 
-<<<<<<< HEAD
-[1499 symbols]
-=======
-[1441 symbols]
->>>>>>> pizeroTest
+[1503 symbols]
