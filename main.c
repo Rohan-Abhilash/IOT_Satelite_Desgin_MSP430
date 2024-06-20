@@ -1,4 +1,5 @@
 #include <msp430.h>
+#include <stdin.h>
 
 #define REF_VOLTAGE 3.3
 #define THRESHOLD_50 (4095 * 0.5)  // 50% of 3.3V
@@ -28,14 +29,19 @@ void main(void)
     configurePins();
     configureTimer();
 
+    uint8_t data[2];
+
     _BIS_SR(GIE);
 
     // Main loop
     while(1)
     {
-        unsigned int adc_value = readADC();
+        I2C_Read(0x02,data,2);
 
-        switch_control(adc_value);
+        uint16_t voltage_raw = (data[1] << 8) | data[0];
+        float voltage = voltage_raw * 1.25 / 1000;
+
+        switch_control(voltage);
 
         __delay_cycles(100000); // Delay for demonstration purposes
     }
