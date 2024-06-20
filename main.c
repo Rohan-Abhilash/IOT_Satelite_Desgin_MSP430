@@ -14,10 +14,8 @@
 #define WATCHDOG_SIGNAL_PIN BIT6 // P2.6 changed as pin number 5.0 cannot have interrupts enabled
 #define RESET_SIGNAL_PIN    BIT7 // P2.7
 
-void configureADC(void);
 void configurePins(void);
 void configureTimer(void);
-unsigned int readADC(void);
 void switch_control(unsigned int);
 void sendResetSignal(void);
 
@@ -28,7 +26,6 @@ void main(void)
 
     // Configure the 12 bit ADC
     configurePins();
-    configureADC();
     configureTimer();
 
     _BIS_SR(GIE);
@@ -44,20 +41,43 @@ void main(void)
     }
 }
 
-void configureADC(void)
-{
-    // Configure P1.0 for ADC
-    P1SEL0 |= BIT6;
-    P1SEL1 |= BIT6;
+void I2C_init(void) {
+    // Configure I2C pins
+    P1SEL0 |= BAT_VOLT_SDA | BAT_VOLT_SCL;      // P1.6 = SDA, P1.7 = SCL
+    P1SEL1 &= ~(BAT_VOLT_SDA| BAT_VOLT_SCL);
 
-    // Configure ADC12_B
-    ADC12CTL0 &= ~ADC12ENC;              // Disable ADC12_B before configuration
-    ADC12CTL0 = ADC12SHT0_2 | ADC12ON;   // Sampling time, ADC12 on
-    ADC12CTL1 = ADC12SHP;                // Use sampling timer
-    ADC12CTL2 = ADC12RES_2;              // 12-bit conversion results
-    ADC12MCTL0 = ADC12INCH_0;            // A0 ADC input select; Vref=AVCC
-    ADC12IER0 = 0;                       // Disable ADC interrupts
-    ADC12CTL0 |= ADC12ENC;               // Enable ADC12_B
+    // Configure USCI_B0 for I2C
+    UCB0CTLW0 |= UCSWRST;       // Put eUSCI_B in reset
+    UCB0CTLW0 |= UCMODE_3 | UCMST | UCSYNC; // I2C master mode, synchronous mode
+    UCB0CTLW0 |= UCSSEL__SMCLK; // SMCLK
+    UCB0BRW = 10;               // Set clock frequency to 100 kHz (assuming SMCLK is 1 MHz)
+    UCB0CTLW0 &= ~UCSWRST;      // Release eUSCI_B from reset
+}
+
+void I2C_Read(uint8_t reg, uint8_t *data, uint8_t length) {
+    // Set slave address
+    UCB0I2CSA = MAX17048G_ADDR;
+
+    // Generate start condition and send register address
+    UCB0CTLW0 |= UCTR + UCTXSTT; // I2C TX, start condition
+    while (UCB0CTLW0 & UCTXSTT); // Wait until start condition is sent
+    UCB0TXBUF = reg;             // Send register address
+    while (!(UCB0IFG & UCTXIFG0)); // Wait for TX buffer to be ready
+
+    // Generate repeated start condition and initiate read
+    UCB0CTLW0 &= ~UCTR;          // I2C RX
+    UCB0CTLW0 |= UCTXSTT;        // Repeated start condition
+    while (UCB0CTLW0 & UCTXSTT); // Wait until repeated start condition is sent
+
+    // Read data
+    int i = 0;
+    for (i = 0; i < length; i++) {
+        while (!(UCB0IFG & UCRXIFG0)); // Wait for RX buffer to be ready
+        data[i] = UCB0RXBUF;        // Read received data
+        if (i == length - 1) {
+            UCB0CTLW0 |= UCTXSTP;   // Generate stop condition
+        }
+    }
 }
 
 void configurePins(void)
@@ -90,13 +110,6 @@ void sendResetSignal(void)
     P2OUT |= RESET_SIGNAL_PIN;   // Set reset signal high
     __delay_cycles(100000);      // Delay to ensure reset signal is recognized
     P2OUT &= ~RESET_SIGNAL_PIN;  // Set reset signal low
-}
-
-unsigned int readADC(void)
-{
-    ADC12CTL0 |= ADC12SC;                // Start sampling/conversion
-    while (ADC12CTL1 & ADC12BUSY);       // Wait for conversion to complete
-    return ADC12MEM0;                    // Return ADC value
 }
 
 void switch_control(unsigned int adc_value){
