@@ -1,5 +1,5 @@
 #include <msp430.h>
-#include <stdin.h>
+#include <stdint.h>
 
 #define REF_VOLTAGE 3.3
 #define THRESHOLD_50 (4095 * 0.5)  // 50% of 3.3V
@@ -8,7 +8,8 @@
 #define SKYSAT_EN BIT3 //GPIO4 p5.3 5v to SkySat switch
 #define PIZERO_EN BIT4 //GPIO1 p1.4 5V to PI zero switch
 #define BURN_EN BIT0 //P3.0 for enabling the burn wire
-#define BAT_VOLT BIT6 //P1.6 for receiving the voltage of the battery
+#define BAT_VOLT_SDA BIT6 //P1.6 for receiving the voltage of the battery
+#define BAT_VOLT_SCL BIT7
 #define TIMER_THRESHOLD 50000
 
 
