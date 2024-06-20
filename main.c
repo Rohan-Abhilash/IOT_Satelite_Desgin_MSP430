@@ -19,6 +19,8 @@ void configurePins(void);
 void configureTimer(void);
 void switch_control(unsigned int);
 void sendResetSignal(void);
+void I2C_init(void);
+void I2C_Read(uint8_t , uint8_t* , uint8_t );
 
 void main(void)
 {
