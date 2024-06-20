@@ -1,6 +1,8 @@
 #include <msp430.h>
 #include <stdint.h>
 
+#define MAX17048G_ADDR 0x36
+
 #define REF_VOLTAGE 3.3
 #define THRESHOLD_50 (4095 * 0.5)  // 50% of 3.3V
 #define THRESHOLD_30 (4095 * 0.3)  // 30% of 3.3V
