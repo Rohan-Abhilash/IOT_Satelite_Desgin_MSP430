@@ -70,8 +70,6 @@ uint8_t SPI_receive(void);
 void I2C_init(void);
 void I2C_Read(uint8_t , uint8_t* , uint8_t );
 
-
-
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
@@ -105,7 +103,6 @@ int main(void)
             float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
         }
 
-
         I2C_Read(0x02,data,2);
 
         uint16_t voltage_raw = (data[1] << 8) | data[0];
@@ -117,8 +114,6 @@ int main(void)
     }
     return 0;
 }
-
-
 
 void VC_Sensor_configure_ina3221(void) {
     VC_Sensor_I2C_write_word(INA3221_REG_CONFIG, CONFIG_VALUE);
@@ -157,6 +152,7 @@ void VC_Sensor_I2C_write_word(uint8_t reg, uint16_t data) {
 }
 
 uint16_t VC_Sensor_I2C_read_word(uint8_t reg) {
+
     uint16_t data;
 
     while (UCB0CTLW0 & UCTXSTP);              // Ensure stop condition got sent
@@ -179,6 +175,7 @@ uint16_t VC_Sensor_I2C_read_word(uint8_t reg) {
 
     return data;
 }
+
 float VC_Sensor_get_shunt_voltage(uint8_t channel) {
     uint8_t reg;
 
@@ -220,7 +217,6 @@ float VC_Sensor_get_bus_voltage(uint8_t channel) {
     uint16_t raw_value = VC_Sensor_I2C_read_word(reg);
     return raw_value * 8e-3;  // Convert raw value to voltage (in volts)
 }
-
 
 void I2C_init(void) {
     // Configure I2C pins
