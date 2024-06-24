@@ -1,7 +1,8 @@
 #include <msp430.h>
 #include <stdint.h>
 
-#define MAX17048G_ADDR 0x36
+#define MAX17048_I2C_address 0x36
+#define MAX17048_REG_SOC 0x04
 
 #define REF_VOLTAGE 3.3
 #define THRESHOLD_50 (REF_VOLTAGE * 0.5)  // 50% of 3.3V
@@ -67,8 +68,8 @@ void SPI_init(void);
 void SPI_send(uint8_t);
 uint8_t SPI_receive(void);
 
-void I2C_init(void);
-void I2C_Read(uint8_t , uint8_t* , uint8_t );
+void cell_I2C_init(void);
+float cell_I2C_read_data(void);
 
 int main(void)
 {
@@ -78,41 +79,75 @@ int main(void)
     // Configure the 12 bit ADC
     configurePins();
 
+    cell_I2C_init();
 
     VC_Sensor_I2C_init();
     VC_Sensor_configure_ina3221();
 
-
-    I2C_init();
     SPI_init();
     Lora_init();
 
     enable_burn_wire(); //enables the burn wire to deploy antennas for communication
 
-    uint8_t data[2];
-
     _BIS_SR(GIE);
-
     // Main loop
     while(1)
     {
         //reading the value coming from the voltage current sensor
         uint8_t channel;
+
         for(channel = 1;channel <=3 ; channel++){
             float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage of each channel
             float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
         }
 
-        I2C_Read(0x02,data,2);
+        float stateOfCharge = cell_I2C_read_data();
 
-        uint16_t voltage_raw = (data[1] << 8) | data[0];
-        float voltage = voltage_raw * 1.25 / 1000;
-
-        switch_control(voltage);
+        switch_control(stateOfCharge);
 
         __delay_cycles(100000);
     }
     return 0;
+}
+
+void cell_I2C_init(void){
+    P1SEL0 |= BIT6 | BIT7;
+    P1SEL1 &= ~(BIT6 | BIT7);
+
+    UCB0CTLW0 |= UCSWRST;
+    UCB0CTLW0 |= UCMST | UCMODE_3 | UCSYNC;
+    UCB0CTLW1 |= UCASTP_2;
+    UCB0BRW = 10; // baudrate = 10
+    UCB0I2CSA = MAX17048_I2C_address;
+    UCB0CTLW0 &= ~UCSWRST;
+    UCB0IE |= UCNACKIE;
+}
+
+float cell_I2C_read_data(){
+
+    uint16_t data;
+    while(~(UCB0CTLW0 & UCTXSTP));
+    UCB0CTLW0 |= UCTR | UCTXSTT;
+
+    while(~(UCB0IFG & UCTXIFG0));
+    UCB0TXBUF = MAX17048_REG_SOC;
+
+    while(~(UCB0CTL0 & UCTXSTP));
+    UCB0CTLW0 &= ~UCTR;
+    UCB0CTLW0 |= UCTXSTT;
+
+    while(UCB0CTLW0 & UCTXSTT);
+    while(~(UCB0IFG & UCRXIFG0));
+    data = UCB0RXBUF << 8;
+
+    UCB0CTLW0 |= UCTXSTP;
+
+    while(~(UCB0IFG & UCRXIFG0));
+    data |= UCB0RXBUF;
+
+    float result = (data >> 8) + ((data & 0xFF) / 256.0);
+
+    return result;
 }
 
 void VC_Sensor_configure_ina3221(void) {
@@ -216,45 +251,6 @@ float VC_Sensor_get_bus_voltage(uint8_t channel) {
 
     uint16_t raw_value = VC_Sensor_I2C_read_word(reg);
     return raw_value * 8e-3;  // Convert raw value to voltage (in volts)
-}
-
-void I2C_init(void) {
-    // Configure I2C pins
-    P1SEL0 |= BAT_VOLT_SDA | BAT_VOLT_SCL;      // P1.6 = SDA, P1.7 = SCL
-    P1SEL1 &= ~(BAT_VOLT_SDA| BAT_VOLT_SCL);
-
-    // Configure USCI_B0 for I2C
-    UCB0CTLW0 |= UCSWRST;       // Put eUSCI_B in reset
-    UCB0CTLW0 |= UCMODE_3 | UCMST | UCSYNC; // I2C master mode, synchronous mode
-    UCB0CTLW0 |= UCSSEL__SMCLK; // SMCLK
-    UCB0BRW = 10;               // Set clock frequency to 100 kHz (assuming SMCLK is 1 MHz)
-    UCB0CTLW0 &= ~UCSWRST;      // Release eUSCI_B from reset
-}
-
-void I2C_Read(uint8_t reg, uint8_t *data, uint8_t length) {
-    // Set slave address
-    UCB0I2CSA = MAX17048G_ADDR;
-
-    // Generate start condition and send register address
-    UCB0CTLW0 |= UCTR + UCTXSTT; // I2C TX, start condition
-    while (UCB0CTLW0 & UCTXSTT); // Wait until start condition is sent
-    UCB0TXBUF = reg;             // Send register address
-    while (!(UCB0IFG & UCTXIFG0)); // Wait for TX buffer to be ready
-
-    // Generate repeated start condition and initiate read
-    UCB0CTLW0 &= ~UCTR;          // I2C RX
-    UCB0CTLW0 |= UCTXSTT;        // Repeated start condition
-    while (UCB0CTLW0 & UCTXSTT); // Wait until repeated start condition is sent
-
-    // Read data
-    int i = 0;
-    for (i = 0; i < length; i++) {
-        while (!(UCB0IFG & UCRXIFG0)); // Wait for RX buffer to be ready
-        data[i] = UCB0RXBUF;        // Read received data
-        if (i == length - 1) {
-            UCB0CTLW0 |= UCTXSTP;   // Generate stop condition
-        }
-    }
 }
 
 void configurePins(void){
