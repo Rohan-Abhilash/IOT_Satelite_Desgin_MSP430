@@ -4,6 +4,20 @@
 #define MAX17048_I2C_address 0x36
 #define MAX17048_REG_SOC 0x04
 
+// INA3221 I2C address
+#define INA3221_I2C_ADDR 0x40
+
+// Register addresses
+#define INA3221_REG_CONFIG 0x00
+#define INA3221_REG_SHUNT_VOLTAGE_1 0x01
+#define INA3221_REG_BUS_VOLTAGE_1 0x02
+#define INA3221_REG_SHUNT_VOLTAGE_2 0x03
+#define INA3221_REG_BUS_VOLTAGE_2 0x04
+#define INA3221_REG_SHUNT_VOLTAGE_3 0x05
+#define INA3221_REG_BUS_VOLTAGE_3 0x06
+// Configuration register value
+#define CONFIG_VALUE 0x7127
+
 #define REF_VOLTAGE 3.3
 #define THRESHOLD_50 (REF_VOLTAGE * 0.5)  // 50% of 3.3V
 #define THRESHOLD_30 (REF_VOLTAGE * 0.3)  // 30% of 3.3V
@@ -32,20 +46,7 @@
 #define LORA_CS BIT7 //3.7 used for choosing the mode of operation
 #define LORA_SCK BIT6 //3.6 used for selecting the clock used for the communication
 
-// INA3221 I2C address
-#define INA3221_I2C_ADDR 0x40
 
-// Register addresses
-#define INA3221_REG_CONFIG 0x00
-#define INA3221_REG_SHUNT_VOLTAGE_1 0x01
-#define INA3221_REG_BUS_VOLTAGE_1 0x02
-#define INA3221_REG_SHUNT_VOLTAGE_2 0x03
-#define INA3221_REG_BUS_VOLTAGE_2 0x04
-#define INA3221_REG_SHUNT_VOLTAGE_3 0x05
-#define INA3221_REG_BUS_VOLTAGE_3 0x06
-
-// Configuration register value
-#define CONFIG_VALUE 0x7127
 
 void configurePins(void);
 void configureTimer(void);
