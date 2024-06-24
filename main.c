@@ -31,6 +31,21 @@
 #define LORA_CS BIT7 //3.7 used for choosing the mode of operation
 #define LORA_SCK BIT6 //3.6 used for selecting the clock used for the communication
 
+// INA3221 I2C address
+#define INA3221_I2C_ADDR 0x40
+
+// Register addresses
+#define INA3221_REG_CONFIG 0x00
+#define INA3221_REG_SHUNT_VOLTAGE_1 0x01
+#define INA3221_REG_BUS_VOLTAGE_1 0x02
+#define INA3221_REG_SHUNT_VOLTAGE_2 0x03
+#define INA3221_REG_BUS_VOLTAGE_2 0x04
+#define INA3221_REG_SHUNT_VOLTAGE_3 0x05
+#define INA3221_REG_BUS_VOLTAGE_3 0x06
+
+// Configuration register value
+#define CONFIG_VALUE 0x7127
+
 void configurePins(void);
 void configureTimer(void);
 void sendResetSignal(void);
@@ -41,6 +56,13 @@ void Lora_init(void);
 void Lora_reset(void);
 void Lora_enable(void);
 
+void VC_Sensor_configure_ina3221(void);
+void VC_Sensor_I2C_init(void);
+void VC_Sensor_I2C_write_word(uint8_t , uint16_t);
+uint16_t VC_Sensor_I2C_read_word(uint8_t);
+float VC_Sensor_get_shunt_voltage(uint8_t);
+float VC_Sensor_get_bus_voltage(uint8_t);
+
 void SPI_init(void);
 void SPI_send(uint8_t);
 uint8_t SPI_receive(void);
@@ -48,7 +70,9 @@ uint8_t SPI_receive(void);
 void I2C_init(void);
 void I2C_Read(uint8_t , uint8_t* , uint8_t );
 
-void main(void)
+
+
+int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
     PM5CTL0 &= ~LOCKLPM5;
@@ -56,10 +80,13 @@ void main(void)
     // Configure the 12 bit ADC
     configurePins();
 
+
+    VC_Sensor_I2C_init();
+    VC_Sensor_configure_ina3221();
+
+
     I2C_init();
-
     SPI_init();
-
     Lora_init();
 
     enable_burn_wire(); //enables the burn wire to deploy antennas for communication
@@ -71,6 +98,14 @@ void main(void)
     // Main loop
     while(1)
     {
+        //reading the value coming from the voltage current sensor
+        uint8_t channel;
+        for(channel = 1;channel <=3 ; channel++){
+            float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage of each channel
+            float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
+        }
+
+
         I2C_Read(0x02,data,2);
 
         uint16_t voltage_raw = (data[1] << 8) | data[0];
@@ -80,7 +115,112 @@ void main(void)
 
         __delay_cycles(100000);
     }
+    return 0;
 }
+
+
+
+void VC_Sensor_configure_ina3221(void) {
+    VC_Sensor_I2C_write_word(INA3221_REG_CONFIG, CONFIG_VALUE);
+}
+
+void VC_Sensor_I2C_init(void) {
+    // Configure pins 3.1 and 3.2 for I2C functionality
+    P3SEL0 |= BIT1 | BIT2;
+    P3SEL1 &= ~(BIT1 | BIT2);
+
+    // Initialize eUSCI_B0 for I2C master mode
+    UCB0CTLW0 = UCSWRST;                      // Enable SW reset
+    UCB0CTLW0 |= UCMODE_3 | UCMST | UCSYNC;   // I2C master mode, synchronous mode
+    UCB0CTLW1 |= UCASTP_2;                    // Automatic STOP condition
+    UCB0BRW = 10;                             // baudrate = SMCLK / 10
+    UCB0I2CSA = INA3221_I2C_ADDR;             // Slave address
+    UCB0CTLW0 &= ~UCSWRST;                    // Clear SW reset, resume operation
+    UCB0IE |= UCNACKIE;                       // Enable NACK interrupt
+}
+
+void VC_Sensor_I2C_write_word(uint8_t reg, uint16_t data) {
+    while (UCB0CTLW0 & UCTXSTP);              // Ensure stop condition got sent
+    UCB0CTLW0 |= UCTR | UCTXSTT;              // I2C TX, start condition
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0TXBUF = reg;                          // Send register address
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0TXBUF = data >> 8;                    // Send MSB
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0TXBUF = data & 0xFF;                  // Send LSB
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0CTLW0 |= UCTXSTP;                     // I2C stop condition
+}
+
+uint16_t VC_Sensor_I2C_read_word(uint8_t reg) {
+    uint16_t data;
+
+    while (UCB0CTLW0 & UCTXSTP);              // Ensure stop condition got sent
+    UCB0CTLW0 |= UCTR | UCTXSTT;              // I2C TX, start condition
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0TXBUF = reg;                          // Send register address
+
+    while (!(UCB0IFG & UCTXIFG0));            // Wait for TX buffer to be ready
+    UCB0CTLW0 &= ~UCTR;                       // I2C RX
+    UCB0CTLW0 |= UCTXSTT;                     // I2C repeated start condition
+
+    while (UCB0CTLW0 & UCTXSTT);              // Wait for start condition to be sent
+    while (!(UCB0IFG & UCRXIFG0));            // Wait for RX buffer to be ready
+    data = UCB0RXBUF << 8;                    // Read MSB
+
+    UCB0CTLW0 |= UCTXSTP;                     // I2C stop condition
+    while (!(UCB0IFG & UCRXIFG0));            // Wait for RX buffer to be ready
+    data |= UCB0RXBUF;                        // Read LSB
+
+    return data;
+}
+float VC_Sensor_get_shunt_voltage(uint8_t channel) {
+    uint8_t reg;
+
+    switch (channel) {
+        case 1:
+            reg = INA3221_REG_SHUNT_VOLTAGE_1;
+            break;
+        case 2:
+            reg = INA3221_REG_SHUNT_VOLTAGE_2;
+            break;
+        case 3:
+            reg = INA3221_REG_SHUNT_VOLTAGE_3;
+            break;
+        default:
+            return -1.0;
+    }
+
+    uint16_t raw_value = VC_Sensor_I2C_read_word(reg);
+    return raw_value * 40e-6;  // Convert raw value to voltage (in volts)
+}
+
+float VC_Sensor_get_bus_voltage(uint8_t channel) {
+    uint8_t reg;
+
+    switch (channel) {
+        case 1:
+            reg = INA3221_REG_BUS_VOLTAGE_1;
+            break;
+        case 2:
+            reg = INA3221_REG_BUS_VOLTAGE_2;
+            break;
+        case 3:
+            reg = INA3221_REG_BUS_VOLTAGE_3;
+            break;
+        default:
+            return -1.0;
+    }
+
+    uint16_t raw_value = VC_Sensor_I2C_read_word(reg);
+    return raw_value * 8e-3;  // Convert raw value to voltage (in volts)
+}
+
 
 void I2C_init(void) {
     // Configure I2C pins
@@ -244,6 +384,7 @@ void switch_control(float voltage){
             P5OUT |= SKYSAT_EN;
         }
 }
+
 #pragma vector = TIMER0_A0_VECTOR
 __interrupt void TIMER_A0(void){
     sendResetSignal();
