@@ -80,6 +80,8 @@ int main(void)
     // Configure the 12 bit ADC
     configurePins();
 
+    configureTimer();
+
     cell_I2C_init();
 
     VC_Sensor_I2C_init();
