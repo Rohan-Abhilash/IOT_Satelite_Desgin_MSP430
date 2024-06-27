@@ -47,7 +47,6 @@
 #define LORA_SCK BIT6 //3.6 used for selecting the clock used for the communication
 
 
-
 void configurePins(void);
 void configureTimer(void);
 void sendResetSignal(void);
@@ -65,12 +64,19 @@ uint16_t VC_Sensor_I2C_read_word(uint8_t);
 float VC_Sensor_get_shunt_voltage(uint8_t);
 float VC_Sensor_get_bus_voltage(uint8_t);
 
+void pizero_spi_init(void);
+void pizero_spi_write(uint8_t);
+uint8_t pizero_spi_read(void);
+void pizero_spi_select(void);
+void pizero_spi_deselect(void);
+
 void SPI_init(void);
 void SPI_send(uint8_t);
 uint8_t SPI_receive(void);
 
 void cell_I2C_init(void);
 float cell_I2C_read_data(void);
+
 
 int main(void)
 {
@@ -85,12 +91,12 @@ int main(void)
     cell_I2C_init();
 
     VC_Sensor_I2C_init();
-    VC_Sensor_configure_ina3221();
+    VC_Sensor_configure_ina3221(); // infinite wait here
 
-    SPI_init();
-    Lora_init();
+    pizero_spi_init();
 
     enable_burn_wire(); //enables the burn wire to deploy antennas for communication
+
 
     _BIS_SR(GIE);
     // Main loop
@@ -99,19 +105,66 @@ int main(void)
         //reading the value coming from the voltage current sensor
         uint8_t channel;
 
+
         for(channel = 1;channel <=3 ; channel++){
             float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage of each channel
             float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
         }
-
         float stateOfCharge = cell_I2C_read_data();
 
         switch_control(stateOfCharge);
+
+        //pizero communication module
+        pizero_spi_select();
+        uint8_t pizero_data = pizero_spi_read();
+        pizero_spi_deselect();
+        //P1OUT &= ~BIT0;
 
         __delay_cycles(100000);
     }
     return 0;
 }
+
+
+void pizero_spi_init(void) {
+    // Set P2.3 as output (CS pin)
+    P2DIR |= BIT3;
+    P2OUT |= BIT3; // Set CS high
+
+    // Configure P2.0 (MOSI), P2.1 (MISO), and P2.2 (SCLK) for SPI
+    P2SEL0 |= BIT0 | BIT1 | BIT2;
+    P2SEL1 &= ~(BIT0 | BIT1 | BIT2);
+
+    // Reset eUSCI_B0
+    UCB0CTLW0 = UCSWRST;
+
+    // Configure eUSCI_B0 for SPI master mode
+    UCB0CTLW0 |= UCMST | UCSYNC | UCCKPH | UCMSB | UCSSEL_2; // 3-pin, 8-bit SPI master, clock phase, MSB first, SMCLK
+    UCB0BRW = 0x01; // Set clock prescaler
+
+    // Clear reset flag
+    UCB0CTLW0 &= ~UCSWRST;
+}
+
+void pizero_spi_write(uint8_t data) {
+    while (!(UCB0IFG & UCTXIFG0)); // Wait for TX buffer to be ready
+    UCB0TXBUF = data; // Transmit data
+    while (UCB0STATW & UCBUSY); // Wait for transmission to complete
+}
+
+uint8_t pizero_spi_read(void) {
+    while (!(UCB0IFG & UCRXIFG0)); // Wait for RX buffer to be ready
+    return UCB0RXBUF; // Return received data
+}
+
+void pizero_spi_select(void) {
+    P2OUT &= ~BIT3; // set CS bit low for beginning communication
+}
+
+void pizero_spi_deselect(void) {
+    P2OUT |= BIT3; // Set CS high for ending the communication
+}
+
 
 void cell_I2C_init(void){
     P1SEL0 |= BIT6 | BIT7;
