@@ -404,24 +404,24 @@ void enable_burn_wire(void){
 //----------------------------------------------------------------------------------------------------------------
 //-------------------------------------Power Mode Switching module------------------------------------------------
 
-void switch_control(float voltage){
-    if(voltage >= THRESHOLD_50)
+void switch_control(float soc){
+    if(soc >= THRESHOLD_50)
         {
-            // If ADC value is >= 50% of 3.3V
+            // If SOC value is >= 50% of 3.3V
             P1OUT |= PIZERO_EN;
             P4OUT |= LORA_EN;
             P5OUT |= SKYSAT_EN;
         }
-        else if(voltage < THRESHOLD_30)
+        else if(soc < THRESHOLD_30)
         {
-            // If ADC value is < 30% of 3.3V
+            // If SOC value is < 30% of 3.3V
             P1OUT &= ~PIZERO_EN;
             P4OUT &= ~LORA_EN;
             P5OUT |= SKYSAT_EN;
         }
         else
         {
-            // If ADC value is >= 30% but < 50% of 3.3V
+            // If SOC value is >= 30% but < 50% of 3.3V
             P1OUT &= ~PIZERO_EN;
             P4OUT |= LORA_EN;
             P5OUT |= SKYSAT_EN;
