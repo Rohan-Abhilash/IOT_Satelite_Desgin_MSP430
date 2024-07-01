@@ -22,8 +22,9 @@
 #define CONFIG_VALUE 0x7127
 
 #define REF_VOLTAGE 3.3
-#define THRESHOLD_50 (REF_VOLTAGE * 0.5)  // 50% of 3.3V
-#define THRESHOLD_30 (REF_VOLTAGE * 0.3)  // 30% of 3.3V
+#define THRESHOLD_50 50  // 50% of 3.3V
+#define THRESHOLD_37 37
+#define THRESHOLD_32 32
 
 #define BURN_EN BIT0 //P3.0 for enabling the burn wire
 #define BAT_VOLT_SDA BIT6 //P1.6 for receiving the voltage of the battery
@@ -82,9 +83,12 @@ float cell_I2C_read_data(void);
 //-----------------------------------------------------------------------------------------------------------------
 //------------------------------------Initializing Global Variables------------------------------------------------
 
-int read_I2C_data_cell;
+uint16_t read_I2C_data_cell ;
 uint16_t read_I2C_data_VC_sensor;
 uint8_t reg;
+int power_mode = 0;
+int sun_mode = 0;
+
 
 //-----------------------------------------------------------------------------------------------------------------
 //-------------------------------------------Main Function---------------------------------------------------------
@@ -108,12 +112,20 @@ int main(void)
         uint8_t channel;
         VC_Sensor_I2C_init();
         for(channel = 1;channel <=3 ; channel++){
-            float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage of each channel
-            float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
+
+            float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage is used for measuring the current
+                                                                      //if the value of the shunt resistance is known ie: ohms law
+                                                                        // I = shunt voltage / shunt resistance
+            float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage is the voltage at the terminal
             //write the operations that need to be performed after receiving the bus and shunt voltage from the VC sensor
 
             //------------------------------Add functionality here----------------------------------------
-
+            if(channel == 1 && bus_voltage > 4){
+                sun_mode = 1;
+            }
+            else if (channel == 1 && bus_voltage <= 4){
+                sun_mode = 0;
+            }
 
         }
 
@@ -144,7 +156,7 @@ int main(void)
 //----------------------------------------------------------------------------------------------------------------
 //-----------------------------Raspberry Pi Zero SPI Communication module-----------------------------------------
 void pizero_spi_init(void) {
-    // Set P2.3 as output (CS pin)
+                        // Set P2.3 as output (CS pin)
     UCA0CTLW0 |= UCSWRST;
 
     UCA0CTLW0 |= UCMST;
@@ -169,7 +181,7 @@ void pizero_spi_write(uint8_t data) {
 
 int pizero_spi_read(void) {
     int temp = UCA0RXBUF;
-    return temp; // Return received data
+    return temp;        // Return received data
 }
 
 //----------------------------------------------------------------------------------------------------------------
@@ -181,7 +193,7 @@ void cell_I2C_init(void){
     UCB0BRW = 10;
     UCB0I2CSA = MAX17048_I2C_address;
     UCB0CTLW1 |= UCASTP_2; // auto stop mode based on the byte counter
-    UCB0TBCNT = 1; // reading one byte from the slave
+    UCB0TBCNT = 1;          // reading one byte from the slave
 
     P1SEL0 |= BIT6 | BIT7;
     P1SEL1 &= ~(BIT6 | BIT7);
@@ -194,23 +206,22 @@ void cell_I2C_init(void){
 
 float cell_I2C_read_data(void){
 
-    //Transmit register address from which we want to read the state of charge
+                        //Transmit register address from which we want to read the state of charge
     UCB0CTLW0 |= UCTR;
     UCB0CTLW0 |= UCTXSTT;
 
     while((UCB0IFG & UCSTPIFG) == 0); //waiting for the stp flag to fire to ensure that the max17048 address has been sent and acknowledged by the slave
     UCB0IFG &= ~UCSTPIFG;
-    //from here it will go to the interrupt service routine
-    //Receive the data from that register containing the state of charge
+                        //from here it will go to the interrupt service routine
+                        //Receive the data from that register containing the state of charge
     UCB0CTLW0 &= ~UCTR;
     UCB0CTLW0 |= UCTXSTT;
-    //restarting the communication for receiving the data from the specific register
+                        //restarting the communication for receiving the data from the specific register
     while((UCB0IFG & UCSTPIFG) == 0);
     UCB0IFG &= ~UCSTPIFG;
 
-    //converting the result into voltage
-    float result = (read_I2C_data_cell >> 8) + ((read_I2C_data_cell & 0xFF) / 256.0);
-
+                        //converting the result into voltage
+    float result = (float)(read_I2C_data_cell >> 8) + (float)((read_I2C_data_cell & 0xFF) / 256.0);
     return result;
 }
 
@@ -218,14 +229,14 @@ float cell_I2C_read_data(void){
 //------------------------------Three channel Voltage current sensor module---------------------------------------
 
 void VC_Sensor_I2C_init(void) {
-    // Configure pins 3.1 and 3.2 for I2C functionality
+                        // Configure pins 3.1 and 3.2 for I2C functionality
     UCB1CTLW0 |= UCSWRST;
 
     UCB1CTLW0 |= UCSSEL__SMCLK | UCMST | UCMSB | UCMODE_3;
     UCB1BRW = 10;
     UCB1I2CSA = INA3221_I2C_ADDR;
     UCB1CTLW1 |= UCASTP_2; // auto stop mode based on the byte counter
-    UCB1TBCNT = 1; // reading one byte from the slave
+    UCB1TBCNT = 1;      // reading one byte from the slave
 
     P3SEL0 |= BIT1 | BIT2;
     P3SEL1 &= ~(BIT1 | BIT2);
@@ -238,19 +249,19 @@ void VC_Sensor_I2C_init(void) {
 
 uint16_t VC_Sensor_I2C_read_word(void) {
 
-    //Transmit register address from which we want to read the state of charge
+                    //Transmit register address from which we want to read the state of charge
     UCB1CTLW0 |= UCTR;
     UCB1CTLW0 |= UCTXSTT;
 
     while((UCB1IFG & UCSTPIFG) == 0); //waiting for the stp flag to fire to ensure that the max17048 address has been sent and acknowledged by the slave
     UCB1IFG &= ~UCSTPIFG;
-    //from here it will go to the interrupt service routine
-    //Receive the data from that register containing the state of charge
+                    //from here it will go to the interrupt service routine
+                    //Receive the data from that register containing the state of charge
     UCB1CTLW0 &= ~UCTR;
     UCB1TBCNT = 2;
     UCB1CTLW0 |= UCTXSTT;
 
-    //restarting the communication for receiving the data from the specific register
+                    //restarting the communication for receiving the data from the specific register
     while((UCB1IFG & UCSTPIFG) == 0);
     UCB1IFG &= ~UCSTPIFG;                    // Read LSB
 
@@ -275,7 +286,7 @@ float VC_Sensor_get_shunt_voltage(uint8_t channel) {
     }
 
     uint16_t raw_value = VC_Sensor_I2C_read_word();
-    return raw_value * 40e-6;  // Convert raw value to voltage (in volts)
+    return ((int)raw_value) * 40e-6;  // Convert raw value to voltage (in volts)
 }
 
 float VC_Sensor_get_bus_voltage(uint8_t channel) {
@@ -294,7 +305,7 @@ float VC_Sensor_get_bus_voltage(uint8_t channel) {
             return -1.0;
     }
     uint16_t raw_value = VC_Sensor_I2C_read_word();
-    return raw_value * 8e-3;  // Convert raw value to voltage (in volts)
+    return ((int)raw_value) * 8e-3;  // Convert raw value to voltage (in volts)
 }
 
 //----------------------------------------------------------------------------------------------------------------
@@ -405,27 +416,58 @@ void enable_burn_wire(void){
 //-------------------------------------Power Mode Switching module------------------------------------------------
 
 void switch_control(float soc){
-    if(soc >= THRESHOLD_50)
-        {
-            // If SOC value is >= 50% of 3.3V
-            P1OUT |= PIZERO_EN;
-            P4OUT |= LORA_EN;
-            P5OUT |= SKYSAT_EN;
+
+    switch(power_mode){
+        case 0:{ //mode 0 is full power mode
+            if(soc < THRESHOLD_50 && sun_mode == 0){
+                P1OUT &= ~PIZERO_EN;
+                P4OUT |= LORA_EN;
+                P5OUT &= ~SKYSAT_EN;
+                power_mode = 1;
+            }
+            else{
+                P1OUT |= PIZERO_EN;
+                P4OUT |= LORA_EN;
+                P5OUT |= SKYSAT_EN;
+            }
+            break;
         }
-        else if(soc < THRESHOLD_30)
-        {
-            // If SOC value is < 30% of 3.3V
-            P1OUT &= ~PIZERO_EN;
-            P4OUT &= ~LORA_EN;
-            P5OUT |= SKYSAT_EN;
+        case 1:{   // case 1 is power saving mode
+            if(soc < THRESHOLD_37 && sun_mode == 1){
+                P1OUT |= PIZERO_EN;
+                P4OUT |= LORA_EN;
+                P5OUT |= SKYSAT_EN;
+                power_mode = 0;
+            }
+            else if (soc < THRESHOLD_32 && sun_mode == 0 ){
+                P1OUT &= ~PIZERO_EN;
+                P4OUT &= ~LORA_EN;
+                P5OUT &= ~SKYSAT_EN;
+                power_mode = 2;
+            }
+            else{
+                P1OUT &= ~PIZERO_EN;
+                P4OUT |= LORA_EN;
+                P5OUT &= ~SKYSAT_EN;
+            }
+            break;
         }
-        else
-        {
-            // If SOC value is >= 30% but < 50% of 3.3V
-            P1OUT &= ~PIZERO_EN;
-            P4OUT |= LORA_EN;
-            P5OUT |= SKYSAT_EN;
+        case 2:{    // case 2 is ultra power saving mode
+            if(soc > THRESHOLD_37 && sun_mode == 1){
+                P1OUT |= PIZERO_EN;
+                P4OUT |= LORA_EN;
+                P5OUT |= SKYSAT_EN;
+                power_mode = 0;
+            }
+            else{
+                P1OUT &= ~PIZERO_EN;
+                P4OUT &= ~LORA_EN;
+                P5OUT &= ~SKYSAT_EN;
+            }
+            break;
         }
+
+    }
 }
 
 
@@ -450,7 +492,7 @@ __interrupt void PORT_2(void){
     }
 }
 
-//------------------------------I2C USCB0 Communication Interrupt module------------------------------------------
+//------------------------------I2C USCB0 Communication Interrupt module Cell Gauge--------------------------------
 #pragma vector = USCI_B0_VECTOR
 __interrupt void USCI_B0_ISR(void){
     if(UCB0IFG & UCTXIFG0){
@@ -461,7 +503,7 @@ __interrupt void USCI_B0_ISR(void){
     }
 }
 
-//------------------------------I2C USCB1 Communication Interrupt module-------------------------------------------
+//------------------------------I2C USCB1 Communication Interrupt module VC Sensor--------------------------------
 #pragma vector = USCI_B1_VECTOR
 __interrupt void USCI_B1_ISR(void){
     if(UCB1IFG & UCTXIFG0){
