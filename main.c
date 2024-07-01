@@ -1,6 +1,9 @@
 #include <msp430.h>
 #include <stdint.h>
 
+//-----------------------------------------------------------------------------------------------------------------
+//---------------------------------------Defining The Constants----------------------------------------------------
+
 #define MAX17048_I2C_address 0x36
 #define MAX17048_REG_SOC 0x04
 
@@ -47,6 +50,8 @@
 #define LORA_SCK BIT6 //3.6 used for the clock of for the communication
 #define LORA_CS BIT7 //3.7 used for choosing the chip
 
+//-----------------------------------------------------------------------------------------------------------------
+//------------------------------------Declaring The Functions------------------------------------------------------
 
 void configurePins(void);
 void configureTimer(void);
@@ -74,48 +79,70 @@ int Lora_spi_receive(void);
 void cell_I2C_init(void);
 float cell_I2C_read_data(void);
 
+//-----------------------------------------------------------------------------------------------------------------
+//------------------------------------Initializing Global Variables------------------------------------------------
 
 int read_I2C_data_cell;
 uint16_t read_I2C_data_VC_sensor;
 uint8_t reg;
 
+//-----------------------------------------------------------------------------------------------------------------
+//-------------------------------------------Main Function---------------------------------------------------------
+
 int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
     PM5CTL0 &= ~LOCKLPM5;
-    // Configure the 12 bit ADC
-    configurePins();
+
+    configurePins();            // Configure the 12 bit ADC
 
     configureTimer();
 
-    enable_burn_wire(); //enables the burn wire to deploy antennas for communication
+    enable_burn_wire();         //enables the burn wire to deploy antennas for communication
 
     __enable_interrupt();
-    // Main loop
+                                // Main loop
     while(1)
     {
-        //reading the value coming from the voltage current sensor
+                                //reading the value coming from the voltage current sensor
         uint8_t channel;
         VC_Sensor_I2C_init();
         for(channel = 1;channel <=3 ; channel++){
             float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage of each channel
             float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage of each channel
+            //write the operations that need to be performed after receiving the bus and shunt voltage from the VC sensor
+
+            //------------------------------Add functionality here----------------------------------------
+
+
         }
 
+        //reading the state of charge from the battery
         cell_I2C_init();
         float stateOfCharge = cell_I2C_read_data();
-        switch_control(stateOfCharge);
+        switch_control(stateOfCharge);  //used to change the power modes based on the state of charge of the battery
 
-        //pizero communication module
+                                //pizero communication module
         pizero_spi_init();
+        pizero_spi_write(0xAF);
         uint8_t pizero_data = pizero_spi_read();
+        //--------------------------Add the operations that need to be performed with pizero data ----------------
 
+                                //Lora communication module
+        Lora_spi_init();
+        Lora_spi_send(0xFD);
+        uint8_t lora_data = Lora_spi_receive();
+        //--------------------------Add the operations that need to be performed with Lora data ------------------
+
+
+        //--------------------------Also add any other functionality with any other sensor or device--------------
         __delay_cycles(100000);
     }
     return 0;
 }
 
-
+//----------------------------------------------------------------------------------------------------------------
+//-----------------------------Raspberry Pi Zero SPI Communication module-----------------------------------------
 void pizero_spi_init(void) {
     // Set P2.3 as output (CS pin)
     UCA0CTLW0 |= UCSWRST;
@@ -144,6 +171,9 @@ int pizero_spi_read(void) {
     int temp = UCA0RXBUF;
     return temp; // Return received data
 }
+
+//----------------------------------------------------------------------------------------------------------------
+//-------------------------------------MAX17048 Cell Gauge module-------------------------------------------------
 
 void cell_I2C_init(void){
     UCB0CTLW0 |= UCSWRST;
@@ -183,6 +213,9 @@ float cell_I2C_read_data(void){
 
     return result;
 }
+
+//----------------------------------------------------------------------------------------------------------------
+//------------------------------Three channel Voltage current sensor module---------------------------------------
 
 void VC_Sensor_I2C_init(void) {
     // Configure pins 3.1 and 3.2 for I2C functionality
@@ -264,6 +297,8 @@ float VC_Sensor_get_bus_voltage(uint8_t channel) {
     return raw_value * 8e-3;  // Convert raw value to voltage (in volts)
 }
 
+//----------------------------------------------------------------------------------------------------------------
+//----------------------Configuring the enable , reset and other miscellaneous pins-------------------------------
 void configurePins(void){
     P1DIR |= PIZERO_EN;
     P4DIR |= LORA_EN;
@@ -291,6 +326,9 @@ void configurePins(void){
     P2IFG &= ~WATCHDOG_SIGNAL_PIN;  // Clear interrupt flag
 
 }
+
+//----------------------------------------------------------------------------------------------------------------
+//----------------------------LORA SPI Communication and Enable Reset module--------------------------------------
 
 void Lora_spi_init(void){
     // configuring the SPI communication ports
@@ -336,6 +374,9 @@ int Lora_spi_receive(void){
     return temp;
 }
 
+//----------------------------------------------------------------------------------------------------------------
+//--------------------------Raspberry Pi Zero Watchdog Timer Monitoring module------------------------------------
+
 void configureTimer(void)
 {
     // Configure Timer_A0
@@ -351,11 +392,17 @@ void sendResetSignal(void)
     P2OUT &= ~RESET_SIGNAL_PIN;  // Set reset signal low
 }
 
+//----------------------------------------------------------------------------------------------------------------
+//------------------------------------Burn Wire switch enable module----------------------------------------------
+
 void enable_burn_wire(void){
     P3OUT |= BURN_EN;
     __delay_cycles(100000);
     P3OUT &= ~BURN_EN;
 }
+
+//----------------------------------------------------------------------------------------------------------------
+//-------------------------------------Power Mode Switching module------------------------------------------------
 
 void switch_control(float voltage){
     if(voltage >= THRESHOLD_50)
@@ -381,14 +428,19 @@ void switch_control(float voltage){
         }
 }
 
-//---------------------------------------------------------------------------------------------------------
-//------------------------------------Interupt Service Routines--------------------------------------------
+
+//--------------------------------------------END OF FUNCTIONS----------------------------------------------------
+
+//----------------------------------------------------------------------------------------------------------------
+//---------------------------------------Interrupt Service Routines-----------------------------------------------
+//----------------------------------------------------------------------------------------------------------------
 
 #pragma vector = TIMER0_A0_VECTOR
 __interrupt void TIMER_A0(void){
     sendResetSignal();
 }
 
+//----------------------------Raspberry Pi Zero Watchdog Interrupt module-----------------------------------------
 #pragma vector = PORT2_VECTOR
 __interrupt void PORT_2(void){
 
@@ -397,6 +449,8 @@ __interrupt void PORT_2(void){
         P2IFG &= ~WATCHDOG_SIGNAL_PIN;
     }
 }
+
+//------------------------------I2C USCB0 Communication Interrupt module------------------------------------------
 #pragma vector = USCI_B0_VECTOR
 __interrupt void USCI_B0_ISR(void){
     if(UCB0IFG & UCTXIFG0){
@@ -406,6 +460,8 @@ __interrupt void USCI_B0_ISR(void){
         read_I2C_data_cell = UCB0RXBUF;
     }
 }
+
+//------------------------------I2C USCB1 Communication Interrupt module-------------------------------------------
 #pragma vector = USCI_B1_VECTOR
 __interrupt void USCI_B1_ISR(void){
     if(UCB1IFG & UCTXIFG0){
