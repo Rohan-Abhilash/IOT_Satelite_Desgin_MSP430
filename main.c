@@ -537,21 +537,21 @@ void enable_burn_wire(void){
 int check_switch_status(float vc_current_2,float vc_current_3){
     switch(power_mode){
         case 0:{
-            if(vc_current_3 != 0 /* && Lora switch is enabled*/){
+            if(vc_current_3 != 0 && vc_current_3 - vc_current_2 > 0.035){//here we are checking if the current difference is greater than 35 milliamps to see weather the lora board is enabled
                 return 1;
             }
             else return 0;
             break;
         }
         case 1:{
-            if(vc_current_3 == 0 /* && Lora switch is enabled*/){
+            if(vc_current_3 == 0 && vc_current_3 - vc_current_2 > 0.035){ //here we are checking if the current difference is greater than 35 milliamps to see weather the lora board is enabled
                 return 1;
             }
             else return 0;
             break;
         }
         case 2:{
-            if(vc_current_3 == 0 /* && Lora switch is disabled*/){
+            if(vc_current_3 == 0 && vc_current_3 - vc_current_2 < 0.005){ //here we are checking if the current difference is lesser than 5 milliamps to see weather the lora board is disabled
                 return 1;
             }
             else return 0;
