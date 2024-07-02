@@ -1,8 +1,11 @@
 #include <msp430.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 //-----------------------------------------------------------------------------------------------------------------
 //---------------------------------------Defining The Constants----------------------------------------------------
+#define DELAY_TIME 10000000 //tentative delay time 10s here as clock is 1MHz
+#define SHUNT_RESISTANCE 5000 //here the shunt resistance is taken from the EPS as 5K ohm
 
 #define MAX17048_I2C_address 0x36
 #define MAX17048_REG_SOC 0x04
@@ -59,6 +62,7 @@ void configureTimer(void);
 void sendResetSignal(void);
 void enable_burn_wire(void);
 void switch_control(float);
+int check_switch_status(float,float);
 
 void Lora_init(void);
 void Lora_reset(void);
@@ -70,12 +74,12 @@ float VC_Sensor_get_shunt_voltage(uint8_t);
 float VC_Sensor_get_bus_voltage(uint8_t);
 
 void pizero_spi_init(void);
-void pizero_spi_write(uint8_t);
-int pizero_spi_read(void);
+void pizero_spi_write(float*);
+uint16_t pizero_spi_read(void);
 
 void Lora_spi_init(void);
-void Lora_spi_send(uint8_t);
-int Lora_spi_receive(void);
+void Lora_spi_send(float*);
+uint16_t Lora_spi_receive(void);
 
 void cell_I2C_init(void);
 float cell_I2C_read_data(void);
@@ -88,8 +92,12 @@ uint16_t read_I2C_data_VC_sensor;
 uint8_t reg;
 int power_mode = 0;
 int sun_mode = 0;
-
-
+uint16_t Lora_data_store;
+uint16_t pizero_data_store;
+float data_beacon_store[7];     /*The format of the stored data : (index,value)
+                                (0 = state Of charge) (1 = voltage of channel 1) (2 = voltage of channel 2)
+                                (3 = voltage of channel 3)
+                                (4 = current of channel 1) (5 = current of channel 2) (6 = current of channel 3)*/
 //-----------------------------------------------------------------------------------------------------------------
 //-------------------------------------------Main Function---------------------------------------------------------
 
@@ -102,53 +110,155 @@ int main(void)
 
     configureTimer();
 
-    enable_burn_wire();         //enables the burn wire to deploy antennas for communication
-
     __enable_interrupt();
-                                // Main loop
-    while(1)
-    {
-                                //reading the value coming from the voltage current sensor
-        uint8_t channel;
-        VC_Sensor_I2C_init();
-        for(channel = 1;channel <=3 ; channel++){
 
-            float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage is used for measuring the current
-                                                                      //if the value of the shunt resistance is known ie: ohms law
-                                                                        // I = shunt voltage / shunt resistance
-            float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage is the voltage at the terminal
-            //write the operations that need to be performed after receiving the bus and shunt voltage from the VC sensor
+//----------------------------------------POWER ON-----------------------------------------------------------------
 
-            //------------------------------Add functionality here----------------------------------------
-            if(channel == 1 && bus_voltage > 4){
-                sun_mode = 1;
-            }
-            else if (channel == 1 && bus_voltage <= 4){
-                sun_mode = 0;
-            }
+    cell_I2C_init();
+    VC_Sensor_I2C_init();
+    pizero_spi_init();
+    Lora_spi_init();
 
+    float stateOfCharge = cell_I2C_read_data();
+
+    while(1){
+        if(stateOfCharge > THRESHOLD_50){
+            enable_burn_wire();         //enables the burn wire to deploy antennas for communication
+            break;
         }
+        else{
+            __delay_cycles(DELAY_TIME);
+            stateOfCharge = cell_I2C_read_data();
+        }
+    }
 
-        //reading the state of charge from the battery
-        cell_I2C_init();
-        float stateOfCharge = cell_I2C_read_data();
-        switch_control(stateOfCharge);  //used to change the power modes based on the state of charge of the battery
+//-----------------------------------------------Main Loop---------------------------------------------------------
+    while(1){
+        stateOfCharge = cell_I2C_read_data();
+        switch_control(stateOfCharge);  //Three switches implemented LORA , PIZERO and SKYSATCOM (also resetting the switch states)
 
-                                //pizero communication module
-        pizero_spi_init();
-        pizero_spi_write(0xAF);
-        uint8_t pizero_data = pizero_spi_read();
-        //--------------------------Add the operations that need to be performed with pizero data ----------------
+        int count_cycles = 0; // reseting the count of operations
 
-                                //Lora communication module
-        Lora_spi_init();
-        Lora_spi_send(0xFD);
-        uint8_t lora_data = Lora_spi_receive();
-        //--------------------------Add the operations that need to be performed with Lora data ------------------
+        while(count_cycles < 3){
 
+            //check if switches are in expected state
+            //checking if the pizero and skysatcom switches are in the correct state
+            float shunt_voltage_channel_2 = VC_Sensor_get_shunt_voltage(2); // channel 2
+            float shunt_voltage_channel_3 = VC_Sensor_get_shunt_voltage(3); // channel 3
+            float vc_current_2 = shunt_voltage_channel_2 / SHUNT_RESISTANCE;    //current from channel 2
+            float vc_current_3 = shunt_voltage_channel_3 / SHUNT_RESISTANCE;    //current from channel 3
 
-        //--------------------------Also add any other functionality with any other sensor or device--------------
-        __delay_cycles(100000);
+            if(!check_switch_status(vc_current_2,vc_current_3)){
+                break;
+            }
+            //Power Mode operations
+            switch(power_mode){
+                case 0:{ // Full power mode operations
+                    uint8_t channel;
+                    VC_Sensor_I2C_init();
+
+                    float data_beacon[7];   //packaging the data as an array and storing it in RAM temporarily till it is transmitted
+
+                    data_beacon[0] = stateOfCharge;
+
+                    for(channel = 1;channel <=3 ; channel++){
+
+                        float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage is used for measuring the current
+                                                                                  //if the value of the shunt resistance is known ie: ohms law
+                                                                                    // I = shunt voltage / shunt resistance
+                        float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage is the voltage at the terminal
+
+                        float vc_current = shunt_voltage / SHUNT_RESISTANCE;    //here the current is calculated from the shunt voltage and shunt resistance using OHM's law
+
+                        //storing t data from the VC sensor in the beacon array to be transmitted
+                        data_beacon[channel] = bus_voltage;
+
+                        data_beacon[channel + 3] = vc_current;
+                    }
+                    int i;
+                    for(i = 0;i<sizeof(data_beacon_store);i++){
+                        data_beacon_store[i] = data_beacon[i]; //storing the packaged data (array) in the global variable
+                    }
+                    pizero_spi_init();
+                    pizero_spi_write(data_beacon);
+                    __delay_cycles(DELAY_TIME); //waiting for the data to be sent;
+                    break;
+                }
+                case 1:{    //power saving mode
+                    uint8_t channel;
+                    VC_Sensor_I2C_init();
+
+                    float data_beacon[7];   //packaging the data as an array and storing it in RAM temporarily till it is transmitted
+
+                    data_beacon[0] = stateOfCharge;
+
+                    for(channel = 1;channel <=3 ; channel++){
+
+                        float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage is used for measuring the current
+                                                                                  //if the value of the shunt resistance is known ie: ohms law
+                                                                                    // I = shunt voltage / shunt resistance
+                        float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage is the voltage at the terminal
+
+                        float vc_current = shunt_voltage / SHUNT_RESISTANCE;    //here the current is calculated from the shunt voltage and shunt resistance using OHM's law
+
+                        //storing t data from the VC sensor in the beacon array to be transmitted
+                        data_beacon[channel] = bus_voltage;
+
+                        data_beacon[channel + 3] = vc_current;
+                    }
+                    int i;
+                    for(i = 0;i<sizeof(data_beacon_store);i++){
+                        data_beacon_store[i] = data_beacon[i]; //storing the packaged data (array) in the global variable
+                    }
+
+                    Lora_spi_send(data_beacon);
+                    __delay_cycles(DELAY_TIME); //waiting for the data to be sent and waiting for receiving package
+                    uint16_t lora_received_data = Lora_spi_receive(); //data received is stored in lora_received_data variable (RAM)
+
+                    if(lora_received_data != 0x0000){
+                        Lora_data_store = lora_received_data;   //obtained data is stored in the global variable
+                    }
+                    //handle data decoding depending on what type of data is being received here
+                    __delay_cycles(DELAY_TIME); //waiting for reception to end
+                    break;
+                }
+                case 2:{    //Ultra power saving mode
+                    uint8_t channel;
+                    VC_Sensor_I2C_init();
+
+                    float data_beacon[7];   //packaging the data as an array and storing it in RAM temporarily till it is transmitted
+
+                    data_beacon[0] = stateOfCharge;
+
+                    for(channel = 1;channel <=3 ; channel++){
+
+                        float shunt_voltage = VC_Sensor_get_shunt_voltage(channel); // shunt voltage is used for measuring the current
+                                                                                  //if the value of the shunt resistance is known ie: ohms law
+                                                                                    // I = shunt voltage / shunt resistance
+                        float bus_voltage = VC_Sensor_get_bus_voltage(channel); //bus voltage is the voltage at the terminal
+
+                        float vc_current = shunt_voltage / SHUNT_RESISTANCE;    //here the current is calculated from the shunt voltage and shunt resistance using OHM's law
+
+                        //storing t data from the VC sensor in the beacon array to be transmitted
+                        data_beacon[channel] = bus_voltage;
+
+                        data_beacon[channel + 3] = vc_current;
+                    }
+                    int i;
+                    for(i = 0;i<sizeof(data_beacon_store);i++){
+                        data_beacon_store[i] = data_beacon[i]; //storing the packaged data (array) in the global variable
+                    }
+
+                    __delay_cycles(DELAY_TIME);
+
+                    break;
+                }
+                default:{
+                    break;
+                }
+            }
+            count_cycles += 1;
+        }
     }
     return 0;
 }
@@ -175,12 +285,17 @@ void pizero_spi_init(void) {
     UCA0CTLW0 &= ~UCSWRST;
 }
 
-void pizero_spi_write(uint8_t data) {
-    UCA0TXBUF = data;
+void pizero_spi_write(float* data) {
+    int i ;
+    for(i = 0 ; i < sizeof(data); i++){
+        UCA0TXBUF = (uint8_t)data[i];
+        __delay_cycles(20);
+    }
+
 }
 
-int pizero_spi_read(void) {
-    int temp = UCA0RXBUF;
+uint16_t pizero_spi_read(void) {
+    uint16_t temp = UCA0RXBUF;
     return temp;        // Return received data
 }
 
@@ -251,6 +366,7 @@ uint16_t VC_Sensor_I2C_read_word(void) {
 
                     //Transmit register address from which we want to read the state of charge
     UCB1CTLW0 |= UCTR;
+    UCB1TBCNT = 1;
     UCB1CTLW0 |= UCTXSTT;
 
     while((UCB1IFG & UCSTPIFG) == 0); //waiting for the stp flag to fire to ensure that the max17048 address has been sent and acknowledged by the slave
@@ -376,12 +492,16 @@ void Lora_enable(void){
     P4OUT |= LORA_EN;
 }
 
-void Lora_spi_send(uint8_t data){
-    UCA1TXBUF = data;
+void Lora_spi_send(float* data){
+    int i ;
+    for(i = 0 ; i < sizeof(data); i++){
+        UCA1TXBUF = (uint8_t)data[i];
+        __delay_cycles(20);
+    }
 }
 
-int Lora_spi_receive(void){
-    int temp = UCA1RXBUF;
+uint16_t Lora_spi_receive(void){
+    uint16_t temp = UCA1RXBUF;
     return temp;
 }
 
@@ -408,14 +528,54 @@ void sendResetSignal(void)
 
 void enable_burn_wire(void){
     P3OUT |= BURN_EN;
-    __delay_cycles(100000);
+    __delay_cycles(10000000);
     P3OUT &= ~BURN_EN;
 }
 
+//---------------------------------------------------------------------------------------------------------------
+//---------------------------------------Checking switch status--------------------------------------------------
+
+int check_switch_status(float vc_current_2,float vc_current_3){
+    switch(power_mode){
+        case 0:{
+            if(vc_current_3 != 0 /* && Lora switch is enabled*/){
+                return 1;
+            }
+            else return 0;
+            break;
+        }
+        case 1:{
+            if(vc_current_3 == 0 /* && Lora switch is enabled*/){
+                return 1;
+            }
+            else return 0;
+            break;
+        }
+        case 2:{
+            if(vc_current_3 == 0 /* && Lora switch is disabled*/){
+                return 1;
+            }
+            else return 0;
+            break;
+        }
+        default:{
+            return 0;
+            break;
+        }
+    }
+}
 //----------------------------------------------------------------------------------------------------------------
 //-------------------------------------Power Mode Switching module------------------------------------------------
 
 void switch_control(float soc){
+    VC_Sensor_I2C_init();
+    float bus_voltage = VC_Sensor_get_bus_voltage(1); //bus voltage is the voltage at the channel 1
+    if(bus_voltage > 4){
+        sun_mode = 1;
+    }
+    else if (bus_voltage <= 4){
+        sun_mode = 0;
+    }
 
     switch(power_mode){
         case 0:{ //mode 0 is full power mode
