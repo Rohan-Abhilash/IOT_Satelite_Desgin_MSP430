@@ -102,3 +102,10 @@ The main function performs the following tasks:
 ## Conclusion
 
 The code implements a comprehensive control system for an MSP430 microcontroller, managing various sensors, communication modules, and power modes. The system is designed for efficient power management and reliable communication with peripheral devices. Each function and module is configured to perform specific tasks, ensuring the overall functionality of the system.
+
+| Image 1 | Image 2 |
+|---------|---------|
+| [c9023179-a3c8-4c38-90eb-c276bd74acbb](https://github.com/Rohan-Abhilash/IOT_Satelite_Desgin_MSP430/assets/120775348/10e363a7-41c3-43e0-b0c6-9a26bab3f093) | ![e71b741f-7d53-4334-8360-45105a6cc90e](https://github.com/Rohan-Abhilash/IOT_Satelite_Desgin_MSP430/assets/120775348/defef4be-4416-4976-b487-2f9e2ca21513)|
+| Image 3 | Image 4 |
+|---------|---------|
+| ![0e512ddf-700d-46b4-b5ec-27a5f56ef8e8](https://github.com/Rohan-Abhilash/IOT_Satelite_Desgin_MSP430/assets/120775348/3a0479ba-cd2d-4477-9f97-db47b74fab10) | ![fccfae70-35e2-4118-9d13-2aa8207dfda1](https://github.com/Rohan-Abhilash/IOT_Satelite_Desgin_MSP430/assets/120775348/75a9c9d4-fc3c-4163-b8fa-274e231ff9dd) |
