@@ -474,7 +474,7 @@ void Lora_spi_init(void){
     P3SEL0 |= LORA_MOSI | LORA_MISO | LORA_SCK | LORA_CS;
     P3SEL1 &= ~(LORA_MOSI | LORA_MISO | LORA_SCK | LORA_CS);
 
-    PMCTLW0 &= ~LOCKLPM5;
+    PM5CTL0 &= ~LOCKLPM5;
     UCA1CTLW0 &= ~UCSWRST;
 
 }
