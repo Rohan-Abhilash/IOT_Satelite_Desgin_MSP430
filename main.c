@@ -320,9 +320,11 @@ void cell_I2C_init(void){
 
 float cell_I2C_read_data(void){
 
+    read_I2C_data_cell = 0;
                         //Transmit register address from which we want to read the state of charge
     UCB0IE |= UCRXIE0 | UCTXIE0;
 
+    UCB0TBCNT = 1;
     UCB0CTLW0 |= UCTR;
     UCB0CTLW0 |= UCTXSTT;
 
@@ -330,6 +332,7 @@ float cell_I2C_read_data(void){
     UCB0IFG &= ~UCSTPIFG;
                         //from here it will go to the interrupt service routine
                         //Receive the data from that register containing the state of charge
+    UCB0TBCNT = 2;
     UCB0CTLW0 &= ~UCTR;
     UCB0CTLW0 |= UCTXSTT;
                         //restarting the communication for receiving the data from the specific register
@@ -364,6 +367,8 @@ void VC_Sensor_I2C_init(void) {
 }
 
 uint16_t VC_Sensor_I2C_read_word(void) {
+
+    read_I2C_data_VC_sensor = 0;
                     //Transmit register address from which we want to read the state of charge
     UCB1IE |= UCRXIE0 | UCTXIE0;
 
@@ -660,11 +665,12 @@ __interrupt void PORT_2(void){
 //------------------------------I2C USCB0 Communication Interrupt module Cell Gauge--------------------------------
 #pragma vector = USCI_B0_VECTOR
 __interrupt void USCI_B0_ISR(void){
+    read_I2C_data_cell = read_I2C_data_cell << 8;
     if(UCB0IFG & UCTXIFG0){
         UCB0TXBUF = MAX17048_REG_SOC;
     }
     else if (UCB0IFG & UCRXIFG0){
-        read_I2C_data_cell = UCB0RXBUF;
+        read_I2C_data_cell |= UCB0RXBUF;
     }
 }
 
@@ -676,6 +682,6 @@ __interrupt void USCI_B1_ISR(void){
         UCB1TXBUF = reg;
     }
     else if (UCB1IFG & UCRXIFG0){
-        read_I2C_data_VC_sensor = UCB1RXBUF;
+        read_I2C_data_VC_sensor |= UCB1RXBUF;
     }
 }
