@@ -286,7 +286,7 @@ void pizero_spi_init(void) {
 
 void pizero_spi_write(float* data) {
     int i ;
-    for(i = 0 ; i < sizeof(data); i++){
+    for(i = 0 ; i < sizeof(data)/sizeof(float); i++){
         UCA0TXBUF = (uint8_t)data[i];
         __delay_cycles(20);
     }
@@ -294,6 +294,7 @@ void pizero_spi_write(float* data) {
 }
 
 uint16_t pizero_spi_read(void) {
+    UCA0TXBUF = 0x00;   //dummy write to get the contents of the TX buffer of the slave
     uint16_t temp = UCA0RXBUF;
     return temp;        // Return received data
 }
@@ -311,16 +312,17 @@ void cell_I2C_init(void){
 
     P1SEL0 |= BIT6 | BIT7;
     P1SEL1 &= ~(BIT6 | BIT7);
+
     PM5CTL0 &= ~LOCKLPM5;
     UCB0CTLW0 &= ~UCSWRST;
-
-    UCB0IE |= UCRXIE0 | UCTXIE0;
     UCB0IFG &= ~(UCRXIFG0 | UCTXIFG0);
 }
 
 float cell_I2C_read_data(void){
 
                         //Transmit register address from which we want to read the state of charge
+    UCB0IE |= UCRXIE0 | UCTXIE0;
+
     UCB0CTLW0 |= UCTR;
     UCB0CTLW0 |= UCTXSTT;
 
@@ -334,6 +336,7 @@ float cell_I2C_read_data(void){
     while((UCB0IFG & UCSTPIFG) == 0);
     UCB0IFG &= ~UCSTPIFG;
 
+    UCB0IE &= ~(UCRXIE0 | UCTXIE0);
                         //converting the result into voltage
     float result = (float)(read_I2C_data_cell >> 8) + (float)((read_I2C_data_cell & 0xFF) / 256.0);
     return result;
@@ -357,13 +360,13 @@ void VC_Sensor_I2C_init(void) {
 
     PM5CTL0 &= ~LOCKLPM5;
     UCB1CTLW0 &= ~UCSWRST;
-    UCB1IE |= UCRXIE0 | UCTXIE0;
     UCB1IFG &= ~(UCRXIFG0 | UCTXIFG0);
 }
 
 uint16_t VC_Sensor_I2C_read_word(void) {
-
                     //Transmit register address from which we want to read the state of charge
+    UCB1IE |= UCRXIE0 | UCTXIE0;
+
     UCB1CTLW0 |= UCTR;
     UCB1TBCNT = 1;
     UCB1CTLW0 |= UCTXSTT;
@@ -379,6 +382,8 @@ uint16_t VC_Sensor_I2C_read_word(void) {
                     //restarting the communication for receiving the data from the specific register
     while((UCB1IFG & UCSTPIFG) == 0);
     UCB1IFG &= ~UCSTPIFG;                    // Read LSB
+
+    UCB1IE &= ~(UCTXIE0 | UCRXIE0);
 
     return read_I2C_data_VC_sensor;
 
@@ -405,7 +410,6 @@ float VC_Sensor_get_shunt_voltage(uint8_t channel) {
 }
 
 float VC_Sensor_get_bus_voltage(uint8_t channel) {
-
     switch (channel) {
         case 1:
             reg = INA3221_REG_BUS_VOLTAGE_1;
@@ -467,10 +471,11 @@ void Lora_spi_init(void){
     UCA1CTLW0 |= UCSYNC;
     UCA1CTLW0 |= UCSTEM;
 
-    UCA1CTLW0 &= ~UCSWRST;
-
     P3SEL0 |= LORA_MOSI | LORA_MISO | LORA_SCK | LORA_CS;
     P3SEL1 &= ~(LORA_MOSI | LORA_MISO | LORA_SCK | LORA_CS);
+
+    PMCTLW0 &= ~LOCKLPM5;
+    UCA1CTLW0 &= ~UCSWRST;
 
 }
 
@@ -493,13 +498,14 @@ void Lora_enable(void){
 
 void Lora_spi_send(float* data){
     int i ;
-    for(i = 0 ; i < sizeof(data); i++){
+    for(i = 0 ; i < sizeof(data)/sizeof(float) ; i++){
         UCA1TXBUF = (uint8_t)data[i];
         __delay_cycles(20);
     }
 }
 
 uint16_t Lora_spi_receive(void){
+    UCA1TXBUF = 0x00;   //dummy write to get the contents of the TX buffer of the slave
     uint16_t temp = UCA1RXBUF;
     return temp;
 }
@@ -665,6 +671,7 @@ __interrupt void USCI_B0_ISR(void){
 //------------------------------I2C USCB1 Communication Interrupt module VC Sensor--------------------------------
 #pragma vector = USCI_B1_VECTOR
 __interrupt void USCI_B1_ISR(void){
+    read_I2C_data_VC_sensor = read_I2C_data_VC_sensor << 8;
     if(UCB1IFG & UCTXIFG0){
         UCB1TXBUF = reg;
     }
