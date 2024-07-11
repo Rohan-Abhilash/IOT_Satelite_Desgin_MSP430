@@ -268,10 +268,10 @@ void pizero_spi_init(void) {
                         // Set P2.3 as output (CS pin)
     UCA0CTLW0 |= UCSWRST;
 
-    UCA0CTLW0 |= UCMST;
+    //UCA0CTLW0 |= UCMST;
     UCA0CTLW0 |= UCMODE_2;  // mode 1 is for 4 pin-spi communication with active low CS bit
-    UCA0CTLW0 |= UCSSEL__SMCLK; //using the sub master clock
-    UCA0BRW    = 10;    // 100khz clock
+    //UCA0CTLW0 |= UCSSEL__SMCLK; //using the sub master clock
+    //UCA0BRW    = 10;    // 100khz clock
     UCA0CTLW0 |= UCSYNC;
     UCA0CTLW0 |= UCSTEM;
     UCA0CTLW0 |= UCMSB;
@@ -282,15 +282,18 @@ void pizero_spi_init(void) {
     PM5CTL0 &= ~LOCKLPM5;
 
     UCA0CTLW0 &= ~UCSWRST;
+
+    //UCA0IE |= UCRXIE;
+    UCA0IFG &= ~UCRXIFG;
 }
 
 void pizero_spi_write(float* data) {
-    int i ;
-    for(i = 0 ; i < sizeof(data)/sizeof(float); i++){
-        UCA0TXBUF = (uint8_t)data[i];
-        __delay_cycles(20);
+    int count = 0;
+    while(count < sizeof(data)){
+        while((UCA0IFG & UCTXIFG) == 0);
+        UCA0TXBUF = data[count++];
     }
-
+    count = 0;
 }
 
 uint16_t pizero_spi_read(void) {
