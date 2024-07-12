@@ -287,17 +287,26 @@ void pizero_spi_init(void) {
     UCA0IFG &= ~UCRXIFG;
 }
 
-void pizero_spi_write(float* data) {
+void pizero_spi_write(float* data) {    //here the data being sent to the raspberry pi is spliut into three parts as in the testing i observed that only first 7 bits that is present in the TX buffer is getting transmitted so i split the data into three different parts containing bit 6:0 then bit 13:7 and finally bit 15:14
     int count = 0;
     while(count < sizeof(data)){
+        UCA0IFG &= ~UCTXIFG;
+        UCA0TXBUF = ((int)data[count] & 0x7F) << 1;
         while((UCA0IFG & UCTXIFG) == 0);
-        UCA0TXBUF = data[count++];
+        UCA0IFG &= ~UCTXIFG;
+        UCA0TXBUF = ((int)data[count] & 0x3F80 ) >> 6 ;
+        while((UCA0IFG & UCTXIFG) == 0);
+        UCA0IFG &= ~UCTXIFG;
+        UCA0TXBUF = ((int)data[count] & 0xC000 ) >> 13 ;
+        while((UCA0IFG & UCTXIFG) == 0);
+        UCA0IFG &= ~UCTXIFG;
+        UCA0TXBUF = 0;
+        count++;
     }
     count = 0;
 }
 
 uint16_t pizero_spi_read(void) {
-    UCA0TXBUF = 0x00;   //dummy write to get the contents of the TX buffer of the slave
     uint16_t temp = UCA0RXBUF;
     return temp;        // Return received data
 }

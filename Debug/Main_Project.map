@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v21.6.1                     
 ******************************************************************************
->> Linked Thu Jul 11 15:17:31 2024
+>> Linked Fri Jul 12 14:17:30 2024
 
 OUTPUT FILE NAME:   <Main_Project.out>
 ENTRY POINT SYMBOL: "_c_int00_noargs_mpu"  address: 00004458
@@ -79,7 +79,7 @@ MEMORY CONFIGURATION
   INT53                 0000fffa   00000002  00000002  00000000  RWIX
   INT54                 0000fffc   00000002  00000002  00000000  RWIX
   RESET                 0000fffe   00000002  00000002  00000000  RWIX
-  FRAM2                 00010000   00013ff8  000015dc  00012a1c  RWIX
+  FRAM2                 00010000   00013ff8  000015f0  00012a08  RWIX
 
 
 SECTION ALLOCATION MAP
@@ -249,7 +249,7 @@ SYSNMI     0    0000fffc    00000002
 .reset     0    0000fffe    00000002     
                   0000fffe    00000002     rts430x_lc_rd_eabi.lib : boot.c.obj (.reset)
 
-.text      0    00010000    000015dc     
+.text      0    00010000    000015f0     
                   00010000    0000033c     main.obj (.text:main)
                   0001033c    00000292     rts430x_lc_rd_eabi.lib : mpyd.c.obj (.text:__mspabi_mpyd)
                   000105ce    00000164                            : frcmpyd.c.obj (.text:__TI_frcmpyd)
@@ -261,52 +261,51 @@ SYSNMI     0    0000fffc    00000002
                   00010c12    000000b2                            : cvtdf.c.obj (.text:__mspabi_cvtdf)
                   00010cc4    0000009e                            : fltlid.c.obj (.text:__mspabi_fltlid)
                   00010d62    00000090                            : fs_div.asm.obj (.text)
-                  00010df2    00000076                            : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
-                  00010e68    00000070     main.obj (.text:cell_I2C_read_data)
-                  00010ed8    00000068     rts430x_lc_rd_eabi.lib : fs_toi.asm.obj (.text)
-                  00010f40    00000064                            : cvtfd.c.obj (.text:__mspabi_cvtfd)
-                  00010fa4    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
-                  00011000    00000058     main.obj (.text:VC_Sensor_get_shunt_voltage)
-                  00011058    00000056     main.obj (.text:VC_Sensor_get_bus_voltage)
-                  000110ae    00000056     main.obj (.text:configurePins)
-                  00011104    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
-                  00011158    0000004a                            : fs_cmp.asm.obj (.text)
-                  000111a2    00000046     main.obj (.text:VC_Sensor_I2C_read_word)
-                  000111e8    00000046     rts430x_lc_rd_eabi.lib : fs_tou.asm.obj (.text)
-                  0001122e    0000003e                            : asr32.asm.obj (.text:l_asr_const)
-                  0001126c    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
-                  000112aa    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
-                  000112e8    0000003c     main.obj (.text:Lora_spi_init)
-                  00011324    0000003a     main.obj (.text:VC_Sensor_I2C_init)
-                  0001135e    0000003a     rts430x_lc_rd_eabi.lib : lsl64.c.obj (.text:__mspabi_sllll)
-                  00011398    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
-                  000113d2    0000003a     main.obj (.text:cell_I2C_init)
-                  0001140c    00000034     main.obj (.text:Lora_spi_send)
-                  00011440    00000034     main.obj (.text:pizero_spi_init)
-                  00011474    00000032     main.obj (.text:pizero_spi_write)
-                  000114a6    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
-                  000114d2    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
-                  000114fe    00000024                            : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
-                  00011522    00000024                            : fs_utof.asm.obj (.text)
-                  00011546    00000020     main.obj (.text:enable_burn_wire)
-                  00011566    0000001a     main.obj (.text:sendResetSignal)
-                  00011580    00000014     main.obj (.text:configureTimer)
-                  00011594    00000014     rts430x_lc_rd_eabi.lib : memcpy.c.obj (.text:memcpy)
-                  000115a8    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  000115ba    0000000c                            : fltid.c.obj (.text:__mspabi_fltid)
-                  000115c6    0000000a     main.obj (.text:Lora_spi_receive)
-                  000115d0    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
-                  000115d6    00000004                            : pre_init.c.obj (.text:_system_pre_init)
-                  000115da    00000002                            : startup.c.obj (.text:_system_post_cinit)
+                  00010df2    0000008c     main.obj (.text:pizero_spi_write)
+                  00010e7e    00000076     rts430x_lc_rd_eabi.lib : copy_decompress_lzss.c.obj (.text:decompress:lzss:__TI_decompress_lzss)
+                  00010ef4    00000070     main.obj (.text:cell_I2C_read_data)
+                  00010f64    00000068     rts430x_lc_rd_eabi.lib : fs_toi.asm.obj (.text)
+                  00010fcc    00000064                            : cvtfd.c.obj (.text:__mspabi_cvtfd)
+                  00011030    0000005c                            : mult64_f5hw.asm.obj (.text:__mpyll)
+                  0001108c    00000058     main.obj (.text:VC_Sensor_get_shunt_voltage)
+                  000110e4    00000056     main.obj (.text:VC_Sensor_get_bus_voltage)
+                  0001113a    00000056     main.obj (.text:configurePins)
+                  00011190    00000054     rts430x_lc_rd_eabi.lib : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit_hold_wdt:__TI_auto_init_nobinit_nopinit_hold_wdt)
+                  000111e4    0000004a                            : fs_cmp.asm.obj (.text)
+                  0001122e    00000046     main.obj (.text:VC_Sensor_I2C_read_word)
+                  00011274    0000003e     rts430x_lc_rd_eabi.lib : asr32.asm.obj (.text:l_asr_const)
+                  000112b2    0000003e                            : lsl32.asm.obj (.text:l_lsl_const)
+                  000112f0    0000003e                            : lsr32.asm.obj (.text:l_lsr_const)
+                  0001132e    0000003c     main.obj (.text:Lora_spi_init)
+                  0001136a    0000003a     main.obj (.text:VC_Sensor_I2C_init)
+                  000113a4    0000003a     rts430x_lc_rd_eabi.lib : lsl64.c.obj (.text:__mspabi_sllll)
+                  000113de    0000003a                            : lsr64.c.obj (.text:__mspabi_srlll)
+                  00011418    0000003a     main.obj (.text:cell_I2C_init)
+                  00011452    00000034     main.obj (.text:Lora_spi_send)
+                  00011486    00000034     main.obj (.text:pizero_spi_init)
+                  000114ba    0000002c     MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib : mpu_init.o (.text:__mpu_init)
+                  000114e6    0000002c     rts430x_lc_rd_eabi.lib : mult3264_f5hw.asm.obj (.text:__mpyull)
+                  00011512    00000024                            : copy_zero_init.c.obj (.text:decompress:ZI:__TI_zero_init_nomemset:__TI_zero_init_nomemset)
+                  00011536    00000024                            : fs_utof.asm.obj (.text)
+                  0001155a    00000020     main.obj (.text:enable_burn_wire)
+                  0001157a    0000001a     main.obj (.text:sendResetSignal)
+                  00011594    00000014     main.obj (.text:configureTimer)
+                  000115a8    00000014     rts430x_lc_rd_eabi.lib : memcpy.c.obj (.text:memcpy)
+                  000115bc    00000012                            : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  000115ce    0000000c                            : fltid.c.obj (.text:__mspabi_fltid)
+                  000115da    0000000a     main.obj (.text:Lora_spi_receive)
+                  000115e4    00000006     rts430x_lc_rd_eabi.lib : exit.c.obj (.text:abort)
+                  000115ea    00000004                            : pre_init.c.obj (.text:_system_pre_init)
+                  000115ee    00000002                            : startup.c.obj (.text:_system_post_cinit)
 
 MODULE SUMMARY
 
        Module                       code   ro data   rw data
        ------                       ----   -------   -------
     .\
-       main.obj                     2348   8         39     
+       main.obj                     2438   8         39     
     +--+----------------------------+------+---------+---------+
-       Total:                       2348   8         39     
+       Total:                       2438   8         39     
                                                             
     C:\ti\ccs1271\ccs\ccs_base\msp430\lib\FR59xx\MSPMPU_INIT_LIB_CCS_msp430_large_code_restricted_data.lib
        mpu_init.o                   44     0         0      
@@ -328,7 +327,6 @@ MODULE SUMMARY
        mult64_f5hw.asm.obj          92     0         0      
        autoinit.c.obj               84     0         0      
        fs_cmp.asm.obj               74     0         0      
-       fs_tou.asm.obj               70     0         0      
        asr32.asm.obj                62     0         0      
        lsl32.asm.obj                62     0         0      
        lsr32.asm.obj                62     0         0      
@@ -370,12 +368,12 @@ MODULE SUMMARY
        int54.asm.obj                0      2         0      
        startup.c.obj                2      0         0      
     +--+----------------------------+------+---------+---------+
-       Total:                       3362   50        0      
+       Total:                       3292   50        0      
                                                             
        Stack:                       0      0         160    
        Linker Generated:            0      41        0      
     +--+----------------------------+------+---------+---------+
-       Grand Total:                 5754   99        199    
+       Grand Total:                 5774   99        199    
 
 
 LINKER GENERATED COPY TABLES
@@ -654,7 +652,7 @@ address   name
 000009ce  AESAXIN_L                              
 000004be  BCD2BIN                                
 000004bc  BIN2BCD                                
-000115d0  C$$EXIT                                
+000115e4  C$$EXIT                                
 0000043e  CAPTIO0CTL                             
 0000043f  CAPTIO0CTL_H                           
 0000043e  CAPTIO0CTL_L                           
@@ -1222,9 +1220,9 @@ address   name
 00000a27  LCDM8                                  
 00000a28  LCDM9                                  
 00001c1c  Lora_data_store                        
-000112e8  Lora_spi_init                          
-000115c6  Lora_spi_receive                       
-0001140c  Lora_spi_send                          
+0001132e  Lora_spi_init                          
+000115da  Lora_spi_receive                       
+00011452  Lora_spi_send                          
 000004c4  MAC                                    
 000004da  MAC32H                                 
 000004db  MAC32H_H                               
@@ -1779,10 +1777,10 @@ address   name
 0000068e  UCB1TXBUF_L                            
 0000442e  USCI_B0_ISR                            
 00004400  USCI_B1_ISR                            
-00011324  VC_Sensor_I2C_init                     
-000111a2  VC_Sensor_I2C_read_word                
-00011058  VC_Sensor_get_bus_voltage              
-00011000  VC_Sensor_get_shunt_voltage            
+0001136a  VC_Sensor_I2C_init                     
+0001122e  VC_Sensor_I2C_read_word                
+000110e4  VC_Sensor_get_bus_voltage              
+0001108c  VC_Sensor_get_shunt_voltage            
 0000015c  WDTCTL                                 
 0000015d  WDTCTL_H                               
 0000015c  WDTCTL_L                               
@@ -1794,9 +1792,9 @@ address   name
 0000449e  __TI_Handler_Table_Base                
 000044aa  __TI_Handler_Table_Limit               
 00004496  __TI_ISR_TRAP                          
-00011104  __TI_auto_init_nobinit_nopinit_hold_wdt
-00010df2  __TI_decompress_lzss                   
-000115a8  __TI_decompress_none                   
+00011190  __TI_auto_init_nobinit_nopinit_hold_wdt
+00010e7e  __TI_decompress_lzss                   
+000115bc  __TI_decompress_none                   
 000105ce  __TI_frcmpyd                           
 0000ffc6  __TI_int27                             
 0000ffc8  __TI_int28                             
@@ -1829,103 +1827,102 @@ address   name
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
-000114fe  __TI_zero_init_nomemset                
+00011512  __TI_zero_init_nomemset                
 ffffffff  __c_args__                             
 00000001  __mpu_enable                           
-000114a6  __mpu_init                             
+000114ba  __mpu_init                             
 0001086c  __mspabi_addf                          
 00010a82  __mspabi_cmpd                          
-00011158  __mspabi_cmpf                          
+000111e4  __mspabi_cmpf                          
 00010c12  __mspabi_cvtdf                         
-00010f40  __mspabi_cvtfd                         
+00010fcc  __mspabi_cvtfd                         
 00010d62  __mspabi_divf                          
-00010ed8  __mspabi_fixfi                         
-000111e8  __mspabi_fixfu                         
-000115ba  __mspabi_fltid                         
+00010f64  __mspabi_fixfi                         
+000115ce  __mspabi_fltid                         
 00010cc4  __mspabi_fltlid                        
-00011522  __mspabi_fltuf                         
+00011536  __mspabi_fltuf                         
 0001033c  __mspabi_mpyd                          
 00010b5a  __mspabi_mpyf                          
-00010fa4  __mspabi_mpyll_f5hw                    
-000114d2  __mspabi_mpyull_f5hw                   
-000112a4  __mspabi_slll_1                        
-00011280  __mspabi_slll_10                       
-0001127c  __mspabi_slll_11                       
-00011278  __mspabi_slll_12                       
-00011274  __mspabi_slll_13                       
-00011270  __mspabi_slll_14                       
-0001126c  __mspabi_slll_15                       
-000112a0  __mspabi_slll_2                        
-0001129c  __mspabi_slll_3                        
-00011298  __mspabi_slll_4                        
-00011294  __mspabi_slll_5                        
-00011290  __mspabi_slll_6                        
-0001128c  __mspabi_slll_7                        
-00011288  __mspabi_slll_8                        
-00011284  __mspabi_slll_9                        
-0001135e  __mspabi_sllll                         
-00011266  __mspabi_sral_1                        
-00011242  __mspabi_sral_10                       
-0001123e  __mspabi_sral_11                       
-0001123a  __mspabi_sral_12                       
-00011236  __mspabi_sral_13                       
-00011232  __mspabi_sral_14                       
-0001122e  __mspabi_sral_15                       
-00011262  __mspabi_sral_2                        
-0001125e  __mspabi_sral_3                        
-0001125a  __mspabi_sral_4                        
-00011256  __mspabi_sral_5                        
-00011252  __mspabi_sral_6                        
-0001124e  __mspabi_sral_7                        
-0001124a  __mspabi_sral_8                        
-00011246  __mspabi_sral_9                        
-000112e2  __mspabi_srll_1                        
-000112be  __mspabi_srll_10                       
-000112ba  __mspabi_srll_11                       
-000112b6  __mspabi_srll_12                       
-000112b2  __mspabi_srll_13                       
-000112ae  __mspabi_srll_14                       
-000112aa  __mspabi_srll_15                       
-000112de  __mspabi_srll_2                        
-000112da  __mspabi_srll_3                        
-000112d6  __mspabi_srll_4                        
-000112d2  __mspabi_srll_5                        
-000112ce  __mspabi_srll_6                        
-000112ca  __mspabi_srll_7                        
-000112c6  __mspabi_srll_8                        
-000112c2  __mspabi_srll_9                        
-00011398  __mspabi_srlll                         
+00011030  __mspabi_mpyll_f5hw                    
+000114e6  __mspabi_mpyull_f5hw                   
+000112ea  __mspabi_slll_1                        
+000112c6  __mspabi_slll_10                       
+000112c2  __mspabi_slll_11                       
+000112be  __mspabi_slll_12                       
+000112ba  __mspabi_slll_13                       
+000112b6  __mspabi_slll_14                       
+000112b2  __mspabi_slll_15                       
+000112e6  __mspabi_slll_2                        
+000112e2  __mspabi_slll_3                        
+000112de  __mspabi_slll_4                        
+000112da  __mspabi_slll_5                        
+000112d6  __mspabi_slll_6                        
+000112d2  __mspabi_slll_7                        
+000112ce  __mspabi_slll_8                        
+000112ca  __mspabi_slll_9                        
+000113a4  __mspabi_sllll                         
+000112ac  __mspabi_sral_1                        
+00011288  __mspabi_sral_10                       
+00011284  __mspabi_sral_11                       
+00011280  __mspabi_sral_12                       
+0001127c  __mspabi_sral_13                       
+00011278  __mspabi_sral_14                       
+00011274  __mspabi_sral_15                       
+000112a8  __mspabi_sral_2                        
+000112a4  __mspabi_sral_3                        
+000112a0  __mspabi_sral_4                        
+0001129c  __mspabi_sral_5                        
+00011298  __mspabi_sral_6                        
+00011294  __mspabi_sral_7                        
+00011290  __mspabi_sral_8                        
+0001128c  __mspabi_sral_9                        
+00011328  __mspabi_srll_1                        
+00011304  __mspabi_srll_10                       
+00011300  __mspabi_srll_11                       
+000112fc  __mspabi_srll_12                       
+000112f8  __mspabi_srll_13                       
+000112f4  __mspabi_srll_14                       
+000112f0  __mspabi_srll_15                       
+00011324  __mspabi_srll_2                        
+00011320  __mspabi_srll_3                        
+0001131c  __mspabi_srll_4                        
+00011318  __mspabi_srll_5                        
+00011314  __mspabi_srll_6                        
+00011310  __mspabi_srll_7                        
+0001130c  __mspabi_srll_8                        
+00011308  __mspabi_srll_9                        
+000113de  __mspabi_srlll                         
 00010866  __mspabi_subf                          
 00004458  _c_int00_noargs_mpu                    
 0000fffe  _reset_vector                          
 00002360  _stack                                 
-000115da  _system_post_cinit                     
-000115d6  _system_pre_init                       
-000115d0  abort                                  
-000113d2  cell_I2C_init                          
-00010e68  cell_I2C_read_data                     
+000115ee  _system_post_cinit                     
+000115ea  _system_pre_init                       
+000115e4  abort                                  
+00011418  cell_I2C_init                          
+00010ef4  cell_I2C_read_data                     
 00010998  check_switch_status                    
-000110ae  configurePins                          
-00011580  configureTimer                         
+0001113a  configurePins                          
+00011594  configureTimer                         
 00001c00  data_beacon_store                      
-00011546  enable_burn_wire                       
+0001155a  enable_burn_wire                       
 00004400  fram_ipe_end                           
 00004400  fram_ipe_start                         
 00004400  fram_rw_start                          
 00004400  fram_rx_start                          
 00010000  main                                   
-00011594  memcpy                                 
+000115a8  memcpy                                 
 0000a501  mpu_ctl0_value                         
 00001513  mpu_sam_value                          
 00000440  mpu_segment_border1                    
 00000440  mpu_segment_border2                    
-00011440  pizero_spi_init                        
-00011474  pizero_spi_write                       
+00011486  pizero_spi_init                        
+00010df2  pizero_spi_write                       
 00001c24  power_mode                             
 00001c1e  read_I2C_data_VC_sensor                
 00001c20  read_I2C_data_cell                     
 00001c22  reg                                    
-00011566  sendResetSignal                        
+0001157a  sendResetSignal                        
 00001c26  sun_mode                               
 00010732  switch_control                         
 
@@ -3381,89 +3378,88 @@ address   name
 00010c12  __mspabi_cvtdf                         
 00010cc4  __mspabi_fltlid                        
 00010d62  __mspabi_divf                          
-00010df2  __TI_decompress_lzss                   
-00010e68  cell_I2C_read_data                     
-00010ed8  __mspabi_fixfi                         
-00010f40  __mspabi_cvtfd                         
-00010fa4  __mspabi_mpyll_f5hw                    
-00011000  VC_Sensor_get_shunt_voltage            
-00011058  VC_Sensor_get_bus_voltage              
-000110ae  configurePins                          
-00011104  __TI_auto_init_nobinit_nopinit_hold_wdt
-00011158  __mspabi_cmpf                          
-000111a2  VC_Sensor_I2C_read_word                
-000111e8  __mspabi_fixfu                         
-0001122e  __mspabi_sral_15                       
-00011232  __mspabi_sral_14                       
-00011236  __mspabi_sral_13                       
-0001123a  __mspabi_sral_12                       
-0001123e  __mspabi_sral_11                       
-00011242  __mspabi_sral_10                       
-00011246  __mspabi_sral_9                        
-0001124a  __mspabi_sral_8                        
-0001124e  __mspabi_sral_7                        
-00011252  __mspabi_sral_6                        
-00011256  __mspabi_sral_5                        
-0001125a  __mspabi_sral_4                        
-0001125e  __mspabi_sral_3                        
-00011262  __mspabi_sral_2                        
-00011266  __mspabi_sral_1                        
-0001126c  __mspabi_slll_15                       
-00011270  __mspabi_slll_14                       
-00011274  __mspabi_slll_13                       
-00011278  __mspabi_slll_12                       
-0001127c  __mspabi_slll_11                       
-00011280  __mspabi_slll_10                       
-00011284  __mspabi_slll_9                        
-00011288  __mspabi_slll_8                        
-0001128c  __mspabi_slll_7                        
-00011290  __mspabi_slll_6                        
-00011294  __mspabi_slll_5                        
-00011298  __mspabi_slll_4                        
-0001129c  __mspabi_slll_3                        
-000112a0  __mspabi_slll_2                        
-000112a4  __mspabi_slll_1                        
-000112aa  __mspabi_srll_15                       
-000112ae  __mspabi_srll_14                       
-000112b2  __mspabi_srll_13                       
-000112b6  __mspabi_srll_12                       
-000112ba  __mspabi_srll_11                       
-000112be  __mspabi_srll_10                       
-000112c2  __mspabi_srll_9                        
-000112c6  __mspabi_srll_8                        
-000112ca  __mspabi_srll_7                        
-000112ce  __mspabi_srll_6                        
-000112d2  __mspabi_srll_5                        
-000112d6  __mspabi_srll_4                        
-000112da  __mspabi_srll_3                        
-000112de  __mspabi_srll_2                        
-000112e2  __mspabi_srll_1                        
-000112e8  Lora_spi_init                          
-00011324  VC_Sensor_I2C_init                     
-0001135e  __mspabi_sllll                         
-00011398  __mspabi_srlll                         
-000113d2  cell_I2C_init                          
-0001140c  Lora_spi_send                          
-00011440  pizero_spi_init                        
-00011474  pizero_spi_write                       
-000114a6  __mpu_init                             
-000114d2  __mspabi_mpyull_f5hw                   
-000114fe  __TI_zero_init_nomemset                
-00011522  __mspabi_fltuf                         
-00011546  enable_burn_wire                       
-00011566  sendResetSignal                        
-00011580  configureTimer                         
-00011594  memcpy                                 
-000115a8  __TI_decompress_none                   
-000115ba  __mspabi_fltid                         
-000115c6  Lora_spi_receive                       
-000115d0  C$$EXIT                                
-000115d0  abort                                  
-000115d6  _system_pre_init                       
-000115da  _system_post_cinit                     
+00010df2  pizero_spi_write                       
+00010e7e  __TI_decompress_lzss                   
+00010ef4  cell_I2C_read_data                     
+00010f64  __mspabi_fixfi                         
+00010fcc  __mspabi_cvtfd                         
+00011030  __mspabi_mpyll_f5hw                    
+0001108c  VC_Sensor_get_shunt_voltage            
+000110e4  VC_Sensor_get_bus_voltage              
+0001113a  configurePins                          
+00011190  __TI_auto_init_nobinit_nopinit_hold_wdt
+000111e4  __mspabi_cmpf                          
+0001122e  VC_Sensor_I2C_read_word                
+00011274  __mspabi_sral_15                       
+00011278  __mspabi_sral_14                       
+0001127c  __mspabi_sral_13                       
+00011280  __mspabi_sral_12                       
+00011284  __mspabi_sral_11                       
+00011288  __mspabi_sral_10                       
+0001128c  __mspabi_sral_9                        
+00011290  __mspabi_sral_8                        
+00011294  __mspabi_sral_7                        
+00011298  __mspabi_sral_6                        
+0001129c  __mspabi_sral_5                        
+000112a0  __mspabi_sral_4                        
+000112a4  __mspabi_sral_3                        
+000112a8  __mspabi_sral_2                        
+000112ac  __mspabi_sral_1                        
+000112b2  __mspabi_slll_15                       
+000112b6  __mspabi_slll_14                       
+000112ba  __mspabi_slll_13                       
+000112be  __mspabi_slll_12                       
+000112c2  __mspabi_slll_11                       
+000112c6  __mspabi_slll_10                       
+000112ca  __mspabi_slll_9                        
+000112ce  __mspabi_slll_8                        
+000112d2  __mspabi_slll_7                        
+000112d6  __mspabi_slll_6                        
+000112da  __mspabi_slll_5                        
+000112de  __mspabi_slll_4                        
+000112e2  __mspabi_slll_3                        
+000112e6  __mspabi_slll_2                        
+000112ea  __mspabi_slll_1                        
+000112f0  __mspabi_srll_15                       
+000112f4  __mspabi_srll_14                       
+000112f8  __mspabi_srll_13                       
+000112fc  __mspabi_srll_12                       
+00011300  __mspabi_srll_11                       
+00011304  __mspabi_srll_10                       
+00011308  __mspabi_srll_9                        
+0001130c  __mspabi_srll_8                        
+00011310  __mspabi_srll_7                        
+00011314  __mspabi_srll_6                        
+00011318  __mspabi_srll_5                        
+0001131c  __mspabi_srll_4                        
+00011320  __mspabi_srll_3                        
+00011324  __mspabi_srll_2                        
+00011328  __mspabi_srll_1                        
+0001132e  Lora_spi_init                          
+0001136a  VC_Sensor_I2C_init                     
+000113a4  __mspabi_sllll                         
+000113de  __mspabi_srlll                         
+00011418  cell_I2C_init                          
+00011452  Lora_spi_send                          
+00011486  pizero_spi_init                        
+000114ba  __mpu_init                             
+000114e6  __mspabi_mpyull_f5hw                   
+00011512  __TI_zero_init_nomemset                
+00011536  __mspabi_fltuf                         
+0001155a  enable_burn_wire                       
+0001157a  sendResetSignal                        
+00011594  configureTimer                         
+000115a8  memcpy                                 
+000115bc  __TI_decompress_none                   
+000115ce  __mspabi_fltid                         
+000115da  Lora_spi_receive                       
+000115e4  C$$EXIT                                
+000115e4  abort                                  
+000115ea  _system_pre_init                       
+000115ee  _system_post_cinit                     
 ffffffff  __TI_pprof_out_hndl                    
 ffffffff  __TI_prof_data_size                    
 ffffffff  __TI_prof_data_start                   
 ffffffff  __c_args__                             
 
-[1531 symbols]
+[1530 symbols]
